@@ -9,7 +9,6 @@ st.set_page_config(
 
 # 2. تصميم الواجهة والمعلومات
 st.title("مرحباً بك في موقعي الشخصي! 👋")
-st.write("أنا أتعلم البرمجة بايثون، وهذه هي صفحتي التي تضم حساباتي على منصات التواصل الاجتماعي.")
 
 st.divider()  # خط فاصل أنيق
 
@@ -17,12 +16,32 @@ st.divider()  # خط فاصل أنيق
 st.subheader("🔗 روابط التواصل الاجتماعي:")
 
 # استبدل الروابط أدناه بروابط حساباتك الحقيقية
-st.link_button("حسابي على لينكد إن (LinkedIn)", "https://www.linkedin.com")
-st.link_button("حسابي على إكس / تويتر (X)", "https://www.x.com")
-st.link_button("حسابي على إنستغرام (Instagram)", "https://www.instagram.com")
+st.link_button("حسابي على إنستغرام (Instagram)", "https://www.instagram.com/meran.alyas/?__pwa=1")
 st.link_button("قناتي على تيليجرام (Telegram)", "https://t.me/your_username")
 
 st.divider()
 
-# 4. تذييل الصفحة
-st.caption("تم إنشاء هذا الموقع بكل فخر باستخدام لغة بايثون 🐍 ومكتبة Streamlit")
+# --- قسم البايو والمعلومات الشخصية ---
+st.title("👋 مرحباً بك في موقعي!")
+st.subheader("مطور تطبيقات ومبرمج")
+
+st.markdown("""
+### 📝 نبذة عني (Bio):
+مرحباً! أنا ميران، مهتم بتطوير البرمجيات وتحليل البيانات وبناء التطبيقات باستخدام Python وStreamlit. 
+أسعى دائماً لتعلم كل ما هو جديد في عالم التكنولوجيا وتقديم حلول برمجة مبتكرة.
+""")
+
+st.divider() # خط فاصل
+
+# --- قسم المهارات والمشاريع ---
+st.header("🛠️ المهارات")
+st.write("- **لغات البرمجة:** Python, HTML, CSS")
+st.write("- **الأدوات والمنصات:** Streamlit, GitHub, VS Code")
+
+st.divider()
+
+with col1:
+    st.link_button("🌐 حسابي على GitHub", "https://github.com/meran101")
+
+with col2:
+    st.link_button("📧 البريد الإلكتروني", "mailto:laptop132ootm@gmail.com")
