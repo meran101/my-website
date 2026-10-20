@@ -32,7 +32,6 @@ st.divider()
 
 # --- قسم المهارات والمشاريع ---
 st.header("🛠️ المهارات")
-st.write("- **لغات البرمجة:** Python, HTML, CSS")
 st.write("- **الأدوات والمنصات:** Streamlit, GitHub, VS Code")
 
 st.divider()
