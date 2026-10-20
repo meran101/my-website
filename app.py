@@ -44,4 +44,14 @@ with col1:
     st.link_button("🌐 حسابي على GitHub", "https://github.com/meran101")
 
 with col2:
-    st.link_button("📧 البريد الإلكتروني", "mailto:laptop132ootm@gmail.com")
+    st.link_button("📧 البريد الإلكتروني", "mailto:laptop132ootm@gmail.com")import streamlit as st
+
+# كود إخفاء شعار وشريط Streamlit في أسفل الموقع
+hide_streamlit_style = """
+            <style>
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            header {visibility: hidden;}
+            </style>
+            """
+st.markdown(hide_streamlit_style, unsafe_allow_html=True)
