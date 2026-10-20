@@ -40,9 +40,6 @@ st.write("- **الأدوات والمنصات:** Streamlit, GitHub, VS Code")
 
 st.divider()
 
-with col1:
-    st.link_button("🌐 حسابي على GitHub", "https://github.com/meran101")
-
 # كود إخفاء الشعار والقوائم بالكامل
 hide_streamlit_style = """
             <style>
