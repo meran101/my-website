@@ -17,4 +17,4 @@ st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
 # محتوى موقعك هنا
 st.title("أهلاً بك في موقعي الشخصي 👋")
-st.write("هذا الموقع مستضاف بنجاح وبدون أي علامة مائية!")
+st.write("Meran")
