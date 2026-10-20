@@ -43,9 +43,6 @@ st.divider()
 with col1:
     st.link_button("🌐 حسابي على GitHub", "https://github.com/meran101")
 
-with col2:
-    st.link_button("📧 البريد الإلكتروني", "mailto:laptop132ootm@gmail.com")import streamlit as stimport streamlit as st
-
 # كود إخفاء الشعار والقوائم بالكامل
 hide_streamlit_style = """
             <style>
