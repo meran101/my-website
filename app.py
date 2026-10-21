@@ -127,9 +127,9 @@ try:
 except Exception as e:
     st.error("تعذر تحميل الصورة، تأكد من وجود اسم الملف بشكل صحيح في المستودع.")
 
-# النصوص المطلوبة بتنسيق أنيق
+# النصوص المطلوبة المحدثة
 st.markdown("<h1 style='text-align: center; color: #ffffff; font-weight: 700;'>Welcome To My Account 👋</h1>", unsafe_allow_html=True)
-st.markdown("<p style='text-align: center; color: #a0a0a0; font-size: 18px;'>The links will be added soon.</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: #a0a0a0; font-size: 18px;'>My social media accounts</p>", unsafe_allow_html=True)
 
 # روابط إنستغرام وسناب شات
 instagram_url = "https://www.instagram.com/meran.alyas/?__pwa=1"
