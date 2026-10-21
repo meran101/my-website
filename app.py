@@ -1,7 +1,7 @@
 import streamlit as st
 import base64
 
-# إعداد الصفحة وتصميم الخلفية والأيقونة المتحركة
+# إعداد الصفحة وتصميم الخلفية مع التأثيرات وأزرار التواصل الاجتماعي
 hide_streamlit_style = """
             <style>
             #MainMenu {visibility: hidden;}
@@ -56,39 +56,54 @@ hide_streamlit_style = """
                 z-index: 2;
             }
             
-            /* تنسيق أيقونة إنستغرام الرائعة */
+            /* حاوية الأيقونات لتجاورها بجانب بعضها */
             .social-container {
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                margin-top: 20px;
+                gap: 20px;
+                margin-top: 25px;
             }
             
-            .insta-btn {
+            /* تنسيق الأيقونات المشترك */
+            .social-btn {
                 display: inline-flex;
                 justify-content: center;
                 align-items: center;
                 width: 50px;
                 height: 50px;
-                background: linear-divider;
-                background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
                 border-radius: 50%;
                 color: white;
                 font-size: 24px;
-                box-shadow: 0px 4px 15px rgba(214, 36, 159, 0.4);
                 transition: transform 0.3s ease, box-shadow 0.3s ease;
                 text-decoration: none;
             }
             
+            /* زر إنستغرام */
+            .insta-btn {
+                background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+                box-shadow: 0px 4px 15px rgba(214, 36, 159, 0.4);
+            }
             .insta-btn:hover {
                 transform: scale(1.1);
                 box-shadow: 0px 6px 20px rgba(214, 36, 159, 0.7);
+            }
+
+            /* زر سناب شات */
+            .snap-btn {
+                background: #FFFC00;
+                color: #000000;
+                box-shadow: 0px 4px 15px rgba(255, 252, 0, 0.4);
+            }
+            .snap-btn:hover {
+                transform: scale(1.1);
+                box-shadow: 0px 6px 20px rgba(255, 252, 0, 0.7);
             }
             </style>
             """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
-# استدعاء مكتبة FontAwesome للأيقونات لضمان ظهور أيقونة إنستغرام باحترافية
+# استدعاء مكتبة FontAwesome لأيقونات التواصل الاجتماعي
 st.markdown('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">', unsafe_allow_html=True)
 
 # دالة لتحويل الصورة المحلية إلى نسق Base64
@@ -116,13 +131,18 @@ except Exception as e:
 st.markdown("<h1 style='text-align: center; color: #ffffff; font-weight: 700;'>Welcome To My Account 👋</h1>", unsafe_allow_html=True)
 st.markdown("<p style='text-align: center; color: #a0a0a0; font-size: 18px;'>The links will be added soon.</p>", unsafe_allow_html=True)
 
-# إضافة أيقونة إنستغرام والرابط أسفل النصوص
+# روابط إنستغرام وسناب شات
 instagram_url = "https://www.instagram.com/meran.alyas/?__pwa=1"
+snapchat_url = "https://www.snapchat.com/add/meran.alyas"
+
 st.markdown(
     f'''
     <div class="social-container">
-        <a href="{instagram_url}" target="_blank" class="insta-btn" title="Instagram">
+        <a href="{instagram_url}" target="_blank" class="social-btn insta-btn" title="Instagram">
             <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a href="{snapchat_url}" target="_blank" class="social-btn snap-btn" title="Snapchat">
+            <i class="fa-brands fa-snapchat"></i>
         </a>
     </div>
     ''',
