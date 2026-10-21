@@ -181,4 +181,100 @@ with nav_col4:
     btn_lang = "العربية 🌐" if st.session_state.lang == "en" else "English 🌐"
     st.button(btn_lang, on_click=toggle_language, key="nav_lang_btn")
 
-st.markdown("<hr style='border-color: rgba(76,175,8
+st.markdown("<hr style='border-color: rgba(76,175,80,0.25); margin-top: 15px; margin-bottom: 25px;'>", unsafe_allow_html=True)
+
+# ==================== 1. الصفحة الرئيسية ====================
+if st.session_state.current_page == "home":
+    img_base64 = get_image_base64(image_filename)
+    if img_base64:
+        st.markdown(
+            f'''
+            <div class="splash-screen">
+                <img src="data:image/jpeg;base64,{img_base64}" class="splash-logo" alt="Loading...">
+                <div class="splash-text">LOADING WEBSITE...</div>
+            </div>
+            <div class="profile-container">
+                <img src="data:image/jpeg;base64,{img_base64}" class="profile-img" alt="Profile Picture">
+            </div>
+            ''',
+            unsafe_allow_html=True
+        )
+
+    if st.session_state.lang == "en":
+        title_text, subtitle_text = "Welcome To My Account 👋", "My social media accounts"
+    else:
+        title_text, subtitle_text = "أهلاً بك في حسابي 👋", "حساباتي على وسائل التواصل الاجتماعي"
+
+    st.markdown(f"<h1 class='title-animation'>{title_text}</h1>", unsafe_allow_html=True)
+    st.markdown(f"<p class='subtitle-animation'>{subtitle_text}</p>", unsafe_allow_html=True)
+
+    instagram_url = "https://www.instagram.com/meran.alyas/?__pwa=1"
+    snapchat_url = "https://www.snapchat.com/add/meran.alyas"
+
+    st.markdown(
+        f'''
+        <div class="social-container">
+            <a href="{instagram_url}" target="_blank" class="social-btn insta-btn" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="{snapchat_url}" target="_blank" class="social-btn snap-btn" title="Snapchat"><i class="fa-brands fa-snapchat"></i></a>
+        </div>
+        ''',
+        unsafe_allow_html=True
+    )
+
+# ==================== 2. صفحة عني ====================
+elif st.session_state.current_page == "about":
+    if st.session_state.lang == "ar":
+        st.markdown("<h2 style='text-align: center; color: #4CAF50;'>نبذة عني 👤</h2>", unsafe_allow_html=True)
+        st.markdown(
+            """
+            <div class="page-card" style="text-align: center;">
+                <h3 style="color: #ffffff; margin-bottom: 15px;">Meran Alyas</h3>
+                <p style="font-size: 20px; font-weight: 700; color: #4CAF50; letter-spacing: 1px;">
+                    🤖 Owner of TIGER Bot 🐅
+                </p>
+                <p style="font-size: 16px; line-height: 1.8; color: #cccccc; margin-top: 15px;">
+                    Welcome to my official page. I am the creator and owner of <b>TIGER Bot</b>.
+                    Passionate about technology, development, and building high-performance automated tools.
+                </p>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+    else:
+        st.markdown("<h2 style='text-align: center; color: #4CAF50;'>About Me 👤</h2>", unsafe_allow_html=True)
+        st.markdown(
+            """
+            <div class="page-card" style="text-align: center;">
+                <h3 style="color: #ffffff; margin-bottom: 15px;">Meran Alyas</h3>
+                <p style="font-size: 20px; font-weight: 700; color: #4CAF50; letter-spacing: 1px;">
+                    🤖 Owner of TIGER Bot 🐅
+                </p>
+                <p style="font-size: 16px; line-height: 1.8; color: #cccccc; margin-top: 15px;">
+                    Welcome to my official landing page. I am the creator and owner of <b>TIGER Bot</b>.
+                    Passionate about technology, development, and building high-performance automated tools.
+                </p>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
+# ==================== 3. صفحة التواصل ====================
+elif st.session_state.current_page == "contact":
+    if st.session_state.lang == "ar":
+        st.markdown("<h2 style='text-align: center; color: #4CAF50;'>تواصل معي 📩</h2>", unsafe_allow_html=True)
+        with st.form("contact_form_ar"):
+            name = st.text_input("الاسم")
+            email = st.text_input("البريد الإلكتروني")
+            message = st.text_area("الرسالة")
+            submit = st.form_submit_button("إرسال الرسالة")
+            if submit:
+                st.success("شُكراً لتواصلك! تم إرسال رسالتك بنجاح.")
+    else:
+        st.markdown("<h2 style='text-align: center; color: #4CAF50;'>Get In Touch 📩</h2>", unsafe_allow_html=True)
+        with st.form("contact_form_en"):
+            name = st.text_input("Your Name")
+            email = st.text_input("Your Email")
+            message = st.text_area("Your Message")
+            submit = st.form_submit_button("Send Message")
+            if submit:
+                st.success("Thank you! Your message has been sent successfully.")
