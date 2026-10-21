@@ -230,7 +230,7 @@ elif st.session_state.current_page == "about":
             <div class="page-card">
                 <p style="font-size: 18px; line-height: 1.8; text-align: center;">
                     أهلاً بك! أنا ميران إلياس. يسعدني زيارتك لموقعي الشخصي المتواضع.
-                    أسعى دائماً للتطوير وتقديم أفضل محتوى وتجربة عبر المنصات.
+                    أسعى دائماً للتطوير وتقديم أفضل تجربة عبر منصات التواصل الاجتماعي.
                 </p>
             </div>
             """,
@@ -242,8 +242,8 @@ elif st.session_state.current_page == "about":
             """
             <div class="page-card">
                 <p style="font-size: 18px; line-height: 1.8; text-align: center;">
-                    Welcome! I'm Meran Alyas. Glad to have you visiting my personal page.
-                    I always strive to learn, grow, and connect across social platforms.
+                    Welcome! I'm Meran Alyas. Glad to have you visiting my personal landing page.
+                    I strive to share great content and connect across social media platforms.
                 </p>
             </div>
             """,
@@ -260,4 +260,13 @@ elif st.session_state.current_page == "contact":
             message = st.text_area("الرسالة")
             submit = st.form_submit_button("إرسال الرسالة")
             if submit:
-                st.success("شُكراً لت
+                st.success("شُكراً لتواصلك! تم إرسال رسالتك بنجاح.")
+    else:
+        st.markdown("<h2 style='text-align: center; color: #4CAF50;'>Get In Touch 📩</h2>", unsafe_allow_html=True)
+        with st.form("contact_form_en"):
+            name = st.text_input("Your Name")
+            email = st.text_input("Your Email")
+            message = st.text_area("Your Message")
+            submit = st.form_submit_button("Send Message")
+            if submit:
+                st.success("Thank you! Your message has been sent successfully.")
