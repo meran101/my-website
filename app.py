@@ -53,6 +53,6 @@ try:
 except Exception as e:
     st.error("تعذر تحميل الصورة، تأكد من اسم الملف في المستودع.")
 
-# النصوص والعناوين
-st.markdown("<h1 style='text-align: center;'>أهلاً بك في موقعي الشخصي 👋</h1>", unsafe_allow_html=True)
-st.markdown("<p style='text-align: center;'>هذا هو موقعي المصمم بكل حب!</p>", unsafe_allow_html=True)
+# النصوص والعناوين المحدثة
+st.markdown("<h1 style='text-align: center;'>Welcome To My Account 👋</h1>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center;'>The links will be added soon.</p>", unsafe_allow_html=True)
