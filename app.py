@@ -1,7 +1,7 @@
 import streamlit as st
 import base64
 
-# إعداد الصفحة وتصميم الخلفية مع خط دوران أخضر متصل
+# إعداد الصفحة وتصميم الخلفية والأيقونة المتحركة
 hide_streamlit_style = """
             <style>
             #MainMenu {visibility: hidden;}
@@ -21,12 +21,12 @@ hide_streamlit_style = """
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                margin-top: 50px;
-                margin-bottom: 40px;
+                margin-top: 40px;
+                margin-bottom: 30px;
                 position: relative;
             }
             
-            /* خط دوران أخضر متحرك ومتصل حول الصورة */
+            /* خط دوران أخضر متصل يدور حول الصورة */
             .profile-container::before {
                 content: '';
                 position: absolute;
@@ -34,7 +34,7 @@ hide_streamlit_style = """
                 height: 225px;
                 border-radius: 50%;
                 border: 3px solid transparent;
-                border-top-color: #4CAF50; /* لون الخط الأخضر المتحرك */
+                border-top-color: #4CAF50;
                 border-right-color: #4CAF50;
                 animation: spin 1.5s linear infinite;
             }
@@ -44,7 +44,7 @@ hide_streamlit_style = """
                 100% { transform: rotate(360deg); }
             }
             
-            /* تنسيق الصورة الثابتة الدائرية في المنتصف مع إطار أخضر */
+            /* تنسيق الصورة الثابتة الدائرية */
             .profile-img {
                 width: 195px !important;
                 height: 195px !important;
@@ -55,9 +55,41 @@ hide_streamlit_style = """
                 position: relative;
                 z-index: 2;
             }
+            
+            /* تنسيق أيقونة إنستغرام الرائعة */
+            .social-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-top: 20px;
+            }
+            
+            .insta-btn {
+                display: inline-flex;
+                justify-content: center;
+                align-items: center;
+                width: 50px;
+                height: 50px;
+                background: linear-divider;
+                background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+                border-radius: 50%;
+                color: white;
+                font-size: 24px;
+                box-shadow: 0px 4px 15px rgba(214, 36, 159, 0.4);
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+                text-decoration: none;
+            }
+            
+            .insta-btn:hover {
+                transform: scale(1.1);
+                box-shadow: 0px 6px 20px rgba(214, 36, 159, 0.7);
+            }
             </style>
             """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
+
+# استدعاء مكتبة FontAwesome للأيقونات لضمان ظهور أيقونة إنستغرام باحترافية
+st.markdown('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">', unsafe_allow_html=True)
 
 # دالة لتحويل الصورة المحلية إلى نسق Base64
 def get_image_base64(image_path):
@@ -78,8 +110,21 @@ try:
         unsafe_allow_html=True
     )
 except Exception as e:
-    st.error("تعذر تحميل الصورة، تأكد من وجود ملف الصورة باسمه الصحيح في المستودع.")
+    st.error("تعذر تحميل الصورة، تأكد من وجود اسم الملف بشكل صحيح في المستودع.")
 
-# النصوص المطلوبة المحدثة
+# النصوص المطلوبة بتنسيق أنيق
 st.markdown("<h1 style='text-align: center; color: #ffffff; font-weight: 700;'>Welcome To My Account 👋</h1>", unsafe_allow_html=True)
 st.markdown("<p style='text-align: center; color: #a0a0a0; font-size: 18px;'>The links will be added soon.</p>", unsafe_allow_html=True)
+
+# إضافة أيقونة إنستغرام والرابط أسفل النصوص
+instagram_url = "https://www.instagram.com/meran.alyas/?__pwa=1"
+st.markdown(
+    f'''
+    <div class="social-container">
+        <a href="{instagram_url}" target="_blank" class="insta-btn" title="Instagram">
+            <i class="fa-brands fa-instagram"></i>
+        </a>
+    </div>
+    ''',
+    unsafe_allow_html=True
+)
