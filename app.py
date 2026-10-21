@@ -1,6 +1,6 @@
 import streamlit as st
 
-# إعداد الصفحة وإخفاء العلامة المائية
+# إعداد الصفحة وإخفاء العلامة المائية والشعار
 hide_streamlit_style = """
             <style>
             #MainMenu {visibility: hidden;}
@@ -28,9 +28,8 @@ hide_streamlit_style = """
             """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
-# عرض الصورة بشكل دائري في المنتصف
-# (استبدل الرابط أدناه برابط صورتك المباشر أو اسم صورتك المرفوعة مثل "my_photo.jpg")
-image_url = "https://images.unsplash.com/photo-1534528741775-53994a69daeb"
+# اختر اسم الصورة المرفوعة في المستودع (مثلاً unnamed.gif أو IMG_20240908_230026_233.jpg)
+image_url = "unnamed.gif"
 
 st.markdown(f"""
     <div class="profile-img-container">
