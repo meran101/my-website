@@ -1,7 +1,18 @@
 import streamlit as st
 import base64
 
-# إعداد الصفحة وتصميم الخلفية مع التأثيرات وأزرار التواصل الاجتماعي
+# إعداد حالة اللغة في التخزين المؤقت (افتراضياً الإنجليزية)
+if "lang" not in st.session_state:
+    st.session_state.lang = "en"
+
+# دالة للتبديل بين اللغتين
+def toggle_language():
+    if st.session_state.lang == "en":
+        st.session_state.lang = "ar"
+    else:
+        st.session_state.lang = "en"
+
+# إعداد التصميم وإخفاء عناصر Streamlit
 hide_streamlit_style = """
             <style>
             #MainMenu {visibility: hidden;}
@@ -16,12 +27,19 @@ hide_streamlit_style = """
                 color: #ffffff;
             }
             
+            /* حاوية زر الترجمة في أعلى الصفحة */
+            .lang-btn-container {
+                display: flex;
+                justify-content: flex-end;
+                padding: 10px 20px 0 0;
+            }
+            
             /* حاوية الصورة في المنتصف */
             .profile-container {
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                margin-top: 40px;
+                margin-top: 20px;
                 margin-bottom: 30px;
                 position: relative;
             }
@@ -99,19 +117,40 @@ hide_streamlit_style = """
                 transform: scale(1.1);
                 box-shadow: 0px 6px 20px rgba(255, 252, 0, 0.7);
             }
+            
+            /* تعديل زر Streamlit للترجمة ليظهر بشكل أنيق */
+            div.stButton > button {
+                background-color: #1a1a1a !important;
+                color: #ffffff !important;
+                border: 1px solid #4CAF50 !important;
+                border-radius: 20px !important;
+                padding: 5px 15px !important;
+                font-size: 14px !important;
+                transition: all 0.3s ease !important;
+            }
+            div.stButton > button:hover {
+                background-color: #4CAF50 !important;
+                color: #ffffff !important;
+                border-color: #4CAF50 !important;
+            }
             </style>
             """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
-# استدعاء مكتبة FontAwesome لأيقونات التواصل الاجتماعي
+# استدعاء مكتبة FontAwesome للأيقونات
 st.markdown('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">', unsafe_allow_html=True)
 
-# دالة لتحويل الصورة المحلية إلى نسق Base64
+# إنشاء صف يحتوي على زر الترجمة في أعلى اليمين
+col1, col2 = st.columns([5, 1])
+with col2:
+    button_label = "العربية 🌐" if st.session_state.lang == "en" else "English 🌐"
+    st.button(button_label, on_click=toggle_language)
+
+# دالة لتحويل الصورة إلى نسق Base64
 def get_image_base64(image_path):
     with open(image_path, "rb") as img_file:
         return base64.b64encode(img_file.read()).decode('utf-8')
 
-# اسم ملف الصورة الثابتة
 image_filename = "IMG_20240908_230026_233.jpg"
 
 try:
@@ -125,11 +164,19 @@ try:
         unsafe_allow_html=True
     )
 except Exception as e:
-    st.error("تعذر تحميل الصورة، تأكد من وجود اسم الملف بشكل صحيح في المستودع.")
+    st.error("تعذر تحميل الصورة، تأكد من وجود الملف بشكل صحيح في المستودع.")
 
-# النصوص المطلوبة المحدثة
-st.markdown("<h1 style='text-align: center; color: #ffffff; font-weight: 700;'>Welcome To My Account 👋</h1>", unsafe_allow_html=True)
-st.markdown("<p style='text-align: center; color: #a0a0a0; font-size: 18px;'>My social media accounts</p>", unsafe_allow_html=True)
+# تحديد النصوص بناءً على اللغة المختارة
+if st.session_state.lang == "en":
+    title_text = "Welcome To My Account 👋"
+    subtitle_text = "My social media accounts"
+else:
+    title_text = "أهلاً بك في حسابي 👋"
+    subtitle_text = "حساباتي على وسائل التواصل الاجتماعي"
+
+# عرض النصوص
+st.markdown(f"<h1 style='text-align: center; color: #ffffff; font-weight: 700;'>{title_text}</h1>", unsafe_allow_html=True)
+st.markdown(f"<p style='text-align: center; color: #a0a0a0; font-size: 18px;'>{subtitle_text}</p>", unsafe_allow_html=True)
 
 # روابط إنستغرام وسناب شات
 instagram_url = "https://www.instagram.com/meran.alyas/?__pwa=1"
