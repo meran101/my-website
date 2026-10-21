@@ -1,7 +1,7 @@
 import streamlit as st
 import base64
 
-# إعداد الصفحة وتصميم الخلفية مع تأثير الحلقات المدارية المتحركة باللون الأخضر
+# إعداد الصفحة وتصميم الخلفية مع خط دوران أخضر متصل
 hide_streamlit_style = """
             <style>
             #MainMenu {visibility: hidden;}
@@ -26,49 +26,32 @@ hide_streamlit_style = """
                 position: relative;
             }
             
-            /* حلقة مدارية أولى متوهجة باللون الأخضر */
+            /* خط دوران أخضر متحرك ومتصل حول الصورة */
             .profile-container::before {
                 content: '';
                 position: absolute;
-                width: 235px;
-                height: 235px;
+                width: 225px;
+                height: 225px;
                 border-radius: 50%;
-                background: conic-gradient(from 0deg, rgba(76, 175, 80, 0.8), transparent, rgba(76, 175, 80, 0.3), transparent);
-                -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #fff calc(100% - 2px));
-                mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #fff calc(100% - 2px));
-                animation: spin 15s linear infinite;
-            }
-
-            /* حلقة خارجية ثانية واسعة باللون الأخضر الخفيف */
-            .profile-container::after {
-                content: '';
-                position: absolute;
-                width: 270px;
-                height: 270px;
-                border-radius: 50%;
-                border: 1px dashed rgba(76, 175, 80, 0.3);
-                box-shadow: 0 0 20px rgba(76, 175, 80, 0.1), inset 0 0 20px rgba(76, 175, 80, 0.1);
-                animation: spin-reverse 25s linear infinite;
+                border: 3px solid transparent;
+                border-top-color: #4CAF50; /* لون الخط الأخضر المتحرك */
+                border-right-color: #4CAF50;
+                animation: spin 1.5s linear infinite;
             }
 
             @keyframes spin {
                 0% { transform: rotate(0deg); }
                 100% { transform: rotate(360deg); }
             }
-
-            @keyframes spin-reverse {
-                0% { transform: rotate(360deg); }
-                100% { transform: rotate(0deg); }
-            }
             
-            /* تنسيق الصورة الثابتة الدائرية في المنتصف مع إطار أخضر وتوهج */
+            /* تنسيق الصورة الثابتة الدائرية في المنتصف مع إطار أخضر */
             .profile-img {
                 width: 195px !important;
                 height: 195px !important;
                 border-radius: 50% !important;
                 object-fit: cover !important;
-                border: 2px solid #4CAF50 !important;
-                box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.9), 0 0 15px rgba(76, 175, 80, 0.3);
+                border: 3px solid #4CAF50 !important;
+                box-shadow: 0px 0px 25px rgba(76, 175, 80, 0.3);
                 position: relative;
                 z-index: 2;
             }
