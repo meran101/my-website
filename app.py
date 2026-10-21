@@ -1,7 +1,7 @@
 import streamlit as st
 import base64
 
-# إعداد الصفحة وتصميم الخلفية مع تأثير جزيئي وحلقات متوهجة تحاكي التصميم المطلوب بدقة
+# إعداد الصفحة وتصميم الخلفية مع خط دوران أخضر متصل
 hide_streamlit_style = """
             <style>
             #MainMenu {visibility: hidden;}
@@ -16,7 +16,7 @@ hide_streamlit_style = """
                 color: #ffffff;
             }
             
-            /* حاوية الصورة في المنتصف تماماً */
+            /* حاوية الصورة في المنتصف */
             .profile-container {
                 display: flex;
                 justify-content: center;
@@ -26,49 +26,32 @@ hide_streamlit_style = """
                 position: relative;
             }
             
-            /* حلقة مدارية أولى متوهجة وكثيفة */
+            /* خط دوران أخضر متحرك ومتصل حول الصورة */
             .profile-container::before {
                 content: '';
                 position: absolute;
-                width: 235px;
-                height: 235px;
+                width: 225px;
+                height: 225px;
                 border-radius: 50%;
-                background: conic-gradient(from 0deg, rgba(255, 255, 255, 0.4), transparent, rgba(255, 255, 255, 0.2), transparent);
-                -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #fff calc(100% - 2px));
-                mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #fff calc(100% - 2px));
-                animation: spin 15s linear infinite;
-            }
-
-            /* حلقة خارجية ثانية واسعة تعطي عمق النجوم والمجرة */
-            .profile-container::after {
-                content: '';
-                position: absolute;
-                width: 270px;
-                height: 270px;
-                border-radius: 50%;
-                border: 1px dashed rgba(255, 255, 255, 0.15);
-                box-shadow: 0 0 20px rgba(255, 255, 255, 0.05), inset 0 0 20px rgba(255, 255, 255, 0.05);
-                animation: spin-reverse 25s linear infinite;
+                border: 3px solid transparent;
+                border-top-color: #4CAF50; /* لون الخط الأخضر المتحرك */
+                border-right-color: #4CAF50;
+                animation: spin 1.5s linear infinite;
             }
 
             @keyframes spin {
                 0% { transform: rotate(0deg); }
                 100% { transform: rotate(360deg); }
             }
-
-            @keyframes spin-reverse {
-                0% { transform: rotate(360deg); }
-                100% { transform: rotate(0deg); }
-            }
             
-            /* تنسيق الصورة الثابتة الدائرية وتوهجها الداخلي */
+            /* تنسيق الصورة الثابتة الدائرية في المنتصف مع إطار أخضر */
             .profile-img {
                 width: 195px !important;
                 height: 195px !important;
                 border-radius: 50% !important;
                 object-fit: cover !important;
-                border: 2px solid rgba(255, 255, 255, 0.3) !important;
-                box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.9), 0 0 15px rgba(255, 255, 255, 0.1);
+                border: 3px solid #4CAF50 !important;
+                box-shadow: 0px 0px 25px rgba(76, 175, 80, 0.3);
                 position: relative;
                 z-index: 2;
             }
@@ -81,7 +64,7 @@ def get_image_base64(image_path):
     with open(image_path, "rb") as img_file:
         return base64.b64encode(img_file.read()).decode('utf-8')
 
-# اسم ملف صورتك الثابتة المرفوع في المستودع
+# اسم ملف الصورة الثابتة
 image_filename = "IMG_20240908_230026_233.jpg"
 
 try:
@@ -95,8 +78,8 @@ try:
         unsafe_allow_html=True
     )
 except Exception as e:
-    st.error("تعذر تحميل الصورة، تأكد من اسم الملف في المستودع.")
+    st.error("تعذر تحميل الصورة، تأكد من وجود ملف الصورة باسمه الصحيح في المستودع.")
 
-# النصوص المطلوبة بتنسيق أنيق
+# النصوص المطلوبة المحدثة
 st.markdown("<h1 style='text-align: center; color: #ffffff; font-weight: 700;'>Welcome To My Account 👋</h1>", unsafe_allow_html=True)
 st.markdown("<p style='text-align: center; color: #a0a0a0; font-size: 18px;'>The links will be added soon.</p>", unsafe_allow_html=True)
