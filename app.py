@@ -1,7 +1,7 @@
 import streamlit as st
 import base64
 
-# إعداد حالة اللغة في التخزين المؤقت
+# إعداد حالة اللغة والتأثير الأولي في التخزين المؤقت
 if "lang" not in st.session_state:
     st.session_state.lang = "en"
 
@@ -11,7 +11,7 @@ def toggle_language():
     else:
         st.session_state.lang = "en"
 
-# إعداد التصميم وإخفاء عناصر Streamlit مع تأثيرات الدخول البصرية
+# إعداد التصميم وتأثير الإخفاء التلقائي عند فتح الموقع (Splash Screen)
 hide_streamlit_style = """
             <style>
             #MainMenu {visibility: hidden;}
@@ -26,26 +26,62 @@ hide_streamlit_style = """
                 color: #ffffff;
             }
             
-            /* حاوية زر الترجمة في أعلى الصفحة */
-            .lang-btn-container {
-                display: flex;
-                justify-content: flex-end;
-                padding: 10px 20px 0 0;
-            }
-            
-            /* تأثير حركة الدخول السلس عند فتح الصفحة (FadeIn & Zoom) */
-            @keyframes fadeInEntry {
+            /* تأثير شاشة البداية (Splash Screen) التي تختفي بعد فتح الموقع */
+            @keyframes splashFadeOut {
                 0% {
-                    opacity: 0;
-                    transform: scale(0.85) translateY(20px);
+                    opacity: 1;
+                    visibility: visible;
+                }
+                80% {
+                    opacity: 1;
                 }
                 100% {
-                    opacity: 1;
-                    transform: scale(1) translateY(0);
+                    opacity: 0;
+                    visibility: hidden;
+                    pointer-events: none;
                 }
             }
+
+            .splash-screen {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                background-color: #050505;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                z-index: 99999;
+                animation: splashFadeOut 1.5s ease-in-out forwards;
+            }
+
+            /* نبض الشعار أو الاسم أثناء التحميل الأولي */
+            .splash-logo {
+                width: 90px;
+                height: 90px;
+                border-radius: 50%;
+                border: 3px solid #4CAF50;
+                box-shadow: 0 0 25px rgba(76, 175, 80, 0.6);
+                animation: pulseLogo 1.2s infinite alternate;
+                object-fit: cover;
+                margin-bottom: 15px;
+            }
+
+            @keyframes pulseLogo {
+                0% { transform: scale(0.9); box-shadow: 0 0 15px rgba(76, 175, 80, 0.4); }
+                100% { transform: scale(1.1); box-shadow: 0 0 35px rgba(76, 175, 80, 0.8); }
+            }
+
+            .splash-text {
+                color: #ffffff;
+                font-size: 20px;
+                font-weight: 600;
+                letter-spacing: 2px;
+            }
             
-            /* تطبيق تأثير الدخول على حاوية الصورة */
+            /* حاوية الصورة الأساسية في الموقع */
             .profile-container {
                 display: flex;
                 justify-content: center;
@@ -53,10 +89,9 @@ hide_streamlit_style = """
                 margin-top: 30px;
                 margin-bottom: 30px;
                 position: relative;
-                animation: fadeInEntry 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
             }
             
-            /* الحلقات المدارية المتوهجة المستوحاة من التصميم الاحترافي */
+            /* الحلقات المدارية المتوهجة */
             .profile-container::before {
                 content: '';
                 position: absolute;
@@ -102,11 +137,6 @@ hide_streamlit_style = """
                 z-index: 2;
             }
             
-            /* تأثير الدخول للنصوص والأزرار */
-            .fade-text {
-                animation: fadeInEntry 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            }
-            
             /* حاوية الأيقونات */
             .social-container {
                 display: flex;
@@ -114,7 +144,6 @@ hide_streamlit_style = """
                 align-items: center;
                 gap: 20px;
                 margin-top: 25px;
-                animation: fadeInEntry 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
             }
             
             /* تنسيق الأيقونات المشترك */
@@ -171,14 +200,8 @@ hide_streamlit_style = """
             """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
-# استدعاء مكتبة FontAwesome لأيقونات التواصل
+# استدعاء مكتبة FontAwesome للأيقونات
 st.markdown('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">', unsafe_allow_html=True)
-
-# زر الترجمة في أعلى الصفحة
-col1, col2 = st.columns([5, 1])
-with col2:
-    button_label = "العربية 🌐" if st.session_state.lang == "en" else "English 🌐"
-    st.button(button_label, on_click=toggle_language)
 
 # دالة لتحويل الصورة إلى Base64
 def get_image_base64(image_path):
@@ -189,6 +212,28 @@ image_filename = "IMG_20240908_230026_233.jpg"
 
 try:
     img_base64 = get_image_base64(image_filename)
+    
+    # عرض شاشة البداية المتوهجة التي تختفي تلقائياً عند فتح الموقع
+    st.markdown(
+        f'''
+        <div class="splash-screen">
+            <img src="data:image/jpeg;base64,{img_base64}" class="splash-logo" alt="Loading...">
+            <div class="splash-text">Loading Website...</div>
+        </div>
+        ''',
+        unsafe_allow_html=True
+    )
+    
+except Exception as e:
+    pass
+
+# زر الترجمة في أعلى الصفحة
+col1, col2 = st.columns([5, 1])
+with col2:
+    button_label = "العربية 🌐" if st.session_state.lang == "en" else "English 🌐"
+    st.button(button_label, on_click=toggle_language)
+
+try:
     st.markdown(
         f'''
         <div class="profile-container">
@@ -208,9 +253,9 @@ else:
     title_text = "أهلاً بك في حسابي 👋"
     subtitle_text = "حساباتي على وسائل التواصل الاجتماعي"
 
-# عرض النصوص مع تأثير الدخول الحركي
-st.markdown(f"<h1 class='fade-text' style='text-align: center; color: #ffffff; font-weight: 700;'>{title_text}</h1>", unsafe_allow_html=True)
-st.markdown(f"<p class='fade-text' style='text-align: center; color: #a0a0a0; font-size: 18px;'>{subtitle_text}</p>", unsafe_allow_html=True)
+# عرض النصوص
+st.markdown(f"<h1 style='text-align: center; color: #ffffff; font-weight: 700;'>{title_text}</h1>", unsafe_allow_html=True)
+st.markdown(f"<p style='text-align: center; color: #a0a0a0; font-size: 18px;'>{subtitle_text}</p>", unsafe_allow_html=True)
 
 # روابط التواصل
 instagram_url = "https://www.instagram.com/meran.alyas/?__pwa=1"
