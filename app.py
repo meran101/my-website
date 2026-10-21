@@ -1,7 +1,7 @@
 import streamlit as st
 import base64
 
-# إعداد الصفحة وتصميم الخلفية مع التأثيرات وأزرار التواصل الاجتماعي
+# إعداد الصفحة وتصميم الخلفية والأيقونة المتحركة
 hide_streamlit_style = """
             <style>
             #MainMenu {visibility: hidden;}
@@ -56,56 +56,39 @@ hide_streamlit_style = """
                 z-index: 2;
             }
             
-            /* حاوية الأيقونات لتجاورها بجانب بعضها */
+            /* تنسيق أيقونة إنستغرام الرائعة */
             .social-container {
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                gap: 20px;
-                margin-top: 25px;
+                margin-top: 20px;
             }
             
-            /* تنسيق الأيقونات المشترك */
-            .social-btn {
+            .insta-btn {
                 display: inline-flex;
                 justify-content: center;
                 align-items: center;
                 width: 50px;
                 height: 50px;
+                background: linear-divider;
+                background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
                 border-radius: 50%;
                 color: white;
                 font-size: 24px;
+                box-shadow: 0px 4px 15px rgba(214, 36, 159, 0.4);
                 transition: transform 0.3s ease, box-shadow 0.3s ease;
                 text-decoration: none;
             }
             
-            /* زر إنستغرام */
-            .insta-btn {
-                background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
-                box-shadow: 0px 4px 15px rgba(214, 36, 159, 0.4);
-            }
             .insta-btn:hover {
                 transform: scale(1.1);
                 box-shadow: 0px 6px 20px rgba(214, 36, 159, 0.7);
-            }
-
-            /* زر ثريدز Threads */
-            .threads-btn {
-                background: #101010;
-                border: 1px solid rgba(255, 255, 255, 0.2);
-                box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.15);
-            }
-            .threads-btn:hover {
-                transform: scale(1.1);
-                background: #1a1a1a;
-                border-color: rgba(255, 255, 255, 0.5);
-                box-shadow: 0px 6px 20px rgba(255, 255, 255, 0.3);
             }
             </style>
             """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
-# استدعاء مكتبة FontAwesome لأيقونات التواصل الاجتماعي
+# استدعاء مكتبة FontAwesome للأيقونات لضمان ظهور أيقونة إنستغرام باحترافية
 st.markdown('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">', unsafe_allow_html=True)
 
 # دالة لتحويل الصورة المحلية إلى نسق Base64
@@ -127,4 +110,21 @@ try:
         unsafe_allow_html=True
     )
 except Exception as e:
-    st.error("
+    st.error("تعذر تحميل الصورة، تأكد من وجود اسم الملف بشكل صحيح في المستودع.")
+
+# النصوص المطلوبة بتنسيق أنيق
+st.markdown("<h1 style='text-align: center; color: #ffffff; font-weight: 700;'>Welcome To My Account 👋</h1>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: #a0a0a0; font-size: 18px;'>The links will be added soon.</p>", unsafe_allow_html=True)
+
+# إضافة أيقونة إنستغرام والرابط أسفل النصوص
+instagram_url = "https://www.instagram.com/meran.alyas/?__pwa=1"
+st.markdown(
+    f'''
+    <div class="social-container">
+        <a href="{instagram_url}" target="_blank" class="insta-btn" title="Instagram">
+            <i class="fa-brands fa-instagram"></i>
+        </a>
+    </div>
+    ''',
+    unsafe_allow_html=True
+)
