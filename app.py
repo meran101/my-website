@@ -30,7 +30,7 @@ st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
 # عرض الصورة بشكل دائري في المنتصف
 # (استبدل الرابط أدناه برابط صورتك المباشر أو اسم صورتك المرفوعة مثل "my_photo.jpg")
-image_url = "https://share.google/UmJAMQ1nYMRvrukkd"
+image_url = "https://images.unsplash.com/photo-1534528741775-53994a69daeb"
 
 st.markdown(f"""
     <div class="profile-img-container">
