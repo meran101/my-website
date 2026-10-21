@@ -1,7 +1,7 @@
 import streamlit as st
 import base64
 
-# 1. إعداد حالة الصفحة واللغة
+# 1. إعداد حالة الصفحة واللغة في التخزين المؤقت
 if "current_page" not in st.session_state:
     st.session_state.current_page = "home"
 
@@ -17,7 +17,7 @@ def toggle_language():
     else:
         st.session_state.lang = "en"
 
-# 2. إعداد CSS وتصميم القائمة العلوية الثابتة
+# 2. إعداد CSS والتصميم الحديث والأيقونات الأفقية المتناسقة
 hide_streamlit_style = """
             <style>
             #MainMenu {visibility: hidden;}
@@ -26,36 +26,40 @@ hide_streamlit_style = """
             .stAppDeployButton {display: none !important;}
             div[data-testid="stDecoration"] {display: none !important;}
             
+            /* خلفية الموقع الداكنة الفخمة */
             .stApp {
                 background-color: #050505;
                 color: #ffffff;
             }
             
-            /* تنسيق أزرار التنقل بين الصفحات لضمان ظهورها بشكل بارز */
+            /* تنسيق أزرار التنقل الأفقية الحديثة */
             div.stButton > button {
-                background-color: #121212 !important;
-                color: #4CAF50 !important;
-                border: 2px solid #4CAF50 !important;
-                border-radius: 12px !important;
-                padding: 8px 12px !important;
-                font-size: 14px !important;
-                font-weight: 700 !important;
-                transition: all 0.3s ease !important;
+                background: rgba(18, 18, 18, 0.85) !important;
+                color: #cccccc !important;
+                border: 1px solid rgba(76, 175, 80, 0.4) !important;
+                border-radius: 20px !important;
+                padding: 6px 12px !important;
+                font-size: 13px !important;
+                font-weight: 600 !important;
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
                 width: 100% !important;
-                box-shadow: 0 0 10px rgba(76, 175, 80, 0.2) !important;
+                backdrop-filter: blur(10px);
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
             }
+
             div.stButton > button:hover {
-                background-color: #4CAF50 !important;
+                background: #4CAF50 !important;
                 color: #ffffff !important;
+                border-color: #4CAF50 !important;
                 box-shadow: 0 0 20px rgba(76, 175, 80, 0.8) !important;
-                transform: scale(1.05) !important;
+                transform: translateY(-2px);
             }
 
             /* شاشة البداية (Splash Screen) */
             @keyframes splashEpicOut {
-                0% { opacity: 1; visibility: visible; }
-                85% { opacity: 1; }
-                100% { opacity: 0; visibility: hidden; pointer-events: none; }
+                0% { opacity: 1; visibility: visible; transform: scale(1); }
+                85% { opacity: 1; transform: scale(1); }
+                100% { opacity: 0; visibility: hidden; transform: scale(1.1); pointer-events: none; }
             }
 
             .splash-screen {
@@ -66,8 +70,8 @@ hide_streamlit_style = """
             }
 
             .splash-logo {
-                width: 100px; height: 100px; border-radius: 50%;
-                border: 3px solid #4CAF50; box-shadow: 0 0 35px rgba(76, 175, 80, 0.9);
+                width: 110px; height: 110px; border-radius: 50%;
+                border: 3px solid #4CAF50; box-shadow: 0 0 40px rgba(76, 175, 80, 0.9);
                 animation: epicPulse 1.2s infinite alternate; object-fit: cover; margin-bottom: 20px;
             }
 
@@ -76,11 +80,13 @@ hide_streamlit_style = """
                 100% { transform: scale(1.1); box-shadow: 0 0 50px rgba(76, 175, 80, 1); }
             }
 
-            .splash-text { color: #4CAF50; font-size: 20px; font-weight: 700; letter-spacing: 2px; }
+            .splash-text {
+                color: #4CAF50; font-size: 22px; font-weight: 700; letter-spacing: 3px;
+            }
 
-            /* تأثيرات الحركة */
+            /* تأثيرات الحركة السينمائية */
             @keyframes cinematicAppear {
-                0% { opacity: 0; transform: translateY(30px) scale(0.9); filter: blur(6px); }
+                0% { opacity: 0; transform: translateY(40px) scale(0.9); filter: blur(8px); }
                 100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
             }
 
@@ -90,12 +96,12 @@ hide_streamlit_style = """
             }
 
             .profile-container::before {
-                content: ''; position: absolute; width: 220px; height: 220px; border-radius: 50%;
+                content: ''; position: absolute; width: 225px; height: 225px; border-radius: 50%;
                 border: 3px dashed #4CAF50; box-shadow: 0 0 30px rgba(76, 175, 80, 0.6); animation: spin 12s linear infinite;
             }
 
             .profile-container::after {
-                content: ''; position: absolute; width: 260px; height: 260px; border-radius: 50%;
+                content: ''; position: absolute; width: 265px; height: 265px; border-radius: 50%;
                 background: conic-gradient(from 0deg, #4CAF50, transparent, #4CAF50, transparent);
                 -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #fff calc(100% - 3px));
                 mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #fff calc(100% - 3px));
@@ -106,14 +112,14 @@ hide_streamlit_style = """
             @keyframes spin-reverse { 0% { transform: rotate(360deg); } 100% { transform: rotate(0deg); } }
 
             .profile-img {
-                width: 180px !important; height: 180px !important; border-radius: 50% !important;
+                width: 185px !important; height: 185px !important; border-radius: 50% !important;
                 object-fit: cover !important; border: 4px solid #4CAF50 !important;
                 box-shadow: 0px 0px 40px rgba(76, 175, 80, 0.7); position: relative; z-index: 2;
             }
 
             .title-animation {
                 animation: cinematicAppear 1.2s cubic-bezier(0.16, 1, 0.3, 1) 1.4s forwards; opacity: 0;
-                text-align: center; color: #ffffff; font-weight: 800; font-size: 32px;
+                text-align: center; color: #ffffff; font-weight: 800; font-size: 34px;
             }
 
             .subtitle-animation {
@@ -134,12 +140,12 @@ hide_streamlit_style = """
             .snap-btn { background: #FFFC00; color: #000000; box-shadow: 0px 5px 20px rgba(255, 252, 0, 0.6); }
             
             .page-card {
-                background: rgba(20, 20, 20, 0.8);
-                border: 1px solid rgba(76, 175, 80, 0.4);
+                background: rgba(20, 20, 20, 0.7);
+                border: 1px solid rgba(76, 175, 80, 0.3);
                 border-radius: 15px;
                 padding: 25px;
                 margin-top: 20px;
-                box-shadow: 0 0 25px rgba(0,0,0,0.6);
+                box-shadow: 0 0 20px rgba(0,0,0,0.5);
             }
             </style>
             """
@@ -156,25 +162,26 @@ def get_image_base64(image_path):
 
 image_filename = "IMG_20240908_230026_233.jpg"
 
-# 3. شريط أزرار التنقل العلوي والترجمة بأزرار واضحة وقوية
-col_nav1, col_nav2, col_nav3 = st.columns(3)
-with col_nav1:
+# 3. شريط التنقل العلوي الأفقي (4 أعمدة متجاورة بدقة عالية)
+nav_col1, nav_col2, nav_col3, nav_col4 = st.columns(4)
+
+with nav_col1:
     btn_home = "🏠 الرئيسية" if st.session_state.lang == "ar" else "🏠 Home"
-    st.button(btn_home, on_click=set_page, args=("home",), key="nav_home")
+    st.button(btn_home, on_click=set_page, args=("home",), key="nav_home_btn")
 
-with col_nav2:
+with nav_col2:
     btn_about = "👤 عني" if st.session_state.lang == "ar" else "👤 About"
-    st.button(btn_about, on_click=set_page, args=("about",), key="nav_about")
+    st.button(btn_about, on_click=set_page, args=("about",), key="nav_about_btn")
 
-with col_nav3:
+with nav_col3:
     btn_contact = "📩 التواصل" if st.session_state.lang == "ar" else "📩 Contact"
-    st.button(btn_contact, on_click=set_page, args=("contact",), key="nav_contact")
+    st.button(btn_contact, on_click=set_page, args=("contact",), key="nav_contact_btn")
 
-# زر الترجمة
-btn_lang = "تغيير اللغة 🌐 (العربية)" if st.session_state.lang == "en" else "Switch Language 🌐 (English)"
-st.button(btn_lang, on_click=toggle_language, key="nav_lang")
+with nav_col4:
+    btn_lang = "العربية 🌐" if st.session_state.lang == "en" else "English 🌐"
+    st.button(btn_lang, on_click=toggle_language, key="nav_lang_btn")
 
-st.markdown("<hr style='border-color: #4CAF50; margin-top: 15px; margin-bottom: 25px;'>", unsafe_allow_html=True)
+st.markdown("<hr style='border-color: rgba(76,175,80,0.25); margin-top: 15px; margin-bottom: 25px;'>", unsafe_allow_html=True)
 
 # ==================== 1. الصفحة الرئيسية ====================
 if st.session_state.current_page == "home":
@@ -253,13 +260,4 @@ elif st.session_state.current_page == "contact":
             message = st.text_area("الرسالة")
             submit = st.form_submit_button("إرسال الرسالة")
             if submit:
-                st.success("شُكراً لتواصلك! تم إرسال رسالتك بنجاح.")
-    else:
-        st.markdown("<h2 style='text-align: center; color: #4CAF50;'>Get In Touch 📩</h2>", unsafe_allow_html=True)
-        with st.form("contact_form_en"):
-            name = st.text_input("Your Name")
-            email = st.text_input("Your Email")
-            message = st.text_area("Your Message")
-            submit = st.form_submit_button("Send Message")
-            if submit:
-                st.success("Thank you! Your message has been sent successfully.")
+                st.success("شُكراً لت
