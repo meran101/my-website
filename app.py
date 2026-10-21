@@ -1,18 +1,17 @@
 import streamlit as st
 import base64
 
-# إعداد حالة اللغة في التخزين المؤقت (افتراضياً الإنجليزية)
+# إعداد حالة اللغة في التخزين المؤقت
 if "lang" not in st.session_state:
     st.session_state.lang = "en"
 
-# دالة للتبديل بين اللغتين
 def toggle_language():
     if st.session_state.lang == "en":
         st.session_state.lang = "ar"
     else:
         st.session_state.lang = "en"
 
-# إعداد التصميم وإخفاء عناصر Streamlit
+# إعداد التصميم وإخفاء عناصر Streamlit مع تأثيرات الدخول البصرية
 hide_streamlit_style = """
             <style>
             #MainMenu {visibility: hidden;}
@@ -34,53 +33,88 @@ hide_streamlit_style = """
                 padding: 10px 20px 0 0;
             }
             
-            /* حاوية الصورة في المنتصف */
+            /* تأثير حركة الدخول السلس عند فتح الصفحة (FadeIn & Zoom) */
+            @keyframes fadeInEntry {
+                0% {
+                    opacity: 0;
+                    transform: scale(0.85) translateY(20px);
+                }
+                100% {
+                    opacity: 1;
+                    transform: scale(1) translateY(0);
+                }
+            }
+            
+            /* تطبيق تأثير الدخول على حاوية الصورة */
             .profile-container {
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                margin-top: 20px;
+                margin-top: 30px;
                 margin-bottom: 30px;
                 position: relative;
+                animation: fadeInEntry 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
             }
             
-            /* خط دوران أخضر متصل يدور حول الصورة */
+            /* الحلقات المدارية المتوهجة المستوحاة من التصميم الاحترافي */
             .profile-container::before {
                 content: '';
                 position: absolute;
-                width: 225px;
-                height: 225px;
+                width: 235px;
+                height: 235px;
                 border-radius: 50%;
-                border: 3px solid transparent;
-                border-top-color: #4CAF50;
-                border-right-color: #4CAF50;
-                animation: spin 1.5s linear infinite;
+                border: 2px dashed rgba(76, 175, 80, 0.4);
+                box-shadow: 0 0 20px rgba(76, 175, 80, 0.2), inset 0 0 20px rgba(76, 175, 80, 0.2);
+                animation: spin 15s linear infinite;
+            }
+
+            .profile-container::after {
+                content: '';
+                position: absolute;
+                width: 270px;
+                height: 270px;
+                border-radius: 50%;
+                background: conic-gradient(from 0deg, rgba(76, 175, 80, 0.6), transparent, rgba(76, 175, 80, 0.2), transparent);
+                -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #fff calc(100% - 2px));
+                mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #fff calc(100% - 2px));
+                animation: spin-reverse 20s linear infinite;
             }
 
             @keyframes spin {
                 0% { transform: rotate(0deg); }
                 100% { transform: rotate(360deg); }
             }
+
+            @keyframes spin-reverse {
+                0% { transform: rotate(360deg); }
+                100% { transform: rotate(0deg); }
+            }
             
-            /* تنسيق الصورة الثابتة الدائرية */
+            /* تنسيق الصورة الثابتة الدائرية وتوهجها */
             .profile-img {
                 width: 195px !important;
                 height: 195px !important;
                 border-radius: 50% !important;
                 object-fit: cover !important;
                 border: 3px solid #4CAF50 !important;
-                box-shadow: 0px 0px 25px rgba(76, 175, 80, 0.3);
+                box-shadow: 0px 0px 30px rgba(76, 175, 80, 0.4);
                 position: relative;
                 z-index: 2;
             }
             
-            /* حاوية الأيقونات لتجاورها بجانب بعضها */
+            /* تأثير الدخول للنصوص والأزرار */
+            .fade-text {
+                animation: fadeInEntry 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            }
+            
+            /* حاوية الأيقونات */
             .social-container {
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 gap: 20px;
                 margin-top: 25px;
+                animation: fadeInEntry 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
             }
             
             /* تنسيق الأيقونات المشترك */
@@ -118,7 +152,7 @@ hide_streamlit_style = """
                 box-shadow: 0px 6px 20px rgba(255, 252, 0, 0.7);
             }
             
-            /* تعديل زر Streamlit للترجمة ليظهر بشكل أنيق */
+            /* تنسيق زر الترجمة */
             div.stButton > button {
                 background-color: #1a1a1a !important;
                 color: #ffffff !important;
@@ -137,16 +171,16 @@ hide_streamlit_style = """
             """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
-# استدعاء مكتبة FontAwesome للأيقونات
+# استدعاء مكتبة FontAwesome لأيقونات التواصل
 st.markdown('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">', unsafe_allow_html=True)
 
-# إنشاء صف يحتوي على زر الترجمة في أعلى اليمين
+# زر الترجمة في أعلى الصفحة
 col1, col2 = st.columns([5, 1])
 with col2:
     button_label = "العربية 🌐" if st.session_state.lang == "en" else "English 🌐"
     st.button(button_label, on_click=toggle_language)
 
-# دالة لتحويل الصورة إلى نسق Base64
+# دالة لتحويل الصورة إلى Base64
 def get_image_base64(image_path):
     with open(image_path, "rb") as img_file:
         return base64.b64encode(img_file.read()).decode('utf-8')
@@ -166,7 +200,7 @@ try:
 except Exception as e:
     st.error("تعذر تحميل الصورة، تأكد من وجود الملف بشكل صحيح في المستودع.")
 
-# تحديد النصوص بناءً على اللغة المختارة
+# تحديد النصوص حسب اللغة
 if st.session_state.lang == "en":
     title_text = "Welcome To My Account 👋"
     subtitle_text = "My social media accounts"
@@ -174,11 +208,11 @@ else:
     title_text = "أهلاً بك في حسابي 👋"
     subtitle_text = "حساباتي على وسائل التواصل الاجتماعي"
 
-# عرض النصوص
-st.markdown(f"<h1 style='text-align: center; color: #ffffff; font-weight: 700;'>{title_text}</h1>", unsafe_allow_html=True)
-st.markdown(f"<p style='text-align: center; color: #a0a0a0; font-size: 18px;'>{subtitle_text}</p>", unsafe_allow_html=True)
+# عرض النصوص مع تأثير الدخول الحركي
+st.markdown(f"<h1 class='fade-text' style='text-align: center; color: #ffffff; font-weight: 700;'>{title_text}</h1>", unsafe_allow_html=True)
+st.markdown(f"<p class='fade-text' style='text-align: center; color: #a0a0a0; font-size: 18px;'>{subtitle_text}</p>", unsafe_allow_html=True)
 
-# روابط إنستغرام وسناب شات
+# روابط التواصل
 instagram_url = "https://www.instagram.com/meran.alyas/?__pwa=1"
 snapchat_url = "https://www.snapchat.com/add/meran.alyas"
 
