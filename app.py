@@ -25,7 +25,7 @@ hide_streamlit_style = """
             """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
-# عرض الصورة المحلية مباشرة عبر دالة Streamlit الرسمية
+# استدعاء الصورة مباشرة باسمها الصحيح
 st.image("IMG_20240908_230026_233.jpg")
 
 # عنوان الموقع والنصوص
