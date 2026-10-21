@@ -1,7 +1,7 @@
 import streamlit as st
 import base64
 
-# إعداد الصفحة وتصميم الخلفية مع تأثير الحلقات المتحركة من حول الصورة الثابتة
+# إعداد الصفحة وتصميم الخلفية مع تأثير جزيئي وحلقات متوهجة تحاكي التصميم المطلوب بدقة
 hide_streamlit_style = """
             <style>
             #MainMenu {visibility: hidden;}
@@ -16,36 +16,39 @@ hide_streamlit_style = """
                 color: #ffffff;
             }
             
-            /* حاوية الصورة في المنتصف لتضمين التأثيرات من حولها */
+            /* حاوية الصورة في المنتصف تماماً */
             .profile-container {
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                margin-top: 60px;
-                margin-bottom: 50px;
+                margin-top: 50px;
+                margin-bottom: 40px;
                 position: relative;
             }
             
-            /* حلقة مدارية أولى متحركة تدور حول الصورة الثابتة */
+            /* حلقة مدارية أولى متوهجة وكثيفة */
             .profile-container::before {
                 content: '';
                 position: absolute;
-                width: 230px;
-                height: 230px;
-                border: 1px dotted rgba(255, 255, 255, 0.4);
+                width: 235px;
+                height: 235px;
                 border-radius: 50%;
-                animation: spin 20s linear infinite;
+                background: conic-gradient(from 0deg, rgba(255, 255, 255, 0.4), transparent, rgba(255, 255, 255, 0.2), transparent);
+                -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #fff calc(100% - 2px));
+                mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #fff calc(100% - 2px));
+                animation: spin 15s linear infinite;
             }
 
-            /* حلقة مدارية ثانية تدور بعكس الاتجاه لإعطاء عمق وتأثير احترافي */
+            /* حلقة خارجية ثانية واسعة تعطي عمق النجوم والمجرة */
             .profile-container::after {
                 content: '';
                 position: absolute;
-                width: 255px;
-                height: 255px;
-                border: 2px dashed rgba(76, 175, 80, 0.3);
+                width: 270px;
+                height: 270px;
                 border-radius: 50%;
-                animation: spin-reverse 30s linear infinite;
+                border: 1px dashed rgba(255, 255, 255, 0.15);
+                box-shadow: 0 0 20px rgba(255, 255, 255, 0.05), inset 0 0 20px rgba(255, 255, 255, 0.05);
+                animation: spin-reverse 25s linear infinite;
             }
 
             @keyframes spin {
@@ -58,14 +61,14 @@ hide_streamlit_style = """
                 100% { transform: rotate(0deg); }
             }
             
-            /* تنسيق الصورة الثابتة الدائرية في المنتصف مع إطار وتوهج خفيف */
+            /* تنسيق الصورة الثابتة الدائرية وتوهجها الداخلي */
             .profile-img {
-                width: 190px !important;
-                height: 190px !important;
+                width: 195px !important;
+                height: 195px !important;
                 border-radius: 50% !important;
                 object-fit: cover !important;
-                border: 3px solid #4CAF50 !important;
-                box-shadow: 0px 0px 25px rgba(76, 175, 80, 0.4);
+                border: 2px solid rgba(255, 255, 255, 0.3) !important;
+                box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.9), 0 0 15px rgba(255, 255, 255, 0.1);
                 position: relative;
                 z-index: 2;
             }
@@ -73,12 +76,12 @@ hide_streamlit_style = """
             """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
-# دالة لتحويل الصورة المحلية الثابتة إلى نسق Base64
+# دالة لتحويل الصورة المحلية إلى نسق Base64
 def get_image_base64(image_path):
     with open(image_path, "rb") as img_file:
         return base64.b64encode(img_file.read()).decode('utf-8')
 
-# استخدام الصورة الثابتة المرفوعة لديك
+# اسم ملف صورتك الثابتة المرفوع في المستودع
 image_filename = "IMG_20240908_230026_233.jpg"
 
 try:
