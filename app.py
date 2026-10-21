@@ -1,9 +1,12 @@
 import streamlit as st
 import base64
 
-# إعداد حالة اللغة والتأثير الأولي في التخزين المؤقت
+# إعداد حالة اللغة والتسجيل في التخزين المؤقت
 if "lang" not in st.session_state:
     st.session_state.lang = "en"
+
+if "logged_in" not in st.session_state:
+    st.session_state.logged_in = False
 
 def toggle_language():
     if st.session_state.lang == "en":
@@ -11,7 +14,7 @@ def toggle_language():
     else:
         st.session_state.lang = "en"
 
-# إعداد التصميم وتأثير الإخفاء التلقائي عند فتح الموقع (Splash Screen)
+# إعداد التصميم وتأثيرات الواجهة
 hide_streamlit_style = """
             <style>
             #MainMenu {visibility: hidden;}
@@ -26,20 +29,11 @@ hide_streamlit_style = """
                 color: #ffffff;
             }
             
-            /* تأثير شاشة البداية (Splash Screen) التي تختفي بعد فتح الموقع */
+            /* تأثير شاشة البداية (Splash Screen) */
             @keyframes splashFadeOut {
-                0% {
-                    opacity: 1;
-                    visibility: visible;
-                }
-                80% {
-                    opacity: 1;
-                }
-                100% {
-                    opacity: 0;
-                    visibility: hidden;
-                    pointer-events: none;
-                }
+                0% { opacity: 1; visibility: visible; }
+                80% { opacity: 1; }
+                100% { opacity: 0; visibility: hidden; pointer-events: none; }
             }
 
             .splash-screen {
@@ -57,7 +51,6 @@ hide_streamlit_style = """
                 animation: splashFadeOut 1.5s ease-in-out forwards;
             }
 
-            /* نبض الشعار أو الاسم أثناء التحميل الأولي */
             .splash-logo {
                 width: 90px;
                 height: 90px;
@@ -81,22 +74,21 @@ hide_streamlit_style = """
                 letter-spacing: 2px;
             }
             
-            /* حاوية الصورة الأساسية في الموقع */
+            /* حاوية الصورة الأساسية */
             .profile-container {
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                margin-top: 30px;
-                margin-bottom: 30px;
+                margin-top: 20px;
+                margin-bottom: 25px;
                 position: relative;
             }
             
-            /* الحلقات المدارية المتوهجة */
             .profile-container::before {
                 content: '';
                 position: absolute;
-                width: 235px;
-                height: 235px;
+                width: 225px;
+                height: 225px;
                 border-radius: 50%;
                 border: 2px dashed rgba(76, 175, 80, 0.4);
                 box-shadow: 0 0 20px rgba(76, 175, 80, 0.2), inset 0 0 20px rgba(76, 175, 80, 0.2);
@@ -106,8 +98,8 @@ hide_streamlit_style = """
             .profile-container::after {
                 content: '';
                 position: absolute;
-                width: 270px;
-                height: 270px;
+                width: 255px;
+                height: 255px;
                 border-radius: 50%;
                 background: conic-gradient(from 0deg, rgba(76, 175, 80, 0.6), transparent, rgba(76, 175, 80, 0.2), transparent);
                 -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #fff calc(100% - 2px));
@@ -125,10 +117,9 @@ hide_streamlit_style = """
                 100% { transform: rotate(0deg); }
             }
             
-            /* تنسيق الصورة الثابتة الدائرية وتوهجها */
             .profile-img {
-                width: 195px !important;
-                height: 195px !important;
+                width: 185px !important;
+                height: 185px !important;
                 border-radius: 50% !important;
                 object-fit: cover !important;
                 border: 3px solid #4CAF50 !important;
@@ -137,51 +128,54 @@ hide_streamlit_style = """
                 z-index: 2;
             }
             
-            /* حاوية الأيقونات */
+            /* الأيقونات */
             .social-container {
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 gap: 20px;
-                margin-top: 25px;
+                margin-top: 20px;
+                margin-bottom: 30px;
             }
             
-            /* تنسيق الأيقونات المشترك */
             .social-btn {
                 display: inline-flex;
                 justify-content: center;
                 align-items: center;
-                width: 50px;
-                height: 50px;
+                width: 45px;
+                height: 45px;
                 border-radius: 50%;
                 color: white;
-                font-size: 24px;
+                font-size: 22px;
                 transition: transform 0.3s ease, box-shadow 0.3s ease;
                 text-decoration: none;
             }
             
-            /* زر إنستغرام */
             .insta-btn {
                 background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
                 box-shadow: 0px 4px 15px rgba(214, 36, 159, 0.4);
             }
-            .insta-btn:hover {
-                transform: scale(1.1);
-                box-shadow: 0px 6px 20px rgba(214, 36, 159, 0.7);
-            }
+            .insta-btn:hover { transform: scale(1.1); }
 
-            /* زر سناب شات */
             .snap-btn {
                 background: #FFFC00;
                 color: #000000;
                 box-shadow: 0px 4px 15px rgba(255, 252, 0, 0.4);
             }
-            .snap-btn:hover {
-                transform: scale(1.1);
-                box-shadow: 0px 6px 20px rgba(255, 252, 0, 0.7);
+            .snap-btn:hover { transform: scale(1.1); }
+            
+            /* تنسيق صندوق تسجيل الدخول الفخم */
+            .login-box {
+                background: rgba(20, 20, 20, 0.8);
+                border: 1px solid rgba(76, 175, 80, 0.3);
+                padding: 25px;
+                border-radius: 15px;
+                box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+                max-width: 400px;
+                margin: 0 auto;
+                backdrop-filter: blur(10px);
             }
             
-            /* تنسيق زر الترجمة */
             div.stButton > button {
                 background-color: #1a1a1a !important;
                 color: #ffffff !important;
@@ -200,10 +194,15 @@ hide_streamlit_style = """
             """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
-# استدعاء مكتبة FontAwesome للأيقونات
 st.markdown('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">', unsafe_allow_html=True)
 
-# دالة لتحويل الصورة إلى Base64
+# زر الترجمة في الأعلى
+col1, col2 = st.columns([5, 1])
+with col2:
+    button_label = "العربية 🌐" if st.session_state.lang == "en" else "English 🌐"
+    st.button(button_label, on_click=toggle_language)
+
+# دالة تحويل الصورة
 def get_image_base64(image_path):
     with open(image_path, "rb") as img_file:
         return base64.b64encode(img_file.read()).decode('utf-8')
@@ -212,8 +211,6 @@ image_filename = "IMG_20240908_230026_233.jpg"
 
 try:
     img_base64 = get_image_base64(image_filename)
-    
-    # عرض شاشة البداية المتوهجة التي تختفي تلقائياً عند فتح الموقع
     st.markdown(
         f'''
         <div class="splash-screen">
@@ -223,15 +220,8 @@ try:
         ''',
         unsafe_allow_html=True
     )
-    
 except Exception as e:
     pass
-
-# زر الترجمة في أعلى الصفحة
-col1, col2 = st.columns([5, 1])
-with col2:
-    button_label = "العربية 🌐" if st.session_state.lang == "en" else "English 🌐"
-    st.button(button_label, on_click=toggle_language)
 
 try:
     st.markdown(
@@ -243,21 +233,32 @@ try:
         unsafe_allow_html=True
     )
 except Exception as e:
-    st.error("تعذر تحميل الصورة، تأكد من وجود الملف بشكل صحيح في المستودع.")
+    st.error("تعذر تحميل الصورة.")
 
-# تحديد النصوص حسب اللغة
+# النصوص حسب اللغة
 if st.session_state.lang == "en":
     title_text = "Welcome To My Account 👋"
     subtitle_text = "My social media accounts"
+    login_title = "Secure Member Access"
+    user_label = "Username"
+    pass_label = "Password"
+    login_btn = "Login"
+    success_msg = "Welcome back, Meran! Access Granted."
+    error_msg = "Invalid credentials. Please try again."
 else:
     title_text = "أهلاً بك في حسابي 👋"
     subtitle_text = "حساباتي على وسائل التواصل الاجتماعي"
+    login_title = "تسجيل دخول الأعضاء"
+    user_label = "اسم المستخدم"
+    pass_label = "كلمة المرور"
+    login_btn = "تسجيل الدخول"
+    success_msg = "أهلاً بك مجدداً يا ميران! تم تسجيل الدخول بنجاح."
+    error_msg = "بيانات الدخول غير صحيحة، حاول مجدداً."
 
-# عرض النصوص
 st.markdown(f"<h1 style='text-align: center; color: #ffffff; font-weight: 700;'>{title_text}</h1>", unsafe_allow_html=True)
-st.markdown(f"<p style='text-align: center; color: #a0a0a0; font-size: 18px;'>{subtitle_text}</p>", unsafe_allow_html=True)
+st.markdown(f"<p style='text-align: center; color: #a0a0a0; font-size: 18px; margin-bottom: 10px;'>{subtitle_text}</p>", unsafe_allow_html=True)
 
-# روابط التواصل
+# أيقونات التواصل الاجتماعي
 instagram_url = "https://www.instagram.com/meran.alyas/?__pwa=1"
 snapchat_url = "https://www.snapchat.com/add/meran.alyas"
 
@@ -274,3 +275,22 @@ st.markdown(
     ''',
     unsafe_allow_html=True
 )
+
+# قسم تسجيل الدخول الفخم في الأسفل
+st.markdown(f"<hr style='border-color: rgba(255,255,255,0.1); margin: 30px 0;'>", unsafe_allow_html=True)
+st.markdown(f"<h3 style='text-align: center; color: #4CAF50; font-size: 20px; margin-bottom: 20px;'>{login_title}</h3>", unsafe_allow_html=True)
+
+with st.container():
+    col_a, col_b, col_c = st.columns([1, 2, 1])
+    with col_b:
+        with st.form("login_form"):
+            username = st.text_input(user_label)
+            password = st.text_input(pass_label, type="password")
+            submit = st.form_submit_button(login_btn)
+            
+            if submit:
+                if username == "meran.alyas" and password == "12345":
+                    st.success(success_msg)
+                    st.session_state.logged_in = True
+                else:
+                    st.error(error_msg)
