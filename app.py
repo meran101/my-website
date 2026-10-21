@@ -175,4 +175,10 @@ with nav_col2:
 
 with nav_col3:
     btn_contact = "📩 التواصل" if st.session_state.lang == "ar" else "📩 Contact"
-    st.button(btn_contact, on_click=set_page,
+    st.button(btn_contact, on_click=set_page, args=("contact",), key="nav_contact_btn")
+
+with nav_col4:
+    btn_lang = "العربية 🌐" if st.session_state.lang == "en" else "English 🌐"
+    st.button(btn_lang, on_click=toggle_language, key="nav_lang_btn")
+
+st.markdown("<hr style='border-color: rgba(76,175,8
