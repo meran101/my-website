@@ -180,7 +180,7 @@ def get_image_base64(image_path):
 
 image_filename = "IMG_20240908_230026_233.jpg"
 
-# 3. شريط التنقل العلوي الأفقي (متجاور تماماً في صف واحد)
+# 3. شريط التنقل العلوي الأفقي
 nav_col1, nav_col2, nav_col3, nav_col4 = st.columns(4)
 
 with nav_col1:
@@ -192,39 +192,4 @@ with nav_col2:
     st.button(btn_about, on_click=set_page, args=("about",), key="nav_about_btn")
 
 with nav_col3:
-    btn_contact = "📩 التواصل" if st.session_state.lang == "ar" else "📩 Contact"
-    st.button(btn_contact, on_click=set_page, args=("contact",), key="nav_contact_btn")
-
-with nav_col4:
-    btn_lang = "العربية 🌐" if st.session_state.lang == "en" else "English 🌐"
-    st.button(btn_lang, on_click=toggle_language, key="nav_lang_btn")
-
-st.markdown("<hr style='border-color: rgba(76,175,80,0.25); margin-top: 15px; margin-bottom: 25px;'>", unsafe_allow_html=True)
-
-# ==================== 1. الصفحة الرئيسية ====================
-if st.session_state.current_page == "home":
-    img_base64 = get_image_base64(image_filename)
-    if img_base64:
-        st.markdown(
-            f'''
-            <div class="splash-screen">
-                <img src="data:image/jpeg;base64,{img_base64}" class="splash-logo" alt="Loading...">
-                <div class="splash-text">LOADING WEBSITE...</div>
-            </div>
-            <div class="profile-container">
-                <img src="data:image/jpeg;base64,{img_base64}" class="profile-img" alt="Profile Picture">
-            </div>
-            ''',
-            unsafe_allow_html=True
-        )
-
-    if st.session_state.lang == "en":
-        title_text, subtitle_text = "Welcome To My Account 👋", "My social media accounts"
-    else:
-        title_text, subtitle_text = "أهلاً بك في حسابي 👋", "حساباتي على وسائل التواصل الاجتماعي"
-
-    st.markdown(f"<h1 class='title-animation'>{title_text}</h1>", unsafe_allow_html=True)
-    st.markdown(f"<p class='subtitle-animation'>{subtitle_text}</p>", unsafe_allow_html=True)
-
-    instagram_url = "https://www.instagram.com/meran.alyas/?__pwa=1"
-    snapchat_url = "
+    btn_contact = "📩 التواصل
