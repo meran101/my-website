@@ -1,7 +1,6 @@
 import streamlit as st
 import base64
 
-# 1. إعداد حالة الصفحة واللغة في التخزين المؤقت
 if "current_page" not in st.session_state:
     st.session_state.current_page = "home"
 
@@ -17,7 +16,6 @@ def toggle_language():
     else:
         st.session_state.lang = "en"
 
-# 2. إعداد CSS والتصميم السينمائي وتنسيق الأيقونات الأفقية
 hide_streamlit_style = """
 <style>
 #MainMenu {visibility: hidden;}
@@ -26,13 +24,11 @@ header {visibility: hidden;}
 .stAppDeployButton {display: none !important;}
 div[data-testid="stDecoration"] {display: none !important;}
 
-/* خلفية الموقع الداكنة الفخمة */
 .stApp {
     background-color: #050505;
     color: #ffffff;
 }
 
-/* إجبار حاوية الأعمدة على التواجد في صف أفقي واحد */
 div[data-testid="horizontal-block"] {
     display: flex !important;
     flex-direction: row !important;
@@ -40,13 +36,11 @@ div[data-testid="horizontal-block"] {
     gap: 8px !important;
 }
 
-/* ضبط مقاسات الأعمدة الثلاثة بشكل مثالي */
 div[data-testid="column"] {
     flex: 1 1 0% !important;
     min-width: 0 !important;
 }
 
-/* تنسيق أزرار التنقل الأفقية */
 div.stButton > button {
     background: rgba(18, 18, 18, 0.85) !important;
     color: #cccccc !important;
@@ -72,7 +66,6 @@ div.stButton > button:hover {
     transform: translateY(-2px);
 }
 
-/* شاشة البداية (Splash Screen) */
 @keyframes splashEpicOut {
     0% { opacity: 1; visibility: visible; transform: scale(1); }
     85% { opacity: 1; transform: scale(1); }
@@ -101,18 +94,9 @@ div.stButton > button:hover {
     color: #4CAF50; font-size: 20px; font-weight: 700; letter-spacing: 3px;
 }
 
-/* تأثيرات الدخول السينمائي الفخم */
 @keyframes epicEntrance {
-    0% {
-        opacity: 0;
-        transform: translateY(50px) scale(0.85);
-        filter: blur(10px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-        filter: blur(0);
-    }
+    0% { opacity: 0; transform: translateY(50px) scale(0.85); filter: blur(10px); }
+    100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
 }
 
 .profile-container {
@@ -163,4 +147,63 @@ div.stButton > button:hover {
     display: inline-flex; justify-content: center; align-items: center; width: 50px; height: 50px;
     border-radius: 50%; color: white; font-size: 24px; transition: all 0.4s ease; text-decoration: none;
 }
-.insta-btn { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fd5949 45%, #d6249f 60%, #285AEB 90%); box-shadow:
+.insta-btn { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fd5949 45%, #d6249f 60%, #285AEB 90%); box-shadow: 0px 4px 15px rgba(214, 36, 159, 0.6); }
+.snap-btn { background: #FFFC00; color: #000000; box-shadow: 0px 4px 15px rgba(255, 252, 0, 0.6); }
+.threads-btn { background: #101010; color: #ffffff; border: 1px solid #333333; box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.25); }
+
+.page-card {
+    background: rgba(20, 20, 20, 0.8);
+    border: 1px solid rgba(76, 175, 80, 0.4);
+    border-radius: 15px;
+    padding: 25px;
+    margin-top: 20px;
+    box-shadow: 0 0 25px rgba(0,0,0,0.6);
+}
+</style>
+"""
+
+st.markdown(hide_streamlit_style, unsafe_allow_html=True)
+st.markdown('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">', unsafe_allow_html=True)
+
+def get_image_base64(image_path):
+    try:
+        with open(image_path, "rb") as img_file:
+            return base64.b64encode(img_file.read()).decode('utf-8')
+    except Exception:
+        return ""
+
+image_filename = "IMG_20240908_230026_233.jpg"
+
+nav_col1, nav_col2, nav_col3 = st.columns(3)
+
+with nav_col1:
+    btn_home = "🏠 الرئيسية" if st.session_state.lang == "ar" else "🏠 Home"
+    st.button(btn_home, on_click=set_page, args=("home",), key="nav_home_btn")
+
+with nav_col2:
+    btn_about = "👤 عني" if st.session_state.lang == "ar" else "👤 About"
+    st.button(btn_about, on_click=set_page, args=("about",), key="nav_about_btn")
+
+with nav_col3:
+    btn_lang = "العربية 🌐" if st.session_state.lang == "en" else "English 🌐"
+    st.button(btn_lang, on_click=toggle_language, key="nav_lang_btn")
+
+st.markdown("<hr style='border-color: rgba(76,175,80,0.25); margin-top: 15px; margin-bottom: 25px;'>", unsafe_allow_html=True)
+
+if st.session_state.current_page == "home":
+    img_base64 = get_image_base64(image_filename)
+    if img_base64:
+        st.markdown(
+            f'<div class="splash-screen"><img src="data:image/jpeg;base64,{img_base64}" class="splash-logo" alt="Loading..."><div class="splash-text">LOADING WEBSITE...</div></div><div class="profile-container"><img src="data:image/jpeg;base64,{img_base64}" class="profile-img" alt="Profile Picture"></div>',
+            unsafe_allow_html=True
+        )
+
+    if st.session_state.lang == "en":
+        title_text, subtitle_text = "Welcome To My Account 👋", "My social media accounts"
+    else:
+        title_text, subtitle_text = "أهلاً بك في حسابي 👋", "حساباتي على وسائل التواصل الاجتماعي"
+
+    st.markdown(f"<h1 class='title-animation'>{title_text}</h1>", unsafe_allow_html=True)
+    st.markdown(f"<p class='subtitle-animation'>{subtitle_text}</p>", unsafe_allow_html=True)
+
+    instagram
