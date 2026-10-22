@@ -17,7 +17,7 @@ def toggle_language():
     else:
         st.session_state.lang = "en"
 
-# 2. إعداد CSS والتصميم السينمائي مع إجبار الأزرار العلوية على الظهور أفقياً وبشكل مرتب
+# 2. إعداد CSS والتصميم السينمائي مع إجبار الأزرار على البقاء أفقية في الهواتف واللابتوب
 hide_streamlit_style = """
 <style>
 #MainMenu {visibility: hidden;}
@@ -32,27 +32,36 @@ div[data-testid="stDecoration"] {display: none !important;}
     color: #ffffff;
 }
 
-/* ضمان ظهور أعمدة التنقل متجاورة أفقياً وبدون تداخل */
-div[data-testid="column"] {
-    width: 25% !important;
-    flex: 1 1 auto !important;
-    min-width: 75px !important;
+/* إجبار حاوية الأعمدة على التواجد في صف أفقي واحد وعدم الالتفاف حتى على الهواتف */
+div[data-testid="horizontal-block"] {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    gap: 5px !important;
 }
 
-/* تنسيق أزرار التنقل الأفقية الحديثة */
+/* ضبط مقاسات الأعمدة لتتطابق أفقياً بشكل مثالي */
+div[data-testid="column"] {
+    flex: 1 1 0% !important;
+    min-width: 0 !important;
+}
+
+/* تنسيق أزرار التنقل الأفقية لتناسب الهواتف والشاشات الصغيرة */
 div.stButton > button {
     background: rgba(18, 18, 18, 0.85) !important;
     color: #cccccc !important;
     border: 1px solid rgba(76, 175, 80, 0.4) !important;
-    border-radius: 20px !important;
-    padding: 6px 10px !important;
-    font-size: 12px !important;
+    border-radius: 15px !important;
+    padding: 5px 4px !important;
+    font-size: 11px !important;
     font-weight: 600 !important;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
     width: 100% !important;
     backdrop-filter: blur(10px);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
     white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
 }
 
 div.stButton > button:hover {
@@ -180,7 +189,7 @@ def get_image_base64(image_path):
 
 image_filename = "IMG_20240908_230026_233.jpg"
 
-# 3. شريط التنقل العلوي الأفقي
+# 3. شريط التنقل العلوي الأفقي (متجاور في صف واحد تماماً على الموبايل واللابتوب)
 nav_col1, nav_col2, nav_col3, nav_col4 = st.columns(4)
 
 with nav_col1:
@@ -286,4 +295,13 @@ elif st.session_state.current_page == "contact":
             message = st.text_area("الرسالة")
             submit = st.form_submit_button("إرسال الرسالة")
             if submit:
-                st
+                st.success("شُكراً لتواصلك! تم إرسال رسالتك بنجاح.")
+    else:
+        st.markdown("<h2 style='text-align: center; color: #4CAF50;'>Get In Touch 📩</h2>", unsafe_allow_html=True)
+        with st.form("contact_form_en"):
+            name = st.text_input("Your Name")
+            email = st.text_input("Your Email")
+            message = st.text_area("Your Message")
+            submit = st.form_submit_button("Send Message")
+            if submit:
+                st.success("Thank you! Your message has
