@@ -99,30 +99,17 @@ div.stButton > button:hover {
     100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
 }
 
-/* خلفية مائية متدرجة مع تموجات خلف صورة البروفايل */
 .water-bg-wrapper {
-    position: relative;
-    width: 170px;
-    height: 170px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto;
+    position: relative; width: 170px; height: 170px; border-radius: 50%;
+    display: flex; justify-content: center; align-items: center; margin: 0 auto;
     background: radial-gradient(circle, rgba(0, 150, 255, 0.35) 0%, rgba(76, 175, 80, 0.15) 50%, transparent 75%);
     box-shadow: 0 0 30px rgba(0, 180, 216, 0.5), inset 0 0 20px rgba(0, 119, 182, 0.4);
     animation: waterPulse 3s ease-in-out infinite alternate;
 }
 
 @keyframes waterPulse {
-    0% {
-        box-shadow: 0 0 20px rgba(0, 180, 216, 0.4), inset 0 0 15px rgba(0, 119, 182, 0.3);
-        transform: scale(0.98);
-    }
-    100% {
-        box-shadow: 0 0 45px rgba(0, 212, 255, 0.8), inset 0 0 30px rgba(76, 175, 80, 0.6);
-        transform: scale(1.03);
-    }
+    0% { box-shadow: 0 0 20px rgba(0, 180, 216, 0.4), inset 0 0 15px rgba(0, 119, 182, 0.3); transform: scale(0.98); }
+    100% { box-shadow: 0 0 45px rgba(0, 212, 255, 0.8), inset 0 0 30px rgba(76, 175, 80, 0.6); transform: scale(1.03); }
 }
 
 .profile-container {
@@ -227,4 +214,25 @@ if st.session_state.current_page == "home":
         title_text, sub_text = "أهلاً بك في حسابي 👋", "حساباتي على وسائل التواصل الاجتماعي"
 
     st.markdown(f"<h1 class='title-animation'>{title_text}</h1>", unsafe_allow_html=True)
-    st.markdown(f"<p class='subtitle-animation'>{sub_text}</p>", unsafe_allow_
+    st.markdown(f"<p class='subtitle-animation'>{sub_text}</p>", unsafe_allow_html=True)
+
+    url_insta = "https://www.instagram.com/meran.alyas/?__pwa=1"
+    url_snap = "https://www.snapchat.com/add/meran.alyas"
+    url_threads = "https://www.threads.net/@meran.alyas"
+
+    social_html = f'''
+    <div class="social-container">
+        <a href="{url_insta}" target="_blank" class="social-btn insta-btn" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="{url_snap}" target="_blank" class="social-btn snap-btn" title="Snapchat"><i class="fa-brands fa-snapchat"></i></a>
+        <a href="{url_threads}" target="_blank" class="social-btn threads-btn" title="Threads"><i class="fa-brands fa-threads"></i></a>
+    </div>
+    '''
+    st.markdown(social_html, unsafe_allow_html=True)
+
+elif st.session_state.current_page == "about":
+    if st.session_state.lang == "ar":
+        st.markdown("<h2 style='text-align: center; color: #4CAF50;'>نبذة عني 👤</h2>", unsafe_allow_html=True)
+        st.markdown('<div class="page-card" style="text-align: center;"><h3 style="color: #ffffff; margin-bottom: 15px;">Meran Alyas</h3><p style="font-size: 20px; font-weight: 700; color: #4CAF50; letter-spacing: 1px;">🤖 Owner of TIGER Bot 🐅</p><p style="font-size: 16px; line-height: 1.8; color: #cccccc; margin-top: 15px;">Welcome to my official page. I am the creator and owner of <b>TIGER Bot</b>. Passionate about technology, development, and building high-performance automated tools.</p></div>', unsafe_allow_html=True)
+    else:
+        st.markdown("<h2 style='text-align: center; color: #4CAF50;'>About Me 👤</h2>", unsafe_allow_html=True)
+        st.markdown('<div class="page-card" style="text-align: center;"><h3 style="color: #ffffff; margin-bottom: 15px;">Meran Alyas</h3><p style="font-size: 20px; font-weight: 700; color: #4CAF50; letter-spacing: 1px;">🤖 Owner of TIGER Bot 🐅</p><p style="font-size: 16px; line-height: 1.8; color: #cccccc; margin-top: 15px;">Welcome to my official landing page. I am the creator and owner of <b>TIGER Bot</b>. Passionate about technology, development, and building high-performance automated tools.</p></div>', unsafe_allow_html=True)
