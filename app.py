@@ -30,7 +30,7 @@ div[data-testid="stDecoration"] {display: none !important;}
     color: #ffffff;
 }
 
-/* طبقة مطر الحروف الإنجليزية المتقطعة */
+/* طبقة مطر الحروف الإنجليزية باللون الأزرق العميق والمائي */
 .matrix-rain {
     position: fixed;
     top: 0;
@@ -40,20 +40,20 @@ div[data-testid="stDecoration"] {display: none !important;}
     pointer-events: none;
     z-index: 1;
     overflow: hidden;
-    opacity: 0.4;
+    opacity: 0.5;
 }
 
 .matrix-column {
     position: absolute;
     top: -50%;
-    color: #4CAF50;
+    color: #00b4d8;
     font-family: monospace;
     font-size: 16px;
     font-weight: bold;
     line-height: 20px;
     letter-spacing: 2px;
     text-align: center;
-    text-shadow: 0 0 8px rgba(76, 175, 80, 0.9), 0 0 4px rgba(0, 212, 255, 0.7);
+    text-shadow: 0 0 10px rgba(0, 150, 255, 0.9), 0 0 5px rgba(0, 212, 255, 0.8);
     animation: matrixFall linear infinite;
 }
 
@@ -86,7 +86,7 @@ div[data-testid="column"] {
 div.stButton > button {
     background: rgba(18, 18, 18, 0.9) !important;
     color: #cccccc !important;
-    border: 1px solid rgba(76, 175, 80, 0.4) !important;
+    border: 1px solid rgba(0, 180, 216, 0.4) !important;
     border-radius: 15px !important;
     padding: 8px 10px !important;
     font-size: 13px !important;
@@ -101,10 +101,10 @@ div.stButton > button {
 }
 
 div.stButton > button:hover {
-    background: #4CAF50 !important;
+    background: #00b4d8 !important;
     color: #ffffff !important;
     border-color: #00d4ff !important;
-    box-shadow: 0 0 25px rgba(76, 175, 80, 0.9), 0 0 10px rgba(0, 212, 255, 0.6) !important;
+    box-shadow: 0 0 25px rgba(0, 180, 216, 0.9), 0 0 10px rgba(0, 212, 255, 0.6) !important;
     transform: translateY(-3px) scale(1.02);
 }
 
@@ -118,9 +118,9 @@ div[data-testid="column"]:nth-child(2) div.stButton > button {
 }
 
 div[data-testid="column"]:nth-child(2) div.stButton > button:hover {
-    background: linear-gradient(135deg, rgba(0, 212, 255, 0.9), rgba(76, 175, 80, 0.8)) !important;
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.9), rgba(0, 119, 182, 0.8)) !important;
     border-color: #ffffff !important;
-    box-shadow: 0 0 35px rgba(0, 212, 255, 0.9), 0 0 15px rgba(76, 175, 80, 0.7) !important;
+    box-shadow: 0 0 35px rgba(0, 212, 255, 0.9), 0 0 15px rgba(0, 150, 255, 0.7) !important;
     transform: translateY(-3px) scale(1.03);
 }
 
@@ -130,8 +130,8 @@ div[data-testid="column"]:nth-child(2) div.stButton > button:hover {
         border-color: rgba(0, 212, 255, 0.6);
     }
     100% {
-        box-shadow: 0 0 30px rgba(0, 212, 255, 0.8), inset 0 0 20px rgba(76, 175, 80, 0.6);
-        border-color: rgba(76, 175, 80, 0.9);
+        box-shadow: 0 0 30px rgba(0, 212, 255, 0.8), inset 0 0 20px rgba(0, 119, 182, 0.6);
+        border-color: rgba(0, 180, 216, 0.9);
     }
 }
 
@@ -168,17 +168,17 @@ div[data-testid="column"]:nth-child(2) div.stButton > button:hover {
 
 .splash-logo {
     width: 90px; height: 90px; border-radius: 50%;
-    border: 3px solid #4CAF50; box-shadow: 0 0 30px rgba(76, 175, 80, 0.9);
+    border: 3px solid #00b4d8; box-shadow: 0 0 30px rgba(0, 180, 216, 0.9);
     animation: epicPulse 1.2s infinite alternate; object-fit: cover; margin-bottom: 20px;
 }
 
 @keyframes epicPulse {
-    0% { transform: scale(0.95); box-shadow: 0 0 15px rgba(76, 175, 80, 0.5); }
-    100% { transform: scale(1.1); box-shadow: 0 0 35px rgba(76, 175, 80, 1); }
+    0% { transform: scale(0.95); box-shadow: 0 0 15px rgba(0, 150, 255, 0.5); }
+    100% { transform: scale(1.1); box-shadow: 0 0 35px rgba(0, 212, 255, 1); }
 }
 
 .splash-text {
-    color: #4CAF50; font-size: 20px; font-weight: 700; letter-spacing: 3px;
+    color: #00b4d8; font-size: 20px; font-weight: 700; letter-spacing: 3px;
 }
 
 .profile-container {
@@ -188,12 +188,12 @@ div[data-testid="column"]:nth-child(2) div.stButton > button:hover {
 
 .profile-container::before {
     content: ''; position: absolute; width: 155px; height: 155px; border-radius: 50%;
-    border: 2px dashed #4CAF50; box-shadow: 0 0 20px rgba(76, 175, 80, 0.6); animation: spin 12s linear infinite;
+    border: 2px dashed #00b4d8; box-shadow: 0 0 20px rgba(0, 180, 216, 0.6); animation: spin 12s linear infinite;
 }
 
 .profile-container::after {
     content: ''; position: absolute; width: 185px; height: 185px; border-radius: 50%;
-    background: conic-gradient(from 0deg, #4CAF50, transparent, #4CAF50, transparent);
+    background: conic-gradient(from 0deg, #00b4d8, transparent, #0077b6, transparent);
     -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #fff calc(100% - 2px));
     mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #fff calc(100% - 2px));
     animation: spin-reverse 18s linear infinite;
@@ -204,8 +204,8 @@ div[data-testid="column"]:nth-child(2) div.stButton > button:hover {
 
 .profile-img {
     width: 125px !important; height: 125px !important; border-radius: 50% !important;
-    object-fit: cover !important; border: 3px solid #4CAF50 !important;
-    box-shadow: 0px 0px 30px rgba(76, 175, 80, 0.8); position: relative; z-index: 2;
+    object-fit: cover !important; border: 3px solid #00b4d8 !important;
+    box-shadow: 0px 0px 30px rgba(0, 180, 216, 0.8); position: relative; z-index: 2;
 }
 
 .title-animation {
@@ -215,8 +215,8 @@ div[data-testid="column"]:nth-child(2) div.stButton > button:hover {
 }
 
 .subtitle-animation {
-    text-align: center; color: #4CAF50; font-size: 17px;
-    text-shadow: 0 0 10px rgba(76, 175, 80, 0.4);
+    text-align: center; color: #00b4d8; font-size: 17px;
+    text-shadow: 0 0 10px rgba(0, 180, 216, 0.4);
     position: relative; z-index: 10;
 }
 
@@ -236,7 +236,7 @@ div[data-testid="column"]:nth-child(2) div.stButton > button:hover {
 /* بنر الماء المتحرك خلف بطاقة عني */
 .water-banner-card {
     position: relative;
-    background: linear-gradient(135deg, rgba(0, 119, 182, 0.25), rgba(76, 175, 80, 0.25)), rgba(15, 15, 15, 0.85);
+    background: linear-gradient(135deg, rgba(0, 119, 182, 0.3), rgba(0, 180, 216, 0.15)), rgba(15, 15, 15, 0.85);
     border: 1px solid rgba(0, 180, 216, 0.6);
     border-radius: 20px;
     padding: 30px;
@@ -255,7 +255,7 @@ div[data-testid="column"]:nth-child(2) div.stButton > button:hover {
     left: -50%;
     width: 200%;
     height: 200%;
-    background: radial-gradient(circle, rgba(0, 212, 255, 0.15) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(0, 212, 255, 0.2) 0%, transparent 70%);
     animation: waterRippleMove 8s linear infinite;
     z-index: 0;
     pointer-events: none;
@@ -263,7 +263,7 @@ div[data-testid="column"]:nth-child(2) div.stButton > button:hover {
 
 @keyframes waterBannerGlow {
     0% { box-shadow: 0 0 25px rgba(0, 150, 255, 0.25), inset 0 0 15px rgba(0, 180, 216, 0.15); }
-    100% { box-shadow: 0 0 45px rgba(0, 212, 255, 0.5), inset 0 0 30px rgba(76, 175, 80, 0.3); }
+    100% { box-shadow: 0 0 45px rgba(0, 212, 255, 0.5), inset 0 0 30px rgba(0, 119, 182, 0.3); }
 }
 
 @keyframes waterRippleMove {
@@ -282,7 +282,7 @@ div[data-testid="column"]:nth-child(2) div.stButton > button:hover {
 
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
-# توليد أعمدة مطر الحروف الإنجليزية المتقطعة والعشوائية
+# توليد أعمدة مطر الحروف الإنجليزية المتقطعة باللون الأزرق العميق والمائي
 matrix_html = '<div class="matrix-rain">'
 char_sets = [
     "X<br>A<br>9<br>R<br>B<br>2<br>M<br>K<br>L<br>7<br>Q<br>W<br>E",
@@ -327,7 +327,7 @@ with col3:
     btn_lang = "العربية 🌐" if st.session_state.lang == "en" else "English 🌐"
     st.button(btn_lang, on_click=toggle_language, key="btn_l")
 
-st.markdown("<hr style='border-color: rgba(76,175,80,0.25); margin-top: 15px; margin-bottom: 25px; position: relative; z-index: 10;'>", unsafe_allow_html=True)
+st.markdown("<hr style='border-color: rgba(0, 180, 216, 0.25); margin-top: 15px; margin-bottom: 25px; position: relative; z-index: 10;'>", unsafe_allow_html=True)
 
 st.markdown('<div class="page-transition">', unsafe_allow_html=True)
 
@@ -359,10 +359,10 @@ if st.session_state.current_page == "home":
 
 elif st.session_state.current_page == "about":
     if st.session_state.lang == "ar":
-        st.markdown("<h2 style='text-align: center; color: #4CAF50; position: relative; z-index: 10;'>نبذة عني 👤</h2>", unsafe_allow_html=True)
-        st.markdown('<div class="water-banner-card"><div class="water-content"><p style="font-size: 20px; font-weight: 700; color: #4CAF50; letter-spacing: 1px; margin: 0;">🤖 Owner of TIGER Bot 🐅</p></div></div>', unsafe_allow_html=True)
+        st.markdown("<h2 style='text-align: center; color: #00b4d8; position: relative; z-index: 10;'>نبذة عني 👤</h2>", unsafe_allow_html=True)
+        st.markdown('<div class="water-banner-card"><div class="water-content"><p style="font-size: 20px; font-weight: 700; color: #00b4d8; letter-spacing: 1px; margin: 0;">🤖 Owner of TIGER Bot 🐅</p></div></div>', unsafe_allow_html=True)
     else:
-        st.markdown("<h2 style='text-align: center; color: #4CAF50; position: relative; z-index: 10;'>About Me 👤</h2>", unsafe_allow_html=True)
-        st.markdown('<div class="water-banner-card"><div class="water-content"><p style="font-size: 20px; font-weight: 700; color: #4CAF50; letter-spacing: 1px; margin: 0;">🤖 Owner of TIGER Bot 🐅</p></div></div>', unsafe_allow_html=True)
+        st.markdown("<h2 style='text-align: center; color: #00b4d8; position: relative; z-index: 10;'>About Me 👤</h2>", unsafe_allow_html=True)
+        st.markdown('<div class="water-banner-card"><div class="water-content"><p style="font-size: 20px; font-weight: 700; color: #00b4d8; letter-spacing: 1px; margin: 0;">🤖 Owner of TIGER Bot 🐅</p></div></div>', unsafe_allow_html=True)
 
 st.markdown('</div>', unsafe_allow_html=True)
