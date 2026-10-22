@@ -30,7 +30,7 @@ div[data-testid="stDecoration"] {display: none !important;}
     color: #ffffff;
 }
 
-/* طبقة المطر الرقمي بحروف الإنجليزية في الخلفية تماماً دون حجب العناصر */
+/* طبقة المطر الرقمي بحروف الإنجليزية في الخلفية */
 .matrix-rain {
     position: fixed;
     top: 0;
@@ -88,29 +88,53 @@ div[data-testid="column"] {
     min-width: 0 !important;
 }
 
+/* تصميم وحركات الأزرار والتنقل */
 div.stButton > button {
     background: rgba(18, 18, 18, 0.9) !important;
     color: #cccccc !important;
     border: 1px solid rgba(76, 175, 80, 0.4) !important;
     border-radius: 15px !important;
-    padding: 6px 8px !important;
-    font-size: 12px !important;
+    padding: 8px 10px !important;
+    font-size: 13px !important;
     font-weight: 600 !important;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
     width: 100% !important;
     backdrop-filter: blur(10px);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
     white-space: nowrap !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
+    position: relative;
 }
 
 div.stButton > button:hover {
     background: #4CAF50 !important;
     color: #ffffff !important;
-    border-color: #4CAF50 !important;
-    box-shadow: 0 0 20px rgba(76, 175, 80, 0.8) !important;
-    transform: translateY(-2px);
+    border-color: #00d4ff !important;
+    box-shadow: 0 0 25px rgba(76, 175, 80, 0.9), 0 0 10px rgba(0, 212, 255, 0.6) !important;
+    transform: translateY(-3px) scale(1.02);
+}
+
+div.stButton > button:active {
+    transform: translateY(1px) scale(0.98) !important;
+}
+
+/* تأثير تحريك وانتقال الصفحات والمحتوى عند الضغط على الأزرار */
+.page-transition {
+    animation: pageSlideIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes pageSlideIn {
+    0% {
+        opacity: 0;
+        transform: translateY(30px) scale(0.96);
+        filter: blur(8px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
 }
 
 @keyframes splashEpicOut {
@@ -141,15 +165,9 @@ div.stButton > button:hover {
     color: #4CAF50; font-size: 20px; font-weight: 700; letter-spacing: 3px;
 }
 
-@keyframes epicEntrance {
-    0% { opacity: 0; transform: translateY(50px) scale(0.85); filter: blur(10px); }
-    100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
-}
-
 .profile-container {
     display: flex; justify-content: center; align-items: center; margin-top: 25px; margin-bottom: 25px;
-    position: relative; animation: epicEntrance 1.4s cubic-bezier(0.16, 1, 0.3, 1) 1.2s forwards; opacity: 0;
-    z-index: 10;
+    position: relative; z-index: 10;
 }
 
 .profile-container::before {
@@ -175,14 +193,12 @@ div.stButton > button:hover {
 }
 
 .title-animation {
-    animation: epicEntrance 1.4s cubic-bezier(0.16, 1, 0.3, 1) 1.5s forwards; opacity: 0;
     text-align: center; color: #ffffff; font-weight: 800; font-size: 30px;
     text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
     position: relative; z-index: 10;
 }
 
 .subtitle-animation {
-    animation: epicEntrance 1.4s cubic-bezier(0.16, 1, 0.3, 1) 1.8s forwards; opacity: 0;
     text-align: center; color: #4CAF50; font-size: 17px;
     text-shadow: 0 0 10px rgba(76, 175, 80, 0.4);
     position: relative; z-index: 10;
@@ -190,7 +206,6 @@ div.stButton > button:hover {
 
 .social-container {
     display: flex; justify-content: center; align-items: center; gap: 20px; margin-top: 25px;
-    animation: epicEntrance 1.4s cubic-bezier(0.16, 1, 0.3, 1) 2.1s forwards; opacity: 0;
     position: relative; z-index: 10;
 }
 
@@ -202,7 +217,7 @@ div.stButton > button:hover {
 .snap-btn { background: #FFFC00; color: #000000; box-shadow: 0px 4px 15px rgba(255, 252, 0, 0.6); }
 .threads-btn { background: #101010; color: #ffffff; border: 1px solid #333333; box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.25); }
 
-/* بنر الماء المتحرك خلف بطاقة عني */
+/* بطاقة عني مع تأثير الماء النيوني */
 .water-banner-card {
     position: relative;
     background: linear-gradient(135deg, rgba(0, 119, 182, 0.25), rgba(76, 175, 80, 0.25)), rgba(15, 15, 15, 0.85);
@@ -278,6 +293,9 @@ with col3:
 
 st.markdown("<hr style='border-color: rgba(76,175,80,0.25); margin-top: 15px; margin-bottom: 25px; position: relative; z-index: 10;'>", unsafe_allow_html=True)
 
+# تغليف المحتوى داخل كلاس التمرير والانتقال
+st.markdown('<div class="page-transition">', unsafe_allow_html=True)
+
 if st.session_state.current_page == "home":
     img_b64 = get_image_base64(image_filename)
     if img_b64:
@@ -311,3 +329,5 @@ elif st.session_state.current_page == "about":
     else:
         st.markdown("<h2 style='text-align: center; color: #4CAF50; position: relative; z-index: 10;'>About Me 👤</h2>", unsafe_allow_html=True)
         st.markdown('<div class="water-banner-card"><div class="water-content"><p style="font-size: 20px; font-weight: 700; color: #4CAF50; letter-spacing: 1px; margin: 0;">🤖 Owner of TIGER Bot 🐅</p></div></div>', unsafe_allow_html=True)
+
+st.markdown('</div>', unsafe_allow_html=True)
