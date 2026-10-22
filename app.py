@@ -189,7 +189,7 @@ def get_image_base64(image_path):
 
 image_filename = "IMG_20240908_230026_233.jpg"
 
-# 3. شريط التنقل العلوي الأفقي (زر الترجمة في أقصى اليمين)
+# 3. شريط التنقل العلوي الأفقي (الترجمة في أقصى اليمين، عني، الرئيسية)
 nav_col1, nav_col2, nav_col3 = st.columns(3)
 
 with nav_col1:
@@ -249,7 +249,4 @@ elif st.session_state.current_page == "about":
     if st.session_state.lang == "ar":
         st.markdown("<h2 style='text-align: center; color: #4CAF50;'>نبذة عني 👤</h2>", unsafe_allow_html=True)
         st.markdown(
-            """
-            <div class="page-card" style="text-align: center;">
-                <h3 style="color: #ffffff; margin-bottom: 15px;">Meran Alyas</h3>
-                <p style="font-size: 20px; font-weight
+            """<div class="page-card" style="text-align: center;"><h3 style="color: #ffffff; margin-bottom: 15px;">Meran Alyas</h3><p style="font-size:
