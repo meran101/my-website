@@ -17,7 +17,7 @@ def toggle_language():
     else:
         st.session_state.lang = "en"
 
-# 2. إعداد CSS والتصميم الحديث والأيقونات الأفقية المتناسقة
+# 2. إعداد CSS والتصميم السينمائي الفخم
 hide_streamlit_style = """
 <style>
 #MainMenu {visibility: hidden;}
@@ -84,15 +84,23 @@ div.stButton > button:hover {
     color: #4CAF50; font-size: 22px; font-weight: 700; letter-spacing: 3px;
 }
 
-/* تأثيرات الحركة السينمائية */
-@keyframes cinematicAppear {
-    0% { opacity: 0; transform: translateY(40px) scale(0.9); filter: blur(8px); }
-    100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+/* تأثيرات الدخول السينمائي الفخم (Epic Cinematic Entrance) */
+@keyframes epicEntrance {
+    0% {
+        opacity: 0;
+        transform: translateY(60px) scale(0.85);
+        filter: blur(12px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
 }
 
 .profile-container {
-    display: flex; justify-content: center; align-items: center; margin-top: 25px; margin-bottom: 25px;
-    position: relative; animation: cinematicAppear 1.2s cubic-bezier(0.16, 1, 0.3, 1) 1.2s forwards; opacity: 0;
+    display: flex; justify-content: center; align-items: center; margin-top: 30px; margin-bottom: 30px;
+    position: relative; animation: epicEntrance 1.4s cubic-bezier(0.16, 1, 0.3, 1) 1.2s forwards; opacity: 0;
 }
 
 .profile-container::before {
@@ -114,22 +122,24 @@ div.stButton > button:hover {
 .profile-img {
     width: 185px !important; height: 185px !important; border-radius: 50% !important;
     object-fit: cover !important; border: 4px solid #4CAF50 !important;
-    box-shadow: 0px 0px 40px rgba(76, 175, 80, 0.7); position: relative; z-index: 2;
+    box-shadow: 0px 0px 45px rgba(76, 175, 80, 0.8); position: relative; z-index: 2;
 }
 
 .title-animation {
-    animation: cinematicAppear 1.2s cubic-bezier(0.16, 1, 0.3, 1) 1.4s forwards; opacity: 0;
+    animation: epicEntrance 1.4s cubic-bezier(0.16, 1, 0.3, 1) 1.5s forwards; opacity: 0;
     text-align: center; color: #ffffff; font-weight: 800; font-size: 34px;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
 }
 
 .subtitle-animation {
-    animation: cinematicAppear 1.2s cubic-bezier(0.16, 1, 0.3, 1) 1.6s forwards; opacity: 0;
+    animation: epicEntrance 1.4s cubic-bezier(0.16, 1, 0.3, 1) 1.8s forwards; opacity: 0;
     text-align: center; color: #4CAF50; font-size: 18px;
+    text-shadow: 0 0 10px rgba(76, 175, 80, 0.4);
 }
 
 .social-container {
-    display: flex; justify-content: center; align-items: center; gap: 25px; margin-top: 25px;
-    animation: cinematicAppear 1.2s cubic-bezier(0.16, 1, 0.3, 1) 1.8s forwards; opacity: 0;
+    display: flex; justify-content: center; align-items: center; gap: 25px; margin-top: 30px;
+    animation: epicEntrance 1.4s cubic-bezier(0.16, 1, 0.3, 1) 2.1s forwards; opacity: 0;
 }
 
 .social-btn {
@@ -140,12 +150,12 @@ div.stButton > button:hover {
 .snap-btn { background: #FFFC00; color: #000000; box-shadow: 0px 5px 20px rgba(255, 252, 0, 0.6); }
 
 .page-card {
-    background: rgba(20, 20, 20, 0.7);
-    border: 1px solid rgba(76, 175, 80, 0.3);
+    background: rgba(20, 20, 20, 0.8);
+    border: 1px solid rgba(76, 175, 80, 0.4);
     border-radius: 15px;
     padding: 25px;
     margin-top: 20px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    box-shadow: 0 0 25px rgba(0,0,0,0.6);
 }
 </style>
 """
