@@ -30,7 +30,7 @@ div[data-testid="stDecoration"] {display: none !important;}
     color: #ffffff;
 }
 
-/* طبقة مطر الحروف الإنجليزية باللون الأزرق العميق والمائي */
+/* طبقة المطر الحقيقي والعميق باللون الأزرق المائي */
 .matrix-rain {
     position: fixed;
     top: 0;
@@ -40,26 +40,22 @@ div[data-testid="stDecoration"] {display: none !important;}
     pointer-events: none;
     z-index: 1;
     overflow: hidden;
-    opacity: 0.5;
+    opacity: 0.6;
 }
 
 .matrix-column {
     position: absolute;
     top: -50%;
-    color: #00b4d8;
-    font-family: monospace;
-    font-size: 16px;
-    font-weight: bold;
-    line-height: 20px;
-    letter-spacing: 2px;
-    text-align: center;
-    text-shadow: 0 0 10px rgba(0, 150, 255, 0.9), 0 0 5px rgba(0, 212, 255, 0.8);
-    animation: matrixFall linear infinite;
+    width: 2px;
+    height: 120px;
+    background: linear-gradient(180deg, transparent, #00b4d8, #0077b6);
+    box-shadow: 0 0 8px rgba(0, 150, 255, 0.9), 0 0 3px rgba(0, 212, 255, 0.7);
+    animation: rainFall linear infinite;
 }
 
-@keyframes matrixFall {
-    0% { transform: translateY(-100%); }
-    100% { transform: translateY(200vh); }
+@keyframes rainFall {
+    0% { transform: translateY(-120px); }
+    100% { transform: translateY(120vh); }
 }
 
 /* ضمان ظهور محتوى ستريملت فوق طبقة المطر والخلفية */
@@ -120,7 +116,7 @@ div[data-testid="column"]:nth-child(2) div.stButton > button {
 div[data-testid="column"]:nth-child(2) div.stButton > button:hover {
     background: linear-gradient(135deg, rgba(0, 212, 255, 0.9), rgba(0, 119, 182, 0.8)) !important;
     border-color: #ffffff !important;
-    box-shadow: 0 0 35px rgba(0, 212, 255, 0.9), 0 0 15px rgba(0, 150, 255, 0.7) !important;
+    box-shadow: 0 0 35px rgba(0, 212, 255, 0.9), 0 0 15px rgba(0, 119, 182, 0.7) !important;
     transform: translateY(-3px) scale(1.03);
 }
 
@@ -282,26 +278,16 @@ div[data-testid="column"]:nth-child(2) div.stButton > button:hover {
 
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
-# توليد أعمدة مطر الحروف الإنجليزية المتقطعة باللون الأزرق العميق والمائي
-matrix_html = '<div class="matrix-rain">'
-char_sets = [
-    "X<br>A<br>9<br>R<br>B<br>2<br>M<br>K<br>L<br>7<br>Q<br>W<br>E",
-    "Z<br>1<br>T<br>O<br>V<br>5<br>J<br>P<br>4<br>Y<br>C<br>8<br>U",
-    "F<br>H<br>3<br>N<br>D<br>G<br>6<br>I<br>S<br>0<br>L<br>B<br>V",
-    "9<br>P<br>K<br>1<br>A<br>M<br>Z<br>4<br>E<br>X<br>7<br>R<br>C",
-    "Q<br>2<br>W<br>8<br>T<br>Y<br>0<br>U<br>I<br>5<br>O<br>G<br>3"
-]
+# توليد خطوط مطر حقيقية (قطرات ماء منسدلة بلون أزرق عميق)
+rain_html = '<div class="matrix-rain">'
+for i in range(35):
+    left_pos = i * 3
+    anim_duration = 0.8 + (i % 5) * 0.3
+    anim_delay = (i % 7) * 0.4
+    rain_html += f'<div class="matrix-column" style="left: {left_pos}%; animation-duration: {anim_duration}s; animation-delay: {anim_delay}s;"></div>'
+rain_html += '</div>'
 
-for i in range(16):
-    left_pos = i * 6.5
-    anim_duration = 4 + (i % 5) * 1.2
-    anim_delay = (i % 4) * 0.7
-    chars = char_sets[i % len(char_sets)]
-    matrix_html += f'<div class="matrix-column" style="left: {left_pos}%; animation-duration: {anim_duration}s; animation-delay: {anim_delay}s;">{chars}</div>'
-
-matrix_html += '</div>'
-
-st.markdown(matrix_html, unsafe_allow_html=True)
+st.markdown(rain_html, unsafe_allow_html=True)
 st.markdown('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">', unsafe_allow_html=True)
 
 def get_image_base64(image_path):
