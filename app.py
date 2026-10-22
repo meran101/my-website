@@ -30,7 +30,7 @@ div[data-testid="stDecoration"] {display: none !important;}
     color: #ffffff;
 }
 
-/* طبقة المطر الحقيقي والعميق باللون الأزرق المائي */
+/* طبقة المطر المائي والعميق */
 .matrix-rain {
     position: fixed;
     top: 0;
@@ -58,24 +58,23 @@ div[data-testid="stDecoration"] {display: none !important;}
     100% { transform: translateY(120vh); }
 }
 
-/* ضمان ظهور محتوى ستريملت فوق طبقة المطر والخلفية */
-section.main > div {
-    position: relative;
-    z-index: 10;
-}
-
-div[data-testid="horizontal-block"] {
+/* ضمان بقاء الأزرار في صف أفقي واحد وعدم نزولها لأسفل حتى في الجوال */
+div[data-testid="horizontal-block"], 
+div.row-widget.stHorizontal, 
+[data-testid="stHorizontalBlock"] {
     display: flex !important;
     flex-direction: row !important;
     flex-wrap: nowrap !important;
-    gap: 8px !important;
-    position: relative;
-    z-index: 10;
+    gap: 6px !important;
+    align-items: center !important;
+    width: 100% !important;
 }
 
-div[data-testid="column"] {
+div[data-testid="column"], 
+[data-testid="stColumn"] {
     flex: 1 1 0% !important;
     min-width: 0 !important;
+    max-width: 100% !important;
 }
 
 /* الأزرار العادية (الرئيسية واللغة) */
@@ -83,9 +82,9 @@ div.stButton > button {
     background: rgba(18, 18, 18, 0.9) !important;
     color: #cccccc !important;
     border: 1px solid rgba(0, 180, 216, 0.4) !important;
-    border-radius: 15px !important;
-    padding: 8px 10px !important;
-    font-size: 13px !important;
+    border-radius: 12px !important;
+    padding: 6px 4px !important;
+    font-size: 11px !important;
     font-weight: 600 !important;
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
     width: 100% !important;
@@ -101,11 +100,12 @@ div.stButton > button:hover {
     color: #ffffff !important;
     border-color: #00d4ff !important;
     box-shadow: 0 0 25px rgba(0, 180, 216, 0.9), 0 0 10px rgba(0, 212, 255, 0.6) !important;
-    transform: translateY(-3px) scale(1.02);
+    transform: translateY(-2px) scale(1.02);
 }
 
 /* زر عني (About) الاحترافي بتأثير مائي متحرك */
-div[data-testid="column"]:nth-child(2) div.stButton > button {
+div[data-testid="column"]:nth-child(2) div.stButton > button,
+[data-testid="stColumn"]:nth-child(2) div.stButton > button {
     background: linear-gradient(135deg, rgba(0, 119, 182, 0.7), rgba(0, 212, 255, 0.4)), rgba(18, 18, 18, 0.95) !important;
     border: 1px solid rgba(0, 212, 255, 0.9) !important;
     color: #ffffff !important;
@@ -113,11 +113,12 @@ div[data-testid="column"]:nth-child(2) div.stButton > button {
     animation: proWaterButtonPulse 3s ease-in-out infinite alternate;
 }
 
-div[data-testid="column"]:nth-child(2) div.stButton > button:hover {
+div[data-testid="column"]:nth-child(2) div.stButton > button:hover,
+[data-testid="stColumn"]:nth-child(2) div.stButton > button:hover {
     background: linear-gradient(135deg, rgba(0, 212, 255, 0.9), rgba(0, 119, 182, 0.8)) !important;
     border-color: #ffffff !important;
     box-shadow: 0 0 35px rgba(0, 212, 255, 0.9), 0 0 15px rgba(0, 119, 182, 0.7) !important;
-    transform: translateY(-3px) scale(1.03);
+    transform: translateY(-2px) scale(1.03);
 }
 
 @keyframes proWaterButtonPulse {
