@@ -125,4 +125,114 @@ div.stButton > button:hover {
 .profile-container::after {
     content: ''; position: absolute; width: 185px; height: 185px; border-radius: 50%;
     background: conic-gradient(from 0deg, #4CAF50, transparent, #00d4ff, transparent);
-    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #fff
+    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #fff calc(100% - 2px));
+    mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #fff calc(100% - 2px));
+    animation: spin-reverse 18s linear infinite;
+}
+
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+@keyframes spin-reverse { 0% { transform: rotate(360deg); } 100% { transform: rotate(0deg); } }
+
+.profile-img {
+    width: 125px !important; height: 125px !important; border-radius: 50% !important;
+    object-fit: cover !important; border: 3px solid #4CAF50 !important;
+    box-shadow: 0px 0px 30px rgba(76, 175, 80, 0.8); position: relative; z-index: 2;
+}
+
+.title-animation {
+    animation: epicEntrance 1.4s cubic-bezier(0.16, 1, 0.3, 1) 1.5s forwards; opacity: 0;
+    text-align: center; color: #ffffff; font-weight: 800; font-size: 30px;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+}
+
+.subtitle-animation {
+    animation: epicEntrance 1.4s cubic-bezier(0.16, 1, 0.3, 1) 1.8s forwards; opacity: 0;
+    text-align: center; color: #4CAF50; font-size: 17px;
+    text-shadow: 0 0 10px rgba(76, 175, 80, 0.4);
+}
+
+.social-container {
+    display: flex; justify-content: center; align-items: center; gap: 20px; margin-top: 25px;
+    animation: epicEntrance 1.4s cubic-bezier(0.16, 1, 0.3, 1) 2.1s forwards; opacity: 0;
+}
+
+.social-btn {
+    display: inline-flex; justify-content: center; align-items: center; width: 50px; height: 50px;
+    border-radius: 50%; color: white; font-size: 24px; transition: all 0.4s ease; text-decoration: none;
+}
+.insta-btn { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fd5949 45%, #d6249f 60%, #285AEB 90%); box-shadow: 0px 4px 15px rgba(214, 36, 159, 0.6); }
+.snap-btn { background: #FFFC00; color: #000000; box-shadow: 0px 4px 15px rgba(255, 252, 0, 0.6); }
+.threads-btn { background: #101010; color: #ffffff; border: 1px solid #333333; box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.25); }
+
+.page-card {
+    background: rgba(20, 20, 20, 0.8);
+    border: 1px solid rgba(76, 175, 80, 0.4);
+    border-radius: 15px;
+    padding: 25px;
+    margin-top: 20px;
+    box-shadow: 0 0 25px rgba(0,0,0,0.6);
+}
+</style>
+"""
+
+st.markdown(hide_streamlit_style, unsafe_allow_html=True)
+st.markdown('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">', unsafe_allow_html=True)
+
+def get_image_base64(image_path):
+    try:
+        with open(image_path, "rb") as img_file:
+            return base64.b64encode(img_file.read()).decode('utf-8')
+    except Exception:
+        return ""
+
+image_filename = "IMG_20240908_230026_233.jpg"
+
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    btn_home = "🏠 الرئيسية" if st.session_state.lang == "ar" else "🏠 Home"
+    st.button(btn_home, on_click=set_page, args=("home",), key="btn_h")
+
+with col2:
+    btn_about = "👤 عني" if st.session_state.lang == "ar" else "👤 About"
+    st.button(btn_about, on_click=set_page, args=("about",), key="btn_a")
+
+with col3:
+    btn_lang = "العربية 🌐" if st.session_state.lang == "en" else "English 🌐"
+    st.button(btn_lang, on_click=toggle_language, key="btn_l")
+
+st.markdown("<hr style='border-color: rgba(76,175,80,0.25); margin-top: 15px; margin-bottom: 25px;'>", unsafe_allow_html=True)
+
+if st.session_state.current_page == "home":
+    img_b64 = get_image_base64(image_filename)
+    if img_b64:
+        st.markdown(f'<div class="splash-screen"><img src="data:image/jpeg;base64,{img_b64}" class="splash-logo" alt="Loading..."><div class="splash-text">LOADING WEBSITE...</div></div><div class="profile-container"><div class="water-bg-wrapper"><img src="data:image/jpeg;base64,{img_b64}" class="profile-img" alt="Profile Picture"></div></div>', unsafe_allow_html=True)
+
+    if st.session_state.lang == "en":
+        title_text, sub_text = "Welcome To My Account 👋", "My social media accounts"
+    else:
+        title_text, sub_text = "أهلاً بك في حسابي 👋", "حساباتي على وسائل التواصل الاجتماعي"
+
+    st.markdown(f"<h1 class='title-animation'>{title_text}</h1>", unsafe_allow_html=True)
+    st.markdown(f"<p class='subtitle-animation'>{sub_text}</p>", unsafe_allow_html=True)
+
+    url_insta = "https://www.instagram.com/meran.alyas/?__pwa=1"
+    url_snap = "https://www.snapchat.com/add/meran.alyas"
+    url_threads = "https://www.threads.net/@meran.alyas"
+
+    social_html = f'''
+    <div class="social-container">
+        <a href="{url_insta}" target="_blank" class="social-btn insta-btn" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="{url_snap}" target="_blank" class="social-btn snap-btn" title="Snapchat"><i class="fa-brands fa-snapchat"></i></a>
+        <a href="{url_threads}" target="_blank" class="social-btn threads-btn" title="Threads"><i class="fa-brands fa-threads"></i></a>
+    </div>
+    '''
+    st.markdown(social_html, unsafe_allow_html=True)
+
+elif st.session_state.current_page == "about":
+    if st.session_state.lang == "ar":
+        st.markdown("<h2 style='text-align: center; color: #4CAF50;'>نبذة عني 👤</h2>", unsafe_allow_html=True)
+        st.markdown('<div class="page-card" style="text-align: center;"><h3 style="color: #ffffff; margin-bottom: 15px;">Meran Alyas</h3><p style="font-size: 20px; font-weight: 700; color: #4CAF50; letter-spacing: 1px;">🤖 Owner of TIGER Bot 🐅</p><p style="font-size: 16px; line-height: 1.8; color: #cccccc; margin-top: 15px;">Welcome to my official page. I am the creator and owner of <b>TIGER Bot</b>. Passionate about technology, development, and building high-performance automated tools.</p></div>', unsafe_allow_html=True)
+    else:
+        st.markdown("<h2 style='text-align: center; color: #4CAF50;'>About Me 👤</h2>", unsafe_allow_html=True)
+        st.markdown('<div class="page-card" style="text-align: center;"><h3 style="color: #ffffff; margin-bottom: 15px;">Meran Alyas</h3><p style="font-size: 20px; font-weight: 700; color: #4CAF50; letter-spacing: 1px;">🤖 Owner of TIGER Bot 🐅</p><p style="font-size: 16px; line-height: 1.8; color: #cccccc; margin-top: 15px;">Welcome to my official landing page. I am the creator and owner of <b>TIGER Bot</b>. Passionate about technology, development, and building high-performance automated tools.</p></div>', unsafe_allow_html=True)
