@@ -30,7 +30,7 @@ div[data-testid="stDecoration"] {display: none !important;}
     color: #ffffff;
 }
 
-/* طبقة مطر الحروف الإنجليزية المرئية والمتحركة في الخلفية */
+/* طبقة مطر الحروف الإنجليزية المتقطعة */
 .matrix-rain {
     position: fixed;
     top: 0;
@@ -40,7 +40,7 @@ div[data-testid="stDecoration"] {display: none !important;}
     pointer-events: none;
     z-index: 1;
     overflow: hidden;
-    opacity: 0.35;
+    opacity: 0.4;
 }
 
 .matrix-column {
@@ -48,11 +48,12 @@ div[data-testid="stDecoration"] {display: none !important;}
     top: -50%;
     color: #4CAF50;
     font-family: monospace;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: bold;
-    line-height: 18px;
-    word-break: break-all;
-    text-shadow: 0 0 8px rgba(76, 175, 80, 0.8), 0 0 3px rgba(0, 212, 255, 0.6);
+    line-height: 20px;
+    letter-spacing: 2px;
+    text-align: center;
+    text-shadow: 0 0 8px rgba(76, 175, 80, 0.9), 0 0 4px rgba(0, 212, 255, 0.7);
     animation: matrixFall linear infinite;
 }
 
@@ -252,106 +253,3 @@ div[data-testid="column"]:nth-child(2) div.stButton > button:hover {
     position: absolute;
     top: -50%;
     left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(0, 212, 255, 0.15) 0%, transparent 70%);
-    animation: waterRippleMove 8s linear infinite;
-    z-index: 0;
-    pointer-events: none;
-}
-
-@keyframes waterBannerGlow {
-    0% { box-shadow: 0 0 25px rgba(0, 150, 255, 0.25), inset 0 0 15px rgba(0, 180, 216, 0.15); }
-    100% { box-shadow: 0 0 45px rgba(0, 212, 255, 0.5), inset 0 0 30px rgba(76, 175, 80, 0.3); }
-}
-
-@keyframes waterRippleMove {
-    0% { transform: translate(0, 0) rotate(0deg); }
-    50% { transform: translate(10px, 15px) rotate(180deg); }
-    100% { transform: translate(0, 0) rotate(360deg); }
-}
-
-.water-content {
-    position: relative;
-    z-index: 1;
-    text-align: center;
-}
-</style>
-"""
-
-st.markdown(hide_streamlit_style, unsafe_allow_html=True)
-
-# توليد أعمدة مطر الحروف الإنجليزية لتظهر بوضوح في الخلفية
-matrix_html = '<div class="matrix-rain">'
-for i in range(15):
-    left_pos = i * 7
-    anim_duration = 5 + (i % 5) * 1.5
-    anim_delay = (i % 4) * 0.8
-    matrix_html += f'<div class="matrix-column" style="left: {left_pos}%; animation-duration: {anim_duration}s; animation-delay: {anim_delay}s;">MERAN<br>TIGER<br>BOT<br>PYTHON<br>STREAMLIT<br>CODE<br>A B C D E<br>F G H I J<br>K L M N O<br>P Q R S T<br>U V W X Y Z</div>'
-matrix_html += '</div>'
-
-st.markdown(matrix_html, unsafe_allow_html=True)
-st.markdown('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">', unsafe_allow_html=True)
-
-def get_image_base64(image_path):
-    try:
-        with open(image_path, "rb") as img_file:
-            return base64.b64encode(img_file.read()).decode('utf-8')
-    except Exception:
-        return ""
-
-image_filename = "IMG_20240908_230026_233.jpg"
-
-col1, col2, col3 = st.columns(3)
-
-with col1:
-    btn_home = "🏠 الرئيسية" if st.session_state.lang == "ar" else "🏠 Home"
-    st.button(btn_home, on_click=set_page, args=("home",), key="btn_h")
-
-with col2:
-    btn_about = "👤 عني" if st.session_state.lang == "ar" else "👤 About"
-    st.button(btn_about, on_click=set_page, args=("about",), key="btn_a")
-
-with col3:
-    btn_lang = "العربية 🌐" if st.session_state.lang == "en" else "English 🌐"
-    st.button(btn_lang, on_click=toggle_language, key="btn_l")
-
-st.markdown("<hr style='border-color: rgba(76,175,80,0.25); margin-top: 15px; margin-bottom: 25px; position: relative; z-index: 10;'>", unsafe_allow_html=True)
-
-st.markdown('<div class="page-transition">', unsafe_allow_html=True)
-
-if st.session_state.current_page == "home":
-    img_b64 = get_image_base64(image_filename)
-    if img_b64:
-        st.markdown(f'<div class="splash-screen"><img src="data:image/jpeg;base64,{img_b64}" class="splash-logo" alt="Loading..."><div class="splash-text">LOADING WEBSITE...</div></div><div class="profile-container"><img src="data:image/jpeg;base64,{img_b64}" class="profile-img" alt="Profile Picture"></div>', unsafe_allow_html=True)
-
-    if st.session_state.lang == "en":
-        title_text, sub_text = "Welcome To My Account 👋", "My social media accounts"
-    else:
-        title_text, sub_text = "أهلاً بك في حسابي 👋", "حساباتي على وسائل التواصل الاجتماعي"
-
-    st.markdown(f"<h1 class='title-animation'>{title_text}</h1>", unsafe_allow_html=True)
-    st.markdown(f"<p class='subtitle-animation'>{sub_text}</p>", unsafe_allow_html=True)
-
-    url_insta = "https://www.instagram.com/meran.alyas/?__pwa=1"
-    url_snap = "https://www.snapchat.com/add/meran.alyas"
-    url_threads = "https://www.threads.net/@meran.alyas"
-
-    social_html = f'''
-    <div class="social-container">
-        <a href="{url_insta}" target="_blank" class="social-btn insta-btn" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
-        <a href="{url_snap}" target="_blank" class="social-btn snap-btn" title="Snapchat"><i class="fa-brands fa-snapchat"></i></a>
-        <a href="{url_threads}" target="_blank" class="social-btn threads-btn" title="Threads"><i class="fa-brands fa-threads"></i></a>
-    </div>
-    '''
-    st.markdown(social_html, unsafe_allow_html=True)
-
-elif st.session_state.current_page == "about":
-    if st.session_state.lang == "ar":
-        st.markdown("<h2 style='text-align: center; color: #4CAF50; position: relative; z-index: 10;'>نبذة عني 👤</h2>", unsafe_allow_html=True)
-        st.markdown('<div class="water-banner-card"><div class="water-content"><p style="font-size: 20px; font-weight: 700; color: #4CAF50; letter-spacing: 1px; margin: 0;">🤖 Owner of TIGER Bot 🐅</p></div></div>', unsafe_allow_html=True)
-    else:
-        st.markdown("<h2 style='text-align: center; color: #4CAF50; position: relative; z-index: 10;'>About Me 👤</h2>", unsafe_allow_html=True)
-        st.markdown('<div class="water-banner-card"><div class="water-content"><p style="font-size: 20px; font-weight: 700; color: #4CAF50; letter-spacing: 1px; margin: 0;">🤖 Owner of TIGER Bot 🐅</p></div></div>', unsafe_allow_html=True)
-
-st.markdown('</div>', unsafe_allow_html=True)
