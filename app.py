@@ -16,7 +16,7 @@ def toggle_language():
     else:
         st.session_state.lang = "en"
 
-hide_streamlit_style = """
+hide_css = """
 <style>
 #MainMenu {visibility: hidden;}
 footer {visibility: hidden;}
@@ -162,7 +162,7 @@ div.stButton > button:hover {
 </style>
 """
 
-st.markdown(hide_streamlit_style, unsafe_allow_html=True)
+st.markdown(hide_css, unsafe_allow_html=True)
 st.markdown('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">', unsafe_allow_html=True)
 
 def get_image_base64(image_path):
@@ -174,16 +174,35 @@ def get_image_base64(image_path):
 
 image_filename = "IMG_20240908_230026_233.jpg"
 
-nav_col1, nav_col2, nav_col3 = st.columns(3)
+col1, col2, col3 = st.columns(3)
 
-with nav_col1:
+with col1:
     btn_home = "🏠 الرئيسية" if st.session_state.lang == "ar" else "🏠 Home"
-    st.button(btn_home, on_click=set_page, args=("home",), key="nav_home_btn")
+    st.button(btn_home, on_click=set_page, args=("home",), key="btn_h")
 
-with nav_col2:
+with col2:
     btn_about = "👤 عني" if st.session_state.lang == "ar" else "👤 About"
-    st.button(btn_about, on_click=set_page, args=("about",), key="nav_about_btn")
+    st.button(btn_about, on_click=set_page, args=("about",), key="btn_a")
 
-with nav_col3:
+with col3:
     btn_lang = "العربية 🌐" if st.session_state.lang == "en" else "English 🌐"
-    st.button(btn_lang, on_click=toggle_language, key="nav_
+    st.button(btn_lang, on_click=toggle_language, key="btn_l")
+
+st.markdown("<hr style='border-color: rgba(76,175,80,0.25); margin-top: 15px; margin-bottom: 25px;'>", unsafe_allow_html=True)
+
+if st.session_state.current_page == "home":
+    img_b64 = get_image_base64(image_filename)
+    if img_b64:
+        st.markdown(
+            f'<div class="splash-screen"><img src="data:image/jpeg;base64,{img_b64}" class="splash-logo" alt="Loading..."><div class="splash-text">LOADING WEBSITE...</div></div><div class="profile-container"><img src="data:image/jpeg;base64,{img_b64}" class="profile-img" alt="Profile Picture"></div>',
+            unsafe_allow_html=True
+        )
+
+    if st.session_state.lang == "en":
+        title_text = "Welcome To My Account 👋"
+        sub_text = "My social media accounts"
+    else:
+        title_text = "أهلاً بك في حسابي 👋"
+        sub_text = "حساباتي على وسائل التواصل الاجتماعي"
+
+    st.markdown(f"<h1 class='title-animation'>{title_text}</h1>", unsafe_allow_html=
