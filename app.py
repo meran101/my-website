@@ -99,56 +99,22 @@ div.stButton > button:hover {
     100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
 }
 
-/* تأثير الماء والتموجات النيونية داخل أيقونة البروفايل نفسها */
 .profile-container {
     display: flex; justify-content: center; align-items: center; margin-top: 25px; margin-bottom: 25px;
     position: relative; animation: epicEntrance 1.4s cubic-bezier(0.16, 1, 0.3, 1) 1.2s forwards; opacity: 0;
 }
 
-.water-profile-wrapper {
-    position: relative;
-    width: 145px;
-    height: 145px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: radial-gradient(circle, rgba(0, 180, 216, 0.5) 0%, rgba(76, 175, 80, 0.3) 60%, transparent 80%);
-    box-shadow: 0 0 30px rgba(0, 150, 255, 0.6), inset 0 0 20px rgba(0, 212, 255, 0.5);
-    animation: waterIconPulse 3s ease-in-out infinite alternate;
+.profile-container::before {
+    content: ''; position: absolute; width: 155px; height: 155px; border-radius: 50%;
+    border: 2px dashed #4CAF50; box-shadow: 0 0 20px rgba(76, 175, 80, 0.6); animation: spin 12s linear infinite;
 }
 
-.water-profile-wrapper::before {
-    content: '';
-    position: absolute;
-    width: 155px;
-    height: 155px;
-    border-radius: 50%;
-    border: 2px dashed rgba(0, 212, 255, 0.7);
-    animation: spin 12s linear infinite;
-}
-
-.water-profile-wrapper::after {
-    content: '';
-    position: absolute;
-    width: 175px;
-    height: 175px;
-    border-radius: 50%;
-    background: conic-gradient(from 0deg, #00d4ff, transparent, #4CAF50, transparent, #00d4ff);
+.profile-container::after {
+    content: ''; position: absolute; width: 185px; height: 185px; border-radius: 50%;
+    background: conic-gradient(from 0deg, #4CAF50, transparent, #4CAF50, transparent);
     -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #fff calc(100% - 2px));
     mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #fff calc(100% - 2px));
-    animation: spin-reverse 15s linear infinite;
-}
-
-@keyframes waterIconPulse {
-    0% {
-        box-shadow: 0 0 20px rgba(0, 150, 255, 0.4), inset 0 0 15px rgba(0, 212, 255, 0.3);
-        transform: scale(0.98);
-    }
-    100% {
-        box-shadow: 0 0 45px rgba(0, 212, 255, 0.8), inset 0 0 30px rgba(76, 175, 80, 0.5);
-        transform: scale(1.03);
-    }
+    animation: spin-reverse 18s linear infinite;
 }
 
 @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
@@ -156,8 +122,8 @@ div.stButton > button:hover {
 
 .profile-img {
     width: 125px !important; height: 125px !important; border-radius: 50% !important;
-    object-fit: cover !important; border: 3px solid #00d4ff !important;
-    box-shadow: 0px 0px 25px rgba(0, 212, 255, 0.8); position: relative; z-index: 2;
+    object-fit: cover !important; border: 3px solid #4CAF50 !important;
+    box-shadow: 0px 0px 30px rgba(76, 175, 80, 0.8); position: relative; z-index: 2;
 }
 
 .title-animation {
@@ -262,7 +228,7 @@ st.markdown("<hr style='border-color: rgba(76,175,80,0.25); margin-top: 15px; ma
 if st.session_state.current_page == "home":
     img_b64 = get_image_base64(image_filename)
     if img_b64:
-        st.markdown(f'<div class="splash-screen"><img src="data:image/jpeg;base64,{img_b64}" class="splash-logo" alt="Loading..."><div class="splash-text">LOADING WEBSITE...</div></div><div class="profile-container"><div class="water-profile-wrapper"><img src="data:image/jpeg;base64,{img_b64}" class="profile-img" alt="Profile Picture"></div></div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="splash-screen"><img src="data:image/jpeg;base64,{img_b64}" class="splash-logo" alt="Loading..."><div class="splash-text">LOADING WEBSITE...</div></div><div class="profile-container"><img src="data:image/jpeg;base64,{img_b64}" class="profile-img" alt="Profile Picture"></div>', unsafe_allow_html=True)
 
     if st.session_state.lang == "en":
         title_text, sub_text = "Welcome To My Account 👋", "My social media accounts"
