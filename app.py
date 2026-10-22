@@ -17,7 +17,7 @@ def toggle_language():
     else:
         st.session_state.lang = "en"
 
-# 2. إعداد CSS والتصميم السينمائي الفخم
+# 2. إعداد CSS والتصميم السينمائي مع تصغير حجم الصورة الدائرية وتأثيراتها
 hide_streamlit_style = """
 <style>
 #MainMenu {visibility: hidden;}
@@ -70,26 +70,26 @@ div.stButton > button:hover {
 }
 
 .splash-logo {
-    width: 110px; height: 110px; border-radius: 50%;
-    border: 3px solid #4CAF50; box-shadow: 0 0 40px rgba(76, 175, 80, 0.9);
+    width: 90px; height: 90px; border-radius: 50%;
+    border: 3px solid #4CAF50; box-shadow: 0 0 30px rgba(76, 175, 80, 0.9);
     animation: epicPulse 1.2s infinite alternate; object-fit: cover; margin-bottom: 20px;
 }
 
 @keyframes epicPulse {
-    0% { transform: scale(0.95); box-shadow: 0 0 20px rgba(76, 175, 80, 0.5); }
-    100% { transform: scale(1.1); box-shadow: 0 0 50px rgba(76, 175, 80, 1); }
+    0% { transform: scale(0.95); box-shadow: 0 0 15px rgba(76, 175, 80, 0.5); }
+    100% { transform: scale(1.1); box-shadow: 0 0 35px rgba(76, 175, 80, 1); }
 }
 
 .splash-text {
-    color: #4CAF50; font-size: 22px; font-weight: 700; letter-spacing: 3px;
+    color: #4CAF50; font-size: 20px; font-weight: 700; letter-spacing: 3px;
 }
 
-/* تأثيرات الدخول السينمائي الفخم (Epic Cinematic Entrance) */
+/* تأثيرات الدخول السينمائي الفخم */
 @keyframes epicEntrance {
     0% {
         opacity: 0;
-        transform: translateY(60px) scale(0.85);
-        filter: blur(12px);
+        transform: translateY(50px) scale(0.85);
+        filter: blur(10px);
     }
     100% {
         opacity: 1;
@@ -99,55 +99,57 @@ div.stButton > button:hover {
 }
 
 .profile-container {
-    display: flex; justify-content: center; align-items: center; margin-top: 30px; margin-bottom: 30px;
+    display: flex; justify-content: center; align-items: center; margin-top: 25px; margin-bottom: 25px;
     position: relative; animation: epicEntrance 1.4s cubic-bezier(0.16, 1, 0.3, 1) 1.2s forwards; opacity: 0;
 }
 
+/* تصغير إطارات النيون لتناسب الحجم الصغير الجديد للصورة */
 .profile-container::before {
-    content: ''; position: absolute; width: 225px; height: 225px; border-radius: 50%;
-    border: 3px dashed #4CAF50; box-shadow: 0 0 30px rgba(76, 175, 80, 0.6); animation: spin 12s linear infinite;
+    content: ''; position: absolute; width: 155px; height: 155px; border-radius: 50%;
+    border: 2px dashed #4CAF50; box-shadow: 0 0 20px rgba(76, 175, 80, 0.6); animation: spin 12s linear infinite;
 }
 
 .profile-container::after {
-    content: ''; position: absolute; width: 265px; height: 265px; border-radius: 50%;
+    content: ''; position: absolute; width: 185px; height: 185px; border-radius: 50%;
     background: conic-gradient(from 0deg, #4CAF50, transparent, #4CAF50, transparent);
-    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #fff calc(100% - 3px));
-    mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #fff calc(100% - 3px));
+    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #fff calc(100% - 2px));
+    mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #fff calc(100% - 2px));
     animation: spin-reverse 18s linear infinite;
 }
 
 @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 @keyframes spin-reverse { 0% { transform: rotate(360deg); } 100% { transform: rotate(0deg); } }
 
+/* تم تصغير حجم الصورة الشخصية هنا بدقة */
 .profile-img {
-    width: 185px !important; height: 185px !important; border-radius: 50% !important;
-    object-fit: cover !important; border: 4px solid #4CAF50 !important;
-    box-shadow: 0px 0px 45px rgba(76, 175, 80, 0.8); position: relative; z-index: 2;
+    width: 125px !important; height: 125px !important; border-radius: 50% !important;
+    object-fit: cover !important; border: 3px solid #4CAF50 !important;
+    box-shadow: 0px 0px 30px rgba(76, 175, 80, 0.8); position: relative; z-index: 2;
 }
 
 .title-animation {
     animation: epicEntrance 1.4s cubic-bezier(0.16, 1, 0.3, 1) 1.5s forwards; opacity: 0;
-    text-align: center; color: #ffffff; font-weight: 800; font-size: 34px;
-    text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+    text-align: center; color: #ffffff; font-weight: 800; font-size: 30px;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
 }
 
 .subtitle-animation {
     animation: epicEntrance 1.4s cubic-bezier(0.16, 1, 0.3, 1) 1.8s forwards; opacity: 0;
-    text-align: center; color: #4CAF50; font-size: 18px;
+    text-align: center; color: #4CAF50; font-size: 17px;
     text-shadow: 0 0 10px rgba(76, 175, 80, 0.4);
 }
 
 .social-container {
-    display: flex; justify-content: center; align-items: center; gap: 25px; margin-top: 30px;
+    display: flex; justify-content: center; align-items: center; gap: 20px; margin-top: 25px;
     animation: epicEntrance 1.4s cubic-bezier(0.16, 1, 0.3, 1) 2.1s forwards; opacity: 0;
 }
 
 .social-btn {
-    display: inline-flex; justify-content: center; align-items: center; width: 55px; height: 55px;
-    border-radius: 50%; color: white; font-size: 26px; transition: all 0.4s ease; text-decoration: none;
+    display: inline-flex; justify-content: center; align-items: center; width: 50px; height: 50px;
+    border-radius: 50%; color: white; font-size: 24px; transition: all 0.4s ease; text-decoration: none;
 }
-.insta-btn { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fd5949 45%, #d6249f 60%, #285AEB 90%); box-shadow: 0px 5px 20px rgba(214, 36, 159, 0.6); }
-.snap-btn { background: #FFFC00; color: #000000; box-shadow: 0px 5px 20px rgba(255, 252, 0, 0.6); }
+.insta-btn { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fd5949 45%, #d6249f 60%, #285AEB 90%); box-shadow: 0px 4px 15px rgba(214, 36, 159, 0.6); }
+.snap-btn { background: #FFFC00; color: #000000; box-shadow: 0px 4px 15px rgba(255, 252, 0, 0.6); }
 
 .page-card {
     background: rgba(20, 20, 20, 0.8);
