@@ -189,7 +189,7 @@ def get_image_base64(image_path):
 
 image_filename = "IMG_20240908_230026_233.jpg"
 
-# 3. شريط التنقل العلوي الأفقي (متجاور في صف واحد تماماً على الموبايل واللابتوب)
+# 3. شريط التنقل العلوي الأفقي
 nav_col1, nav_col2, nav_col3, nav_col4 = st.columns(4)
 
 with nav_col1:
@@ -304,4 +304,4 @@ elif st.session_state.current_page == "contact":
             message = st.text_area("Your Message")
             submit = st.form_submit_button("Send Message")
             if submit:
-                st.success("Thank you! Your message has
+                st.success("Thank you! Your message has been sent successfully.")
