@@ -24,9 +24,18 @@ header {visibility: hidden;}
 .stAppDeployButton {display: none !important;}
 div[data-testid="stDecoration"] {display: none !important;}
 
+/* تحويل الخلفية السوداء بالكامل إلى خلفية مائية متحركة وفخمة */
 .stApp {
-    background-color: #050505;
+    background: radial-gradient(circle at 50% 20%, #001f3f 0%, #050505 60%, #000814 100%);
+    background-size: 200% 200%;
+    animation: waterBackgroundShift 12s ease infinite;
     color: #ffffff;
+}
+
+@keyframes waterBackgroundShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 div[data-testid="horizontal-block"] {
@@ -74,7 +83,7 @@ div.stButton > button:hover {
 
 .splash-screen {
     position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-    background: radial-gradient(circle, #121212 0%, #000000 100%);
+    background: radial-gradient(circle, #001f3f 0%, #000000 100%);
     display: flex; flex-direction: column; justify-content: center; align-items: center;
     z-index: 99999; animation: splashEpicOut 1.8s cubic-bezier(0.77, 0, 0.175, 1) forwards;
 }
