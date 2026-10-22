@@ -24,6 +24,14 @@ header {visibility: hidden;}
 .stAppDeployButton {display: none !important;}
 div[data-testid="stDecoration"] {display: none !important;}
 
+/* إخفاء شريط الأدوات العائم الذي يحتوي على Created by بالأسفل */
+div[data-testid="stToolbar"] {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
 /* إلغاء المسافات والهوامش العلوية لرفع المحتوى للأعلى */
 .stMainBlockContainer, .block-container {
     padding-top: 0.8rem !important;
@@ -83,7 +91,7 @@ div[data-testid="column"],
     max-width: 100% !important;
 }
 
-/* تصميم احترافي وعصري للأزرار (Glassmorphism & Neon Glow) */
+/* تصميم احترافي وعصري للأزرار */
 div.stButton > button {
     background: linear-gradient(135deg, rgba(15, 23, 42, 0.8), rgba(30, 41, 59, 0.6)) !important;
     color: #e2e8f0 !important;
