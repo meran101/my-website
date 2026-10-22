@@ -163,7 +163,6 @@ div.stButton > button:hover {
 """
 
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
-# تحديث مكتبة FontAwesome إلى الإصدار الأحدث لدعم أيقونة Threads
 st.markdown('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">', unsafe_allow_html=True)
 
 def get_image_base64(image_path):
@@ -175,22 +174,28 @@ def get_image_base64(image_path):
 
 image_filename = "IMG_20240908_230026_233.jpg"
 
-col1, col2, col3 = st.columns(3)
+# شريط التنقل العلوي (أصبح يتكون من 4 أزرار: الرئيسية، عني، أداة المثلث، والترجمة)
+nav_col1, nav_col2, nav_col3, nav_col4 = st.columns(4)
 
-with col1:
+with nav_col1:
     btn_home = "🏠 الرئيسية" if st.session_state.lang == "ar" else "🏠 Home"
     st.button(btn_home, on_click=set_page, args=("home",), key="btn_h")
 
-with col2:
+with nav_col2:
     btn_about = "👤 عني" if st.session_state.lang == "ar" else "👤 About"
     st.button(btn_about, on_click=set_page, args=("about",), key="btn_a")
 
-with col3:
+with nav_col3:
+    btn_tool = "📐 أدوات" if st.session_state.lang == "ar" else "📐 Tools"
+    st.button(btn_tool, on_click=set_page, args=("tools",), key="btn_t")
+
+with nav_col4:
     btn_lang = "العربية 🌐" if st.session_state.lang == "en" else "English 🌐"
     st.button(btn_lang, on_click=toggle_language, key="btn_l")
 
 st.markdown("<hr style='border-color: rgba(76,175,80,0.25); margin-top: 15px; margin-bottom: 25px;'>", unsafe_allow_html=True)
 
+# ==================== 1. الصفحة الرئيسية ====================
 if st.session_state.current_page == "home":
     img_b64 = get_image_base64(image_filename)
     if img_b64:
@@ -217,6 +222,7 @@ if st.session_state.current_page == "home":
     '''
     st.markdown(social_html, unsafe_allow_html=True)
 
+# ==================== 2. صفحة عني ====================
 elif st.session_state.current_page == "about":
     if st.session_state.lang == "ar":
         st.markdown("<h2 style='text-align: center; color: #4CAF50;'>نبذة عني 👤</h2>", unsafe_allow_html=True)
@@ -224,3 +230,49 @@ elif st.session_state.current_page == "about":
     else:
         st.markdown("<h2 style='text-align: center; color: #4CAF50;'>About Me 👤</h2>", unsafe_allow_html=True)
         st.markdown('<div class="page-card" style="text-align: center;"><h3 style="color: #ffffff; margin-bottom: 15px;">Meran Alyas</h3><p style="font-size: 20px; font-weight: 700; color: #4CAF50; letter-spacing: 1px;">🤖 Owner of TIGER Bot 🐅</p><p style="font-size: 16px; line-height: 1.8; color: #cccccc; margin-top: 15px;">Welcome to my official landing page. I am the creator and owner of <b>TIGER Bot</b>. Passionate about technology, development, and building high-performance automated tools.</p></div>', unsafe_allow_html=True)
+
+# ==================== 3. صفحة الأداة (المثلث البرمجي) ====================
+elif st.session_state.current_page == "tools":
+    if st.session_state.lang == "ar":
+        st.markdown("<h2 style='text-align: center; color: #4CAF50;'>أداة رسم المثلث 📐</h2>", unsafe_allow_html=True)
+        st.markdown(
+            """
+            <div class="page-card">
+                <p style="color: #cccccc; text-align: center; margin-bottom: 20px;">
+                    أدخل ارتفاع المثلث أدناه لتوليد وطباعة الشكل البرمجي مباشرةً:
+                </p>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+        
+        height = st.number_input("أدخل ارتفاع المثلث:", min_value=1, max_value=30, value=5, step=1)
+        
+        triangle_output = ""
+        for i in range(1, height + 1):
+            line = ' ' * (height - i) + '*' * (2 * i - 1)
+            triangle_output += line + "\n"
+            
+        st.code(triangle_output, language="text")
+        
+    else:
+        st.markdown("<h2 style='text-align: center; color: #4CAF50;'>Triangle Generator Tool 📐</h2>", unsafe_allow_html=True)
+        st.markdown(
+            """
+            <div class="page-card">
+                <p style="color: #cccccc; text-align: center; margin-bottom: 20px;">
+                    Enter the triangle height below to generate and render the pattern instantly:
+                </p>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+        
+        height = st.number_input("Enter triangle height:", min_value=1, max_value=30, value=5, step=1)
+        
+        triangle_output = ""
+        for i in range(1, height + 1):
+            line = ' ' * (height - i) + '*' * (2 * i - 1)
+            triangle_output += line + "\n"
+            
+        st.code(triangle_output, language="text")
