@@ -66,6 +66,27 @@ div.stButton > button:hover {
     transform: translateY(-2px);
 }
 
+/* تخصيص زر عني (About) ليحتوي على تأثير وخلفية مائية فخمة ومتحركة */
+div[data-testid="column"]:nth-child(2) div.stButton > button {
+    background: linear-gradient(135deg, rgba(0, 119, 182, 0.6), rgba(0, 180, 216, 0.3)), rgba(18, 18, 18, 0.9) !important;
+    border: 1px solid rgba(0, 212, 255, 0.8) !important;
+    color: #00d4ff !important;
+    box-shadow: 0 0 20px rgba(0, 150, 255, 0.5), inset 0 0 10px rgba(0, 212, 255, 0.4) !important;
+    animation: waterButtonPulse 3s ease-in-out infinite alternate;
+}
+
+div[data-testid="column"]:nth-child(2) div.stButton > button:hover {
+    background: linear-gradient(135deg, rgba(0, 180, 216, 0.8), rgba(76, 175, 80, 0.6)) !important;
+    color: #ffffff !important;
+    border-color: #00d4ff !important;
+    box-shadow: 0 0 30px rgba(0, 212, 255, 0.9) !important;
+}
+
+@keyframes waterButtonPulse {
+    0% { box-shadow: 0 0 15px rgba(0, 150, 255, 0.4), inset 0 0 8px rgba(0, 212, 255, 0.3); }
+    100% { box-shadow: 0 0 25px rgba(0, 212, 255, 0.8), inset 0 0 15px rgba(76, 175, 80, 0.4); }
+}
+
 @keyframes splashEpicOut {
     0% { opacity: 1; visibility: visible; transform: scale(1); }
     85% { opacity: 1; transform: scale(1); }
@@ -99,41 +120,21 @@ div.stButton > button:hover {
     100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
 }
 
-/* تأثير الماء والتموجات النيونية داخل أيقونة البروفايل نفسها */
-.profile-container {
-    display: flex; justify-content: center; align-items: center; margin-top: 25px; margin-bottom: 25px;
-    position: relative; animation: epicEntrance 1.4s cubic-bezier(0.16, 1, 0.3, 1) 1.2s forwards; opacity: 0;
-}
-
 .water-profile-wrapper {
-    position: relative;
-    width: 145px;
-    height: 145px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position: relative; width: 145px; height: 145px; border-radius: 50%;
+    display: flex; justify-content: center; align-items: center;
     background: radial-gradient(circle, rgba(0, 180, 216, 0.5) 0%, rgba(76, 175, 80, 0.3) 60%, transparent 80%);
     box-shadow: 0 0 30px rgba(0, 150, 255, 0.6), inset 0 0 20px rgba(0, 212, 255, 0.5);
     animation: waterIconPulse 3s ease-in-out infinite alternate;
 }
 
 .water-profile-wrapper::before {
-    content: '';
-    position: absolute;
-    width: 155px;
-    height: 155px;
-    border-radius: 50%;
-    border: 2px dashed rgba(0, 212, 255, 0.7);
-    animation: spin 12s linear infinite;
+    content: ''; position: absolute; width: 155px; height: 155px; border-radius: 50%;
+    border: 2px dashed rgba(0, 212, 255, 0.7); animation: spin 12s linear infinite;
 }
 
 .water-profile-wrapper::after {
-    content: '';
-    position: absolute;
-    width: 175px;
-    height: 175px;
-    border-radius: 50%;
+    content: ''; position: absolute; width: 175px; height: 175px; border-radius: 50%;
     background: conic-gradient(from 0deg, #00d4ff, transparent, #4CAF50, transparent, #00d4ff);
     -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #fff calc(100% - 2px));
     mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #fff calc(100% - 2px));
@@ -141,14 +142,8 @@ div.stButton > button:hover {
 }
 
 @keyframes waterIconPulse {
-    0% {
-        box-shadow: 0 0 20px rgba(0, 150, 255, 0.4), inset 0 0 15px rgba(0, 212, 255, 0.3);
-        transform: scale(0.98);
-    }
-    100% {
-        box-shadow: 0 0 45px rgba(0, 212, 255, 0.8), inset 0 0 30px rgba(76, 175, 80, 0.5);
-        transform: scale(1.03);
-    }
+    0% { box-shadow: 0 0 20px rgba(0, 150, 255, 0.4), inset 0 0 15px rgba(0, 212, 255, 0.3); transform: scale(0.98); }
+    100% { box-shadow: 0 0 45px rgba(0, 212, 255, 0.8), inset 0 0 30px rgba(76, 175, 80, 0.5); transform: scale(1.03); }
 }
 
 @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
@@ -185,7 +180,6 @@ div.stButton > button:hover {
 .snap-btn { background: #FFFC00; color: #000000; box-shadow: 0px 4px 15px rgba(255, 252, 0, 0.6); }
 .threads-btn { background: #101010; color: #ffffff; border: 1px solid #333333; box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.25); }
 
-/* بنر الماء المتحرك خلف بطاقة عني */
 .water-banner-card {
     position: relative;
     background: linear-gradient(135deg, rgba(0, 119, 182, 0.25), rgba(76, 175, 80, 0.25)), rgba(15, 15, 15, 0.85);
