@@ -1,5 +1,6 @@
 import streamlit as st
 import base64
+import streamlit.components.v1 as components
 
 if "current_page" not in st.session_state:
     st.session_state.current_page = "home"
@@ -24,19 +25,14 @@ header {visibility: hidden;}
 .stAppDeployButton {display: none !important;}
 div[data-testid="stDecoration"] {display: none !important;}
 
-/* إخفاء الشعار والشريط السفلي بالكامل نهائياً */
+/* إخفاء الشعار والشريط السفلي بالكامل نهائياً عبر CSS */
 footer, 
-.viewerBadge_container__16336, 
-.viewerBadge_link__1S137, 
 [data-testid="stToolbar"], 
 [data-testid="stStatusWidget"],
-div[class*="viewerBadge"],
-div[class*="stAppViewerBadge"] {
+div[class*="viewerBadge"] {
     display: none !important;
     visibility: hidden !important;
     opacity: 0 !important;
-    height: 0 !important;
-    width: 0 !important;
     pointer-events: none !important;
 }
 
@@ -276,6 +272,21 @@ div.stButton > button:active {
 """
 
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
+
+# سكربت جافاسكريبت لإزالة الشريط السفلي وشعار المنصة من DOM المتصفح بالقوة
+components.html(
+    """
+    <script>
+    const removeBadge = () => {
+        const doc = window.parent.document;
+        const badges = doc.querySelectorAll('footer, [data-testid="stToolbar"], div[class*="viewerBadge"]');
+        badges.forEach(el => el.remove());
+    };
+    setInterval(removeBadge, 300);
+    </script>
+    """,
+    height=0,
+)
 
 # توليد خطوط المطر المائي
 rain_html = '<div class="matrix-rain">'
