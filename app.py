@@ -24,18 +24,51 @@ header {visibility: hidden;}
 .stAppDeployButton {display: none !important;}
 div[data-testid="stDecoration"] {display: none !important;}
 
-/* تحويل الخلفية السوداء بالكامل إلى خلفية مائية متحركة وفخمة */
+/* خلفية سوداء سينمائية مع طبقة مطر الحروف الإنجليزية */
 .stApp {
-    background: radial-gradient(circle at 50% 20%, #001f3f 0%, #050505 60%, #000814 100%);
-    background-size: 200% 200%;
-    animation: waterBackgroundShift 12s ease infinite;
+    background-color: #050505;
     color: #ffffff;
+    position: relative;
+    overflow: hidden;
 }
 
-@keyframes waterBackgroundShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+/* طبقة مطر الحروف الإنجليزية المتحركة (Matrix/Water Letters Rain) */
+.matrix-rain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.25;
+    background: linear-gradient(180deg, 
+        rgba(0, 212, 255, 0.05) 0%, 
+        rgba(76, 175, 80, 0.1) 50%, 
+        rgba(0, 0, 0, 0.9) 100%
+    );
+}
+
+/* محاكاة تساقط الحروف والرموز الإنجليزية */
+.matrix-rain::before {
+    content: "A B C D E F G H I J K L M N O P Q R S T U V W X Y Z 0 1 2 3 4 5 6 7 8 9 TIGER BOT PYTHON STREAMLIT CODE MERAN ALYAS";
+    position: absolute;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 200%;
+    color: #4CAF50;
+    font-family: monospace;
+    font-size: 16px;
+    line-height: 20px;
+    word-break: break-all;
+    opacity: 0.4;
+    animation: rainDrop 10s linear infinite;
+}
+
+@keyframes rainDrop {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(50%); }
 }
 
 div[data-testid="horizontal-block"] {
@@ -43,6 +76,8 @@ div[data-testid="horizontal-block"] {
     flex-direction: row !important;
     flex-wrap: nowrap !important;
     gap: 8px !important;
+    position: relative;
+    z-index: 2;
 }
 
 div[data-testid="column"] {
@@ -83,7 +118,7 @@ div.stButton > button:hover {
 
 .splash-screen {
     position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-    background: radial-gradient(circle, #001f3f 0%, #000000 100%);
+    background: radial-gradient(circle, #121212 0%, #000000 100%);
     display: flex; flex-direction: column; justify-content: center; align-items: center;
     z-index: 99999; animation: splashEpicOut 1.8s cubic-bezier(0.77, 0, 0.175, 1) forwards;
 }
@@ -111,6 +146,7 @@ div.stButton > button:hover {
 .profile-container {
     display: flex; justify-content: center; align-items: center; margin-top: 25px; margin-bottom: 25px;
     position: relative; animation: epicEntrance 1.4s cubic-bezier(0.16, 1, 0.3, 1) 1.2s forwards; opacity: 0;
+    z-index: 2;
 }
 
 .profile-container::before {
@@ -139,17 +175,20 @@ div.stButton > button:hover {
     animation: epicEntrance 1.4s cubic-bezier(0.16, 1, 0.3, 1) 1.5s forwards; opacity: 0;
     text-align: center; color: #ffffff; font-weight: 800; font-size: 30px;
     text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+    position: relative; z-index: 2;
 }
 
 .subtitle-animation {
     animation: epicEntrance 1.4s cubic-bezier(0.16, 1, 0.3, 1) 1.8s forwards; opacity: 0;
     text-align: center; color: #4CAF50; font-size: 17px;
     text-shadow: 0 0 10px rgba(76, 175, 80, 0.4);
+    position: relative; z-index: 2;
 }
 
 .social-container {
     display: flex; justify-content: center; align-items: center; gap: 20px; margin-top: 25px;
     animation: epicEntrance 1.4s cubic-bezier(0.16, 1, 0.3, 1) 2.1s forwards; opacity: 0;
+    position: relative; z-index: 2;
 }
 
 .social-btn {
@@ -172,6 +211,7 @@ div.stButton > button:hover {
     overflow: hidden;
     backdrop-filter: blur(12px);
     animation: waterBannerGlow 4s ease-in-out infinite alternate;
+    z-index: 2;
 }
 
 .water-banner-card::before {
@@ -207,6 +247,7 @@ div.stButton > button:hover {
 """
 
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
+st.markdown('<div class="matrix-rain"></div>', unsafe_allow_html=True)
 st.markdown('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">', unsafe_allow_html=True)
 
 def get_image_base64(image_path):
@@ -232,7 +273,7 @@ with col3:
     btn_lang = "العربية 🌐" if st.session_state.lang == "en" else "English 🌐"
     st.button(btn_lang, on_click=toggle_language, key="btn_l")
 
-st.markdown("<hr style='border-color: rgba(76,175,80,0.25); margin-top: 15px; margin-bottom: 25px;'>", unsafe_allow_html=True)
+st.markdown("<hr style='border-color: rgba(76,175,80,0.25); margin-top: 15px; margin-bottom: 25px; position: relative; z-index: 2;'>", unsafe_allow_html=True)
 
 if st.session_state.current_page == "home":
     img_b64 = get_image_base64(image_filename)
@@ -262,8 +303,8 @@ if st.session_state.current_page == "home":
 
 elif st.session_state.current_page == "about":
     if st.session_state.lang == "ar":
-        st.markdown("<h2 style='text-align: center; color: #4CAF50;'>نبذة عني 👤</h2>", unsafe_allow_html=True)
+        st.markdown("<h2 style='text-align: center; color: #4CAF50; position: relative; z-index: 2;'>نبذة عني 👤</h2>", unsafe_allow_html=True)
         st.markdown('<div class="water-banner-card"><div class="water-content"><p style="font-size: 20px; font-weight: 700; color: #4CAF50; letter-spacing: 1px; margin: 0;">🤖 Owner of TIGER Bot 🐅</p></div></div>', unsafe_allow_html=True)
     else:
-        st.markdown("<h2 style='text-align: center; color: #4CAF50;'>About Me 👤</h2>", unsafe_allow_html=True)
+        st.markdown("<h2 style='text-align: center; color: #4CAF50; position: relative; z-index: 2;'>About Me 👤</h2>", unsafe_allow_html=True)
         st.markdown('<div class="water-banner-card"><div class="water-content"><p style="font-size: 20px; font-weight: 700; color: #4CAF50; letter-spacing: 1px; margin: 0;">🤖 Owner of TIGER Bot 🐅</p></div></div>', unsafe_allow_html=True)
