@@ -24,9 +24,9 @@ header {visibility: hidden;}
 .stAppDeployButton {display: none !important;}
 div[data-testid="stDecoration"] {display: none !important;}
 
-/* إلغاء المسافات والهوامش العلوية الافتراضية لرفع كل شيء للأعلى */
+/* إلغاء المسافات والهوامش العلوية لرفع المحتوى للأعلى */
 .stMainBlockContainer, .block-container {
-    padding-top: 1rem !important;
+    padding-top: 0.8rem !important;
     padding-bottom: 1rem !important;
 }
 
@@ -71,7 +71,7 @@ div.row-widget.stHorizontal,
     display: flex !important;
     flex-direction: row !important;
     flex-wrap: nowrap !important;
-    gap: 8px !important;
+    gap: 10px !important;
     align-items: center !important;
     width: 100% !important;
 }
@@ -83,30 +83,35 @@ div[data-testid="column"],
     max-width: 100% !important;
 }
 
-/* تصميم موحد لجميع الأزرار العلوية بدون تأثيرات مائية داخلية */
+/* تصميم احترافي وعصري للأزرار (Glassmorphism & Neon Glow) */
 div.stButton > button {
-    background: rgba(18, 18, 18, 0.9) !important;
-    color: #cccccc !important;
-    border: 1px solid rgba(0, 180, 216, 0.4) !important;
-    border-radius: 12px !important;
-    padding: 6px 4px !important;
-    font-size: 11px !important;
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.8), rgba(30, 41, 59, 0.6)) !important;
+    color: #e2e8f0 !important;
+    border: 1px solid rgba(0, 180, 216, 0.3) !important;
+    border-radius: 14px !important;
+    padding: 8px 12px !important;
+    font-size: 12px !important;
     font-weight: 600 !important;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    letter-spacing: 0.5px !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
     width: 100% !important;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
     white-space: nowrap !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
 }
 
 div.stButton > button:hover {
-    background: #00b4d8 !important;
+    background: linear-gradient(135deg, rgba(0, 119, 182, 0.9), rgba(0, 180, 216, 0.7)) !important;
     color: #ffffff !important;
-    border-color: #00d4ff !important;
-    box-shadow: 0 0 20px rgba(0, 180, 216, 0.7) !important;
+    border-color: rgba(0, 212, 255, 0.9) !important;
+    box-shadow: 0 0 25px rgba(0, 180, 216, 0.6), inset 0 1px 2px rgba(255, 255, 255, 0.3) !important;
     transform: translateY(-2px) scale(1.02);
+}
+
+div.stButton > button:active {
+    transform: translateY(0) scale(0.98) !important;
 }
 
 /* تأثير الانتقال بين الصفحات */
@@ -117,8 +122,8 @@ div.stButton > button:hover {
 @keyframes pageSlideIn {
     0% {
         opacity: 0;
-        transform: translateY(30px) scale(0.96);
-        filter: blur(8px);
+        transform: translateY(20px) scale(0.97);
+        filter: blur(6px);
     }
     100% {
         opacity: 1;
