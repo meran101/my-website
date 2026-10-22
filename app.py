@@ -163,7 +163,8 @@ div.stButton > button:hover {
 """
 
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
-st.markdown('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">', unsafe_allow_html=True)
+# تحديث مكتبة FontAwesome إلى الإصدار الأحدث لدعم أيقونة Threads
+st.markdown('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">', unsafe_allow_html=True)
 
 def get_image_base64(image_path):
     try:
