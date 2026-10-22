@@ -17,7 +17,7 @@ def toggle_language():
     else:
         st.session_state.lang = "en"
 
-# 2. إعداد CSS والتصميم السينمائي مع تصغير حجم الصورة الدائرية وتأثيراتها
+# 2. إعداد CSS والتصميم السينمائي مع إجبار الأزرار العلوية على الظهور أفقياً وبشكل مرتب
 hide_streamlit_style = """
 <style>
 #MainMenu {visibility: hidden;}
@@ -32,19 +32,27 @@ div[data-testid="stDecoration"] {display: none !important;}
     color: #ffffff;
 }
 
+/* ضمان ظهور أعمدة التنقل متجاورة أفقياً وبدون تداخل */
+div[data-testid="column"] {
+    width: 25% !important;
+    flex: 1 1 auto !important;
+    min-width: 75px !important;
+}
+
 /* تنسيق أزرار التنقل الأفقية الحديثة */
 div.stButton > button {
     background: rgba(18, 18, 18, 0.85) !important;
     color: #cccccc !important;
     border: 1px solid rgba(76, 175, 80, 0.4) !important;
     border-radius: 20px !important;
-    padding: 6px 12px !important;
-    font-size: 13px !important;
+    padding: 6px 10px !important;
+    font-size: 12px !important;
     font-weight: 600 !important;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
     width: 100% !important;
     backdrop-filter: blur(10px);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    white-space: nowrap !important;
 }
 
 div.stButton > button:hover {
@@ -103,7 +111,6 @@ div.stButton > button:hover {
     position: relative; animation: epicEntrance 1.4s cubic-bezier(0.16, 1, 0.3, 1) 1.2s forwards; opacity: 0;
 }
 
-/* تصغير إطارات النيون لتناسب الحجم الصغير الجديد للصورة */
 .profile-container::before {
     content: ''; position: absolute; width: 155px; height: 155px; border-radius: 50%;
     border: 2px dashed #4CAF50; box-shadow: 0 0 20px rgba(76, 175, 80, 0.6); animation: spin 12s linear infinite;
@@ -120,7 +127,6 @@ div.stButton > button:hover {
 @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 @keyframes spin-reverse { 0% { transform: rotate(360deg); } 100% { transform: rotate(0deg); } }
 
-/* تم تصغير حجم الصورة الشخصية هنا بدقة */
 .profile-img {
     width: 125px !important; height: 125px !important; border-radius: 50% !important;
     object-fit: cover !important; border: 3px solid #4CAF50 !important;
@@ -174,7 +180,7 @@ def get_image_base64(image_path):
 
 image_filename = "IMG_20240908_230026_233.jpg"
 
-# 3. شريط التنقل العلوي الأفقي
+# 3. شريط التنقل العلوي الأفقي (متجاور تماماً في صف واحد)
 nav_col1, nav_col2, nav_col3, nav_col4 = st.columns(4)
 
 with nav_col1:
@@ -221,72 +227,4 @@ if st.session_state.current_page == "home":
     st.markdown(f"<p class='subtitle-animation'>{subtitle_text}</p>", unsafe_allow_html=True)
 
     instagram_url = "https://www.instagram.com/meran.alyas/?__pwa=1"
-    snapchat_url = "https://www.snapchat.com/add/meran.alyas"
-
-    st.markdown(
-        f'''
-        <div class="social-container">
-            <a href="{instagram_url}" target="_blank" class="social-btn insta-btn" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
-            <a href="{snapchat_url}" target="_blank" class="social-btn snap-btn" title="Snapchat"><i class="fa-brands fa-snapchat"></i></a>
-        </div>
-        ''',
-        unsafe_allow_html=True
-    )
-
-# ==================== 2. صفحة عني ====================
-elif st.session_state.current_page == "about":
-    if st.session_state.lang == "ar":
-        st.markdown("<h2 style='text-align: center; color: #4CAF50;'>نبذة عني 👤</h2>", unsafe_allow_html=True)
-        st.markdown(
-            """
-            <div class="page-card" style="text-align: center;">
-                <h3 style="color: #ffffff; margin-bottom: 15px;">Meran Alyas</h3>
-                <p style="font-size: 20px; font-weight: 700; color: #4CAF50; letter-spacing: 1px;">
-                    🤖 Owner of TIGER Bot 🐅
-                </p>
-                <p style="font-size: 16px; line-height: 1.8; color: #cccccc; margin-top: 15px;">
-                    Welcome to my official page. I am the creator and owner of <b>TIGER Bot</b>.
-                    Passionate about technology, development, and building high-performance automated tools.
-                </p>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-    else:
-        st.markdown("<h2 style='text-align: center; color: #4CAF50;'>About Me 👤</h2>", unsafe_allow_html=True)
-        st.markdown(
-            """
-            <div class="page-card" style="text-align: center;">
-                <h3 style="color: #ffffff; margin-bottom: 15px;">Meran Alyas</h3>
-                <p style="font-size: 20px; font-weight: 700; color: #4CAF50; letter-spacing: 1px;">
-                    🤖 Owner of TIGER Bot 🐅
-                </p>
-                <p style="font-size: 16px; line-height: 1.8; color: #cccccc; margin-top: 15px;">
-                    Welcome to my official landing page. I am the creator and owner of <b>TIGER Bot</b>.
-                    Passionate about technology, development, and building high-performance automated tools.
-                </p>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-
-# ==================== 3. صفحة التواصل ====================
-elif st.session_state.current_page == "contact":
-    if st.session_state.lang == "ar":
-        st.markdown("<h2 style='text-align: center; color: #4CAF50;'>تواصل معي 📩</h2>", unsafe_allow_html=True)
-        with st.form("contact_form_ar"):
-            name = st.text_input("الاسم")
-            email = st.text_input("البريد الإلكتروني")
-            message = st.text_area("الرسالة")
-            submit = st.form_submit_button("إرسال الرسالة")
-            if submit:
-                st.success("شُكراً لتواصلك! تم إرسال رسالتك بنجاح.")
-    else:
-        st.markdown("<h2 style='text-align: center; color: #4CAF50;'>Get In Touch 📩</h2>", unsafe_allow_html=True)
-        with st.form("contact_form_en"):
-            name = st.text_input("Your Name")
-            email = st.text_input("Your Email")
-            message = st.text_area("Your Message")
-            submit = st.form_submit_button("Send Message")
-            if submit:
-                st.success("Thank you! Your message has been sent successfully.")
+    snapchat_url = "
