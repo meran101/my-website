@@ -151,13 +151,48 @@ div.stButton > button:hover {
 .snap-btn { background: #FFFC00; color: #000000; box-shadow: 0px 4px 15px rgba(255, 252, 0, 0.6); }
 .threads-btn { background: #101010; color: #ffffff; border: 1px solid #333333; box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.25); }
 
-.page-card {
-    background: rgba(20, 20, 20, 0.8);
-    border: 1px solid rgba(76, 175, 80, 0.4);
-    border-radius: 15px;
-    padding: 25px;
+/* بنر الماء المتحرك خلف بطاقة عني */
+.water-banner-card {
+    position: relative;
+    background: linear-gradient(135deg, rgba(0, 119, 182, 0.25), rgba(76, 175, 80, 0.25)), rgba(15, 15, 15, 0.85);
+    border: 1px solid rgba(0, 180, 216, 0.6);
+    border-radius: 20px;
+    padding: 30px;
     margin-top: 20px;
-    box-shadow: 0 0 25px rgba(0,0,0,0.6);
+    box-shadow: 0 0 35px rgba(0, 150, 255, 0.3), inset 0 0 20px rgba(0, 180, 216, 0.2);
+    overflow: hidden;
+    backdrop-filter: blur(12px);
+    animation: waterBannerGlow 4s ease-in-out infinite alternate;
+}
+
+.water-banner-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(0, 212, 255, 0.15) 0%, transparent 70%);
+    animation: waterRippleMove 8s linear infinite;
+    z-index: 0;
+    pointer-events: none;
+}
+
+@keyframes waterBannerGlow {
+    0% { box-shadow: 0 0 25px rgba(0, 150, 255, 0.25), inset 0 0 15px rgba(0, 180, 216, 0.15); }
+    100% { box-shadow: 0 0 45px rgba(0, 212, 255, 0.5), inset 0 0 30px rgba(76, 175, 80, 0.3); }
+}
+
+@keyframes waterRippleMove {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    50% { transform: translate(10px, 15px) rotate(180deg); }
+    100% { transform: translate(0, 0) rotate(360deg); }
+}
+
+.water-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
 }
 </style>
 """
@@ -219,7 +254,7 @@ if st.session_state.current_page == "home":
 elif st.session_state.current_page == "about":
     if st.session_state.lang == "ar":
         st.markdown("<h2 style='text-align: center; color: #4CAF50;'>نبذة عني 👤</h2>", unsafe_allow_html=True)
-        st.markdown('<div class="page-card" style="text-align: center;"><p style="font-size: 20px; font-weight: 700; color: #4CAF50; letter-spacing: 1px;">🤖 Owner of TIGER Bot 🐅</p></div>', unsafe_allow_html=True)
+        st.markdown('<div class="water-banner-card"><div class="water-content"><p style="font-size: 20px; font-weight: 700; color: #4CAF50; letter-spacing: 1px; margin: 0;">🤖 Owner of TIGER Bot 🐅</p></div></div>', unsafe_allow_html=True)
     else:
         st.markdown("<h2 style='text-align: center; color: #4CAF50;'>About Me 👤</h2>", unsafe_allow_html=True)
-        st.markdown('<div class="page-card" style="text-align: center;"><p style="font-size: 20px; font-weight: 700; color: #4CAF50; letter-spacing: 1px;">🤖 Owner of TIGER Bot 🐅</p></div>', unsafe_allow_html=True)
+        st.markdown('<div class="water-banner-card"><div class="water-content"><p style="font-size: 20px; font-weight: 700; color: #4CAF50; letter-spacing: 1px; margin: 0;">🤖 Owner of TIGER Bot 🐅</p></div></div>', unsafe_allow_html=True)
