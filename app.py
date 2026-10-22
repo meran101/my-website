@@ -189,7 +189,7 @@ def get_image_base64(image_path):
 
 image_filename = "IMG_20240908_230026_233.jpg"
 
-# 3. شريط التنقل العلوي الأفقي (3 أعمدة: الرئيسية، عني، وتغيير اللغة)
+# 3. شريط التنقل العلوي الأفقي (زر الترجمة في أقصى اليمين)
 nav_col1, nav_col2, nav_col3 = st.columns(3)
 
 with nav_col1:
@@ -252,31 +252,4 @@ elif st.session_state.current_page == "about":
             """
             <div class="page-card" style="text-align: center;">
                 <h3 style="color: #ffffff; margin-bottom: 15px;">Meran Alyas</h3>
-                <p style="font-size: 20px; font-weight: 700; color: #4CAF50; letter-spacing: 1px;">
-                    🤖 Owner of TIGER Bot 🐅
-                </p>
-                <p style="font-size: 16px; line-height: 1.8; color: #cccccc; margin-top: 15px;">
-                    Welcome to my official page. I am the creator and owner of <b>TIGER Bot</b>.
-                    Passionate about technology, development, and building high-performance automated tools.
-                </p>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-    else:
-        st.markdown("<h2 style='text-align: center; color: #4CAF50;'>About Me 👤</h2>", unsafe_allow_html=True)
-        st.markdown(
-            """
-            <div class="page-card" style="text-align: center;">
-                <h3 style="color: #ffffff; margin-bottom: 15px;">Meran Alyas</h3>
-                <p style="font-size: 20px; font-weight: 700; color: #4CAF50; letter-spacing: 1px;">
-                    🤖 Owner of TIGER Bot 🐅
-                </p>
-                <p style="font-size: 16px; line-height: 1.8; color: #cccccc; margin-top: 15px;">
-                    Welcome to my official landing page. I am the creator and owner of <b>TIGER Bot</b>.
-                    Passionate about technology, development, and building high-performance automated tools.
-                </p>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
+                <p style="font-size: 20px; font-weight
