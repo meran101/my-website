@@ -24,11 +24,19 @@ header {visibility: hidden;}
 .stAppDeployButton {display: none !important;}
 div[data-testid="stDecoration"] {display: none !important;}
 
-/* إخفاء شريط الأدوات العائم الذي يحتوي على Created by بالأسفل */
-div[data-testid="stToolbar"] {
+/* إخفاء الشعار والشريط السفلي بالكامل نهائياً */
+footer, 
+.viewerBadge_container__16336, 
+.viewerBadge_link__1S137, 
+[data-testid="stToolbar"], 
+[data-testid="stStatusWidget"],
+div[class*="viewerBadge"],
+div[class*="stAppViewerBadge"] {
     display: none !important;
     visibility: hidden !important;
     opacity: 0 !important;
+    height: 0 !important;
+    width: 0 !important;
     pointer-events: none !important;
 }
 
