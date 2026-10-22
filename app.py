@@ -211,15 +211,7 @@ if st.session_state.current_page == "home":
     img_base64 = get_image_base64(image_filename)
     if img_base64:
         st.markdown(
-            f'''
-            <div class="splash-screen">
-                <img src="data:image/jpeg;base64,{img_base64}" class="splash-logo" alt="Loading...">
-                <div class="splash-text">LOADING WEBSITE...</div>
-            </div>
-            <div class="profile-container">
-                <img src="data:image/jpeg;base64,{img_base64}" class="profile-img" alt="Profile Picture">
-            </div>
-            ''',
+            f'<div class="splash-screen"><img src="data:image/jpeg;base64,{img_base64}" class="splash-logo" alt="Loading..."><div class="splash-text">LOADING WEBSITE...</div></div><div class="profile-container"><img src="data:image/jpeg;base64,{img_base64}" class="profile-img" alt="Profile Picture"></div>',
             unsafe_allow_html=True
         )
 
@@ -235,12 +227,7 @@ if st.session_state.current_page == "home":
     snapchat_url = "https://www.snapchat.com/add/meran.alyas"
 
     st.markdown(
-        f'''
-        <div class="social-container">
-            <a href="{instagram_url}" target="_blank" class="social-btn insta-btn" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
-            <a href="{snapchat_url}" target="_blank" class="social-btn snap-btn" title="Snapchat"><i class="fa-brands fa-snapchat"></i></a>
-        </div>
-        ''',
+        f'<div class="social-container"><a href="{instagram_url}" target="_blank" class="social-btn insta-btn" title="Instagram"><i class="fa-brands fa-instagram"></i></a><a href="{snapchat_url}" target="_blank" class="social-btn snap-btn" title="Snapchat"><i class="fa-brands fa-snapchat"></i></a></div>',
         unsafe_allow_html=True
     )
 
@@ -248,5 +235,7 @@ if st.session_state.current_page == "home":
 elif st.session_state.current_page == "about":
     if st.session_state.lang == "ar":
         st.markdown("<h2 style='text-align: center; color: #4CAF50;'>نبذة عني 👤</h2>", unsafe_allow_html=True)
-        st.markdown(
-            """<div class="page-card" style="text-align: center;"><h3 style="color: #ffffff; margin-bottom: 15px;">Meran Alyas</h3><p style="font-size:
+        st.markdown('<div class="page-card" style="text-align: center;"><h3 style="color: #ffffff; margin-bottom: 15px;">Meran Alyas</h3><p style="font-size: 20px; font-weight: 700; color: #4CAF50; letter-spacing: 1px;">🤖 Owner of TIGER Bot 🐅</p><p style="font-size: 16px; line-height: 1.8; color: #cccccc; margin-top: 15px;">Welcome to my official page. I am the creator and owner of <b>TIGER Bot</b>. Passionate about technology, development, and building high-performance automated tools.</p></div>', unsafe_allow_html=True)
+    else:
+        st.markdown("<h2 style='text-align: center; color: #4CAF50;'>About Me 👤</h2>", unsafe_allow_html=True)
+        st.markdown('<div class="page-card" style="text-align: center;"><h3 style="color: #ffffff; margin-bottom: 15px;">Meran Alyas</h3><p style="font-size: 20px; font-weight: 700; color: #4CAF50; letter-spacing: 1px;">🤖 Owner of TIGER Bot 🐅</p><p style="font-size: 16px; line-height: 1.8; color: #cccccc; margin-top: 15px;">Welcome to my official landing page. I am the creator and owner of <b>TIGER Bot</b>. Passionate about technology, development, and building high-performance automated tools.</p></div>', unsafe_allow_html=True)
