@@ -66,27 +66,6 @@ div.stButton > button:hover {
     transform: translateY(-2px);
 }
 
-/* تخصيص زر عني (About) ليحتوي على تأثير وخلفية مائية فخمة ومتحركة */
-div[data-testid="column"]:nth-child(2) div.stButton > button {
-    background: linear-gradient(135deg, rgba(0, 119, 182, 0.6), rgba(0, 180, 216, 0.3)), rgba(18, 18, 18, 0.9) !important;
-    border: 1px solid rgba(0, 212, 255, 0.8) !important;
-    color: #00d4ff !important;
-    box-shadow: 0 0 20px rgba(0, 150, 255, 0.5), inset 0 0 10px rgba(0, 212, 255, 0.4) !important;
-    animation: waterButtonPulse 3s ease-in-out infinite alternate;
-}
-
-div[data-testid="column"]:nth-child(2) div.stButton > button:hover {
-    background: linear-gradient(135deg, rgba(0, 180, 216, 0.8), rgba(76, 175, 80, 0.6)) !important;
-    color: #ffffff !important;
-    border-color: #00d4ff !important;
-    box-shadow: 0 0 30px rgba(0, 212, 255, 0.9) !important;
-}
-
-@keyframes waterButtonPulse {
-    0% { box-shadow: 0 0 15px rgba(0, 150, 255, 0.4), inset 0 0 8px rgba(0, 212, 255, 0.3); }
-    100% { box-shadow: 0 0 25px rgba(0, 212, 255, 0.8), inset 0 0 15px rgba(76, 175, 80, 0.4); }
-}
-
 @keyframes splashEpicOut {
     0% { opacity: 1; visibility: visible; transform: scale(1); }
     85% { opacity: 1; transform: scale(1); }
