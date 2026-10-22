@@ -17,7 +17,7 @@ def toggle_language():
     else:
         st.session_state.lang = "en"
 
-# 2. إعداد CSS والتصميم السينمائي مع إجبار الأزرار على البقاء أفقية في الهواتف واللابتوب
+# 2. إعداد CSS والتصميم السينمائي مع إجبار الأزرار على البقاء أفقية
 hide_streamlit_style = """
 <style>
 #MainMenu {visibility: hidden;}
@@ -32,15 +32,15 @@ div[data-testid="stDecoration"] {display: none !important;}
     color: #ffffff;
 }
 
-/* إجبار حاوية الأعمدة على التواجد في صف أفقي واحد وعدم الالتفاف حتى على الهواتف */
+/* إجبار حاوية الأعمدة على التواجد في صف أفقي واحد وعدم الالتفاف */
 div[data-testid="horizontal-block"] {
     display: flex !important;
     flex-direction: row !important;
     flex-wrap: nowrap !important;
-    gap: 5px !important;
+    gap: 8px !important;
 }
 
-/* ضبط مقاسات الأعمدة لتتطابق أفقياً بشكل مثالي */
+/* ضبط مقاسات الأعمدة الثلاثة بشكل مثالي */
 div[data-testid="column"] {
     flex: 1 1 0% !important;
     min-width: 0 !important;
@@ -52,8 +52,8 @@ div.stButton > button {
     color: #cccccc !important;
     border: 1px solid rgba(76, 175, 80, 0.4) !important;
     border-radius: 15px !important;
-    padding: 5px 4px !important;
-    font-size: 11px !important;
+    padding: 6px 8px !important;
+    font-size: 12px !important;
     font-weight: 600 !important;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
     width: 100% !important;
@@ -189,8 +189,8 @@ def get_image_base64(image_path):
 
 image_filename = "IMG_20240908_230026_233.jpg"
 
-# 3. شريط التنقل العلوي الأفقي
-nav_col1, nav_col2, nav_col3, nav_col4 = st.columns(4)
+# 3. شريط التنقل العلوي الأفقي (3 أعمدة فقط: الرئيسية، عني، وتغيير اللغة)
+nav_col1, nav_col2, nav_col3 = st.columns(3)
 
 with nav_col1:
     btn_home = "🏠 الرئيسية" if st.session_state.lang == "ar" else "🏠 Home"
@@ -201,10 +201,6 @@ with nav_col2:
     st.button(btn_about, on_click=set_page, args=("about",), key="nav_about_btn")
 
 with nav_col3:
-    btn_contact = "📩 التواصل" if st.session_state.lang == "ar" else "📩 Contact"
-    st.button(btn_contact, on_click=set_page, args=("contact",), key="nav_contact_btn")
-
-with nav_col4:
     btn_lang = "العربية 🌐" if st.session_state.lang == "en" else "English 🌐"
     st.button(btn_lang, on_click=toggle_language, key="nav_lang_btn")
 
@@ -239,69 +235,3 @@ if st.session_state.current_page == "home":
     snapchat_url = "https://www.snapchat.com/add/meran.alyas"
 
     st.markdown(
-        f'''
-        <div class="social-container">
-            <a href="{instagram_url}" target="_blank" class="social-btn insta-btn" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
-            <a href="{snapchat_url}" target="_blank" class="social-btn snap-btn" title="Snapchat"><i class="fa-brands fa-snapchat"></i></a>
-        </div>
-        ''',
-        unsafe_allow_html=True
-    )
-
-# ==================== 2. صفحة عني ====================
-elif st.session_state.current_page == "about":
-    if st.session_state.lang == "ar":
-        st.markdown("<h2 style='text-align: center; color: #4CAF50;'>نبذة عني 👤</h2>", unsafe_allow_html=True)
-        st.markdown(
-            """
-            <div class="page-card" style="text-align: center;">
-                <h3 style="color: #ffffff; margin-bottom: 15px;">Meran Alyas</h3>
-                <p style="font-size: 20px; font-weight: 700; color: #4CAF50; letter-spacing: 1px;">
-                    🤖 Owner of TIGER Bot 🐅
-                </p>
-                <p style="font-size: 16px; line-height: 1.8; color: #cccccc; margin-top: 15px;">
-                    Welcome to my official page. I am the creator and owner of <b>TIGER Bot</b>.
-                    Passionate about technology, development, and building high-performance automated tools.
-                </p>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-    else:
-        st.markdown("<h2 style='text-align: center; color: #4CAF50;'>About Me 👤</h2>", unsafe_allow_html=True)
-        st.markdown(
-            """
-            <div class="page-card" style="text-align: center;">
-                <h3 style="color: #ffffff; margin-bottom: 15px;">Meran Alyas</h3>
-                <p style="font-size: 20px; font-weight: 700; color: #4CAF50; letter-spacing: 1px;">
-                    🤖 Owner of TIGER Bot 🐅
-                </p>
-                <p style="font-size: 16px; line-height: 1.8; color: #cccccc; margin-top: 15px;">
-                    Welcome to my official landing page. I am the creator and owner of <b>TIGER Bot</b>.
-                    Passionate about technology, development, and building high-performance automated tools.
-                </p>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-
-# ==================== 3. صفحة التواصل ====================
-elif st.session_state.current_page == "contact":
-    if st.session_state.lang == "ar":
-        st.markdown("<h2 style='text-align: center; color: #4CAF50;'>تواصل معي 📩</h2>", unsafe_allow_html=True)
-        with st.form("contact_form_ar"):
-            name = st.text_input("الاسم")
-            email = st.text_input("البريد الإلكتروني")
-            message = st.text_area("الرسالة")
-            submit = st.form_submit_button("إرسال الرسالة")
-            if submit:
-                st.success("شُكراً لتواصلك! تم إرسال رسالتك بنجاح.")
-    else:
-        st.markdown("<h2 style='text-align: center; color: #4CAF50;'>Get In Touch 📩</h2>", unsafe_allow_html=True)
-        with st.form("contact_form_en"):
-            name = st.text_input("Your Name")
-            email = st.text_input("Your Email")
-            message = st.text_area("Your Message")
-            submit = st.form_submit_button("Send Message")
-            if submit:
-                st.success("Thank you! Your message has been sent successfully.")
