@@ -16,7 +16,7 @@ def toggle_language():
     else:
         st.session_state.lang = "en"
 
-hide_css = """
+hide_streamlit_style = """
 <style>
 #MainMenu {visibility: hidden;}
 footer {visibility: hidden;}
@@ -162,7 +162,7 @@ div.stButton > button:hover {
 </style>
 """
 
-st.markdown(hide_css, unsafe_allow_html=True)
+st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 st.markdown('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">', unsafe_allow_html=True)
 
 def get_image_base64(image_path):
@@ -193,16 +193,18 @@ st.markdown("<hr style='border-color: rgba(76,175,80,0.25); margin-top: 15px; ma
 if st.session_state.current_page == "home":
     img_b64 = get_image_base64(image_filename)
     if img_b64:
-        st.markdown(
-            f'<div class="splash-screen"><img src="data:image/jpeg;base64,{img_b64}" class="splash-logo" alt="Loading..."><div class="splash-text">LOADING WEBSITE...</div></div><div class="profile-container"><img src="data:image/jpeg;base64,{img_b64}" class="profile-img" alt="Profile Picture"></div>',
-            unsafe_allow_html=True
-        )
+        st.markdown(f'<div class="splash-screen"><img src="data:image/jpeg;base64,{img_b64}" class="splash-logo" alt="Loading..."><div class="splash-text">LOADING WEBSITE...</div></div><div class="profile-container"><img src="data:image/jpeg;base64,{img_b64}" class="profile-img" alt="Profile Picture"></div>', unsafe_allow_html=True)
 
     if st.session_state.lang == "en":
-        title_text = "Welcome To My Account 👋"
-        sub_text = "My social media accounts"
+        title_text, sub_text = "Welcome To My Account 👋", "My social media accounts"
     else:
-        title_text = "أهلاً بك في حسابي 👋"
-        sub_text = "حساباتي على وسائل التواصل الاجتماعي"
+        title_text, sub_text = "أهلاً بك في حسابي 👋", "حساباتي على وسائل التواصل الاجتماعي"
 
-    st.markdown(f"<h1 class='title-animation'>{title_text}</h1>", unsafe_allow_html=
+    st.markdown(f"<h1 class='title-animation'>{title_text}</h1>", unsafe_allow_html=True)
+    st.markdown(f"<p class='subtitle-animation'>{sub_text}</p>", unsafe_allow_html=True)
+
+    url_insta = "https://www.instagram.com/meran.alyas/?__pwa=1"
+    url_snap = "https://www.snapchat.com/add/meran.alyas"
+    url_threads = "https://www.threads.net/@meran.alyas"
+
+    st.markdown(f'<div class="social-container"><a href="{url_insta}" target="_blank" class="social-btn insta-btn" title="Instagram"><i class="fa-brands fa-instagram"></i></a><a href="{url_snap}" target="_blank"
