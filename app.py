@@ -30,7 +30,7 @@ div[data-testid="stDecoration"] {display: none !important;}
     color: #ffffff;
 }
 
-/* طبقة المطر الرقمي بحروف الإنجليزية في الخلفية */
+/* طبقة مطر الحروف الإنجليزية المرئية والمتحركة في الخلفية */
 .matrix-rain {
     position: fixed;
     top: 0;
@@ -38,37 +38,30 @@ div[data-testid="stDecoration"] {display: none !important;}
     width: 100vw;
     height: 100vh;
     pointer-events: none;
-    z-index: 0;
-    opacity: 0.15;
-    background: linear-gradient(180deg, 
-        rgba(0, 212, 255, 0.05) 0%, 
-        rgba(76, 175, 80, 0.08) 50%, 
-        rgba(5, 5, 5, 0.95) 100%
-    );
+    z-index: 1;
+    overflow: hidden;
+    opacity: 0.35;
 }
 
-.matrix-rain::before {
-    content: "A B C D E F G H I J K L M N O P Q R S T U V W X Y Z 0 1 2 3 4 5 6 7 8 9 TIGER BOT PYTHON STREAMLIT CODE MERAN ALYAS";
+.matrix-column {
     position: absolute;
-    top: -100%;
-    left: 0;
-    width: 100%;
-    height: 200%;
+    top: -50%;
     color: #4CAF50;
     font-family: monospace;
-    font-size: 15px;
-    line-height: 22px;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 18px;
     word-break: break-all;
-    opacity: 0.35;
-    animation: rainDrop 12s linear infinite;
+    text-shadow: 0 0 8px rgba(76, 175, 80, 0.8), 0 0 3px rgba(0, 212, 255, 0.6);
+    animation: matrixFall linear infinite;
 }
 
-@keyframes rainDrop {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(50%); }
+@keyframes matrixFall {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(200vh); }
 }
 
-/* ضمان ظهور محتوى ستريملت فوق طبقة الخلفية */
+/* ضمان ظهور محتوى ستريملت فوق طبقة المطر والخلفية */
 section.main > div {
     position: relative;
     z-index: 10;
@@ -114,7 +107,7 @@ div.stButton > button:hover {
     transform: translateY(-3px) scale(1.02);
 }
 
-/* تخصيص زر عني (About) ليصبح احترافياً وذا تأثير مائي متحرك وخاص */
+/* زر عني (About) الاحترافي بتأثير مائي متحرك */
 div[data-testid="column"]:nth-child(2) div.stButton > button {
     background: linear-gradient(135deg, rgba(0, 119, 182, 0.7), rgba(0, 212, 255, 0.4)), rgba(18, 18, 18, 0.95) !important;
     border: 1px solid rgba(0, 212, 255, 0.9) !important;
@@ -141,7 +134,7 @@ div[data-testid="column"]:nth-child(2) div.stButton > button:hover {
     }
 }
 
-/* تأثير تحريك وانتقال الصفحات والمحتوى */
+/* تأثير الانتقال بين الصفحات */
 .page-transition {
     animation: pageSlideIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
@@ -287,7 +280,17 @@ div[data-testid="column"]:nth-child(2) div.stButton > button:hover {
 """
 
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
-st.markdown('<div class="matrix-rain"></div>', unsafe_allow_html=True)
+
+# توليد أعمدة مطر الحروف الإنجليزية لتظهر بوضوح في الخلفية
+matrix_html = '<div class="matrix-rain">'
+for i in range(15):
+    left_pos = i * 7
+    anim_duration = 5 + (i % 5) * 1.5
+    anim_delay = (i % 4) * 0.8
+    matrix_html += f'<div class="matrix-column" style="left: {left_pos}%; animation-duration: {anim_duration}s; animation-delay: {anim_delay}s;">MERAN<br>TIGER<br>BOT<br>PYTHON<br>STREAMLIT<br>CODE<br>A B C D E<br>F G H I J<br>K L M N O<br>P Q R S T<br>U V W X Y Z</div>'
+matrix_html += '</div>'
+
+st.markdown(matrix_html, unsafe_allow_html=True)
 st.markdown('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">', unsafe_allow_html=True)
 
 def get_image_base64(image_path):
