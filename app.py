@@ -83,7 +83,7 @@ div[data-testid="column"],
     max-width: 100% !important;
 }
 
-/* الأزرار العادية */
+/* تصميم موحد لجميع الأزرار العلوية بدون تأثيرات مائية داخلية */
 div.stButton > button {
     background: rgba(18, 18, 18, 0.9) !important;
     color: #cccccc !important;
@@ -105,37 +105,8 @@ div.stButton > button:hover {
     background: #00b4d8 !important;
     color: #ffffff !important;
     border-color: #00d4ff !important;
-    box-shadow: 0 0 25px rgba(0, 180, 216, 0.9), 0 0 10px rgba(0, 212, 255, 0.6) !important;
+    box-shadow: 0 0 20px rgba(0, 180, 216, 0.7) !important;
     transform: translateY(-2px) scale(1.02);
-}
-
-/* زر عني (About) الاحترافي بتأثير مائي متحرك */
-div[data-testid="column"]:nth-child(2) div.stButton > button,
-[data-testid="stColumn"]:nth-child(2) div.stButton > button {
-    background: linear-gradient(135deg, rgba(0, 119, 182, 0.7), rgba(0, 212, 255, 0.4)), rgba(18, 18, 18, 0.95) !important;
-    border: 1px solid rgba(0, 212, 255, 0.9) !important;
-    color: #ffffff !important;
-    box-shadow: 0 0 25px rgba(0, 150, 255, 0.6), inset 0 0 15px rgba(0, 212, 255, 0.5) !important;
-    animation: proWaterButtonPulse 3s ease-in-out infinite alternate;
-}
-
-div[data-testid="column"]:nth-child(2) div.stButton > button:hover,
-[data-testid="stColumn"]:nth-child(2) div.stButton > button:hover {
-    background: linear-gradient(135deg, rgba(0, 212, 255, 0.9), rgba(0, 119, 182, 0.8)) !important;
-    border-color: #ffffff !important;
-    box-shadow: 0 0 35px rgba(0, 212, 255, 0.9), 0 0 15px rgba(0, 119, 182, 0.7) !important;
-    transform: translateY(-2px) scale(1.03);
-}
-
-@keyframes proWaterButtonPulse {
-    0% {
-        box-shadow: 0 0 15px rgba(0, 150, 255, 0.4), inset 0 0 10px rgba(0, 212, 255, 0.3);
-        border-color: rgba(0, 212, 255, 0.6);
-    }
-    100% {
-        box-shadow: 0 0 30px rgba(0, 212, 255, 0.8), inset 0 0 20px rgba(0, 119, 182, 0.6);
-        border-color: rgba(0, 180, 216, 0.9);
-    }
 }
 
 /* تأثير الانتقال بين الصفحات */
