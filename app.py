@@ -24,6 +24,12 @@ header {visibility: hidden;}
 .stAppDeployButton {display: none !important;}
 div[data-testid="stDecoration"] {display: none !important;}
 
+/* إلغاء المسافات والهوامش العلوية الافتراضية لرفع كل شيء للأعلى */
+.stMainBlockContainer, .block-container {
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+}
+
 /* خلفية الموقع الأساسية */
 .stApp {
     background-color: #050505;
@@ -58,14 +64,14 @@ div[data-testid="stDecoration"] {display: none !important;}
     100% { transform: translateY(120vh); }
 }
 
-/* ضمان بقاء الأزرار في صف أفقي واحد وعدم نزولها لأسفل حتى في الجوال */
+/* ضمان بقاء الأزرار في صف أفقي واحد بجانب بعضها تماماً */
 div[data-testid="horizontal-block"], 
 div.row-widget.stHorizontal, 
 [data-testid="stHorizontalBlock"] {
     display: flex !important;
     flex-direction: row !important;
     flex-wrap: nowrap !important;
-    gap: 6px !important;
+    gap: 8px !important;
     align-items: center !important;
     width: 100% !important;
 }
@@ -77,7 +83,7 @@ div[data-testid="column"],
     max-width: 100% !important;
 }
 
-/* الأزرار العادية (الرئيسية واللغة) */
+/* الأزرار العادية */
 div.stButton > button {
     background: rgba(18, 18, 18, 0.9) !important;
     color: #cccccc !important;
@@ -179,7 +185,7 @@ div[data-testid="column"]:nth-child(2) div.stButton > button:hover,
 }
 
 .profile-container {
-    display: flex; justify-content: center; align-items: center; margin-top: 25px; margin-bottom: 25px;
+    display: flex; justify-content: center; align-items: center; margin-top: 15px; margin-bottom: 20px;
     position: relative; z-index: 10;
 }
 
@@ -206,25 +212,25 @@ div[data-testid="column"]:nth-child(2) div.stButton > button:hover,
 }
 
 .title-animation {
-    text-align: center; color: #ffffff; font-weight: 800; font-size: 30px;
+    text-align: center; color: #ffffff; font-weight: 800; font-size: 26px;
     text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
     position: relative; z-index: 10;
 }
 
 .subtitle-animation {
-    text-align: center; color: #00b4d8; font-size: 17px;
+    text-align: center; color: #00b4d8; font-size: 15px;
     text-shadow: 0 0 10px rgba(0, 180, 216, 0.4);
     position: relative; z-index: 10;
 }
 
 .social-container {
-    display: flex; justify-content: center; align-items: center; gap: 20px; margin-top: 25px;
+    display: flex; justify-content: center; align-items: center; gap: 20px; margin-top: 20px;
     position: relative; z-index: 10;
 }
 
 .social-btn {
-    display: inline-flex; justify-content: center; align-items: center; width: 50px; height: 50px;
-    border-radius: 50%; color: white; font-size: 24px; transition: all 0.4s ease; text-decoration: none;
+    display: inline-flex; justify-content: center; align-items: center; width: 45px; height: 45px;
+    border-radius: 50%; color: white; font-size: 22px; transition: all 0.4s ease; text-decoration: none;
 }
 .insta-btn { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fd5949 45%, #d6249f 60%, #285AEB 90%); box-shadow: 0px 4px 15px rgba(214, 36, 159, 0.6); }
 .snap-btn { background: #FFFC00; color: #000000; box-shadow: 0px 4px 15px rgba(255, 252, 0, 0.6); }
@@ -236,8 +242,8 @@ div[data-testid="column"]:nth-child(2) div.stButton > button:hover,
     background: linear-gradient(135deg, rgba(0, 119, 182, 0.3), rgba(0, 180, 216, 0.15)), rgba(15, 15, 15, 0.85);
     border: 1px solid rgba(0, 180, 216, 0.6);
     border-radius: 20px;
-    padding: 30px;
-    margin-top: 20px;
+    padding: 25px;
+    margin-top: 15px;
     box-shadow: 0 0 35px rgba(0, 150, 255, 0.3), inset 0 0 20px rgba(0, 180, 216, 0.2);
     overflow: hidden;
     backdrop-filter: blur(12px);
@@ -279,7 +285,7 @@ div[data-testid="column"]:nth-child(2) div.stButton > button:hover,
 
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
-# توليد خطوط مطر حقيقية (قطرات ماء منسدلة بلون أزرق عميق)
+# توليد خطوط المطر المائي
 rain_html = '<div class="matrix-rain">'
 for i in range(35):
     left_pos = i * 3
@@ -314,7 +320,7 @@ with col3:
     btn_lang = "العربية 🌐" if st.session_state.lang == "en" else "English 🌐"
     st.button(btn_lang, on_click=toggle_language, key="btn_l")
 
-st.markdown("<hr style='border-color: rgba(0, 180, 216, 0.25); margin-top: 15px; margin-bottom: 25px; position: relative; z-index: 10;'>", unsafe_allow_html=True)
+st.markdown("<hr style='border-color: rgba(0, 180, 216, 0.25); margin-top: 10px; margin-bottom: 15px; position: relative; z-index: 10;'>", unsafe_allow_html=True)
 
 st.markdown('<div class="page-transition">', unsafe_allow_html=True)
 
